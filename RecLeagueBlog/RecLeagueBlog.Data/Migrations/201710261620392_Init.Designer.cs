@@ -13,7 +13,7 @@ namespace RecLeagueBlog.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201710261320460_Init"; }
+            get { return "201710261620392_Init"; }
         }
         
         string IMigrationMetadata.Source

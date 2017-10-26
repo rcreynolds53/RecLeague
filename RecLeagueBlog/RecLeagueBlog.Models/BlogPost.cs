@@ -10,6 +10,7 @@ namespace RecLeagueBlog.Models
     {
         public int BlogPostId { get; set; }
         public string Title { get; set; }
+        public string Content { get; set; }
         public DateTime DateCreated { get; set; }
         public int StatusId { get; set; }
         public int EmployeeId { get; set; }

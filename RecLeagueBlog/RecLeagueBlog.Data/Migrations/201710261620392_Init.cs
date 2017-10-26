@@ -2,7 +2,7 @@ namespace RecLeagueBlog.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-
+    
     public partial class Init : DbMigration
     {
         public override void Up()
@@ -10,84 +10,95 @@ namespace RecLeagueBlog.Data.Migrations
             CreateTable(
                 "dbo.BlogPosts",
                 c => new
-                {
-                    BlogPostId = c.Int(nullable: false, identity: true),
-                    Title = c.String(maxLength: 150),
-                    DateCreated = c.DateTime(nullable: false),
-                    StatusId = c.Int(nullable: false),
-                    EmployeeId = c.Int(nullable: false),
-                })
+                    {
+                        BlogPostId = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false, maxLength: 100),
+                        BlogContent = c.String(),
+                        DateCreated = c.DateTime(nullable: false),
+                        StatusId = c.Int(nullable: false),
+                        EmployeeId = c.Int(nullable: false),
+                    })
                 .PrimaryKey(t => t.BlogPostId)
                 .ForeignKey("dbo.Employees", t => t.EmployeeId, cascadeDelete: true)
                 .ForeignKey("dbo.Status", t => t.StatusId, cascadeDelete: true)
                 .Index(t => t.StatusId)
                 .Index(t => t.EmployeeId);
-
+            
             CreateTable(
                 "dbo.Categories",
                 c => new
-                {
-                    CategoryId = c.Int(nullable: false, identity: true),
-                    CategoryName = c.String(maxLength: 50),
-                })
+                    {
+                        CategoryId = c.Int(nullable: false, identity: true),
+                        CategoryName = c.String(nullable: false, maxLength: 25),
+                    })
                 .PrimaryKey(t => t.CategoryId);
-
+            
             CreateTable(
                 "dbo.Employees",
                 c => new
-                {
-                    EmployeeId = c.Int(nullable: false, identity: true),
-                    FirstName = c.String(maxLength: 25),
-                    LastName = c.String(maxLength: 50),
-                })
+                    {
+                        EmployeeId = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false, maxLength: 30),
+                        LastName = c.String(nullable: false, maxLength: 30),
+                    })
                 .PrimaryKey(t => t.EmployeeId);
-
+            
             CreateTable(
                 "dbo.Status",
                 c => new
-                {
-                    StatusId = c.Int(nullable: false, identity: true),
-                    StatusName = c.String(maxLength: 15),
-                })
+                    {
+                        StatusId = c.Int(nullable: false, identity: true),
+                        StatusName = c.String(nullable: false, maxLength: 20),
+                    })
                 .PrimaryKey(t => t.StatusId);
-
+            
             CreateTable(
                 "dbo.Tags",
                 c => new
-                {
-                    TagId = c.Int(nullable: false, identity: true),
-                    TagName = c.String(maxLength: 50),
-                })
+                    {
+                        TagId = c.Int(nullable: false, identity: true),
+                        TagName = c.String(nullable: false, maxLength: 50),
+                    })
                 .PrimaryKey(t => t.TagId);
-
+            
+            CreateTable(
+                "dbo.StaticPages",
+                c => new
+                    {
+                        StaticPageId = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false, maxLength: 50),
+                        PageContent = c.String(),
+                    })
+                .PrimaryKey(t => t.StaticPageId);
+            
             CreateTable(
                 "dbo.CategoryBlogPosts",
                 c => new
-                {
-                    Category_CategoryId = c.Int(nullable: false),
-                    BlogPost_BlogPostId = c.Int(nullable: false),
-                })
+                    {
+                        Category_CategoryId = c.Int(nullable: false),
+                        BlogPost_BlogPostId = c.Int(nullable: false),
+                    })
                 .PrimaryKey(t => new { t.Category_CategoryId, t.BlogPost_BlogPostId })
                 .ForeignKey("dbo.Categories", t => t.Category_CategoryId, cascadeDelete: true)
                 .ForeignKey("dbo.BlogPosts", t => t.BlogPost_BlogPostId, cascadeDelete: true)
                 .Index(t => t.Category_CategoryId)
                 .Index(t => t.BlogPost_BlogPostId);
-
+            
             CreateTable(
                 "dbo.TagBlogPosts",
                 c => new
-                {
-                    Tag_TagId = c.Int(nullable: false),
-                    BlogPost_BlogPostId = c.Int(nullable: false),
-                })
+                    {
+                        Tag_TagId = c.Int(nullable: false),
+                        BlogPost_BlogPostId = c.Int(nullable: false),
+                    })
                 .PrimaryKey(t => new { t.Tag_TagId, t.BlogPost_BlogPostId })
                 .ForeignKey("dbo.Tags", t => t.Tag_TagId, cascadeDelete: true)
                 .ForeignKey("dbo.BlogPosts", t => t.BlogPost_BlogPostId, cascadeDelete: true)
                 .Index(t => t.Tag_TagId)
                 .Index(t => t.BlogPost_BlogPostId);
-
+            
         }
-
+        
         public override void Down()
         {
             DropForeignKey("dbo.TagBlogPosts", "BlogPost_BlogPostId", "dbo.BlogPosts");
@@ -104,6 +115,7 @@ namespace RecLeagueBlog.Data.Migrations
             DropIndex("dbo.BlogPosts", new[] { "StatusId" });
             DropTable("dbo.TagBlogPosts");
             DropTable("dbo.CategoryBlogPosts");
+            DropTable("dbo.StaticPages");
             DropTable("dbo.Tags");
             DropTable("dbo.Status");
             DropTable("dbo.Employees");
