@@ -98,8 +98,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppRole.cs" />
-    <Compile Include="AppUser.cs" />
     <Compile Include="BlogPost.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Employee.cs" />
