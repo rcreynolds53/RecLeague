@@ -39,8 +39,9 @@ namespace RecLeagueBlog.Controllers
 
             if(user == null)
             {
-                ModelState.AddModelError("Model", "Please enter your email and password");
-                return Redirect(Url.Action("Index", "Home"));
+                //this error message doesn't work
+                ModelState.AddModelError("model", "Please enter your email and password");
+                return Redirect(Url.Action("Login", "Auth"));
             }
 
             var userToLogin = userMgr.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace RecLeagueBlog.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class DashboardController : Controller
     {
         // GET: Dashboard
