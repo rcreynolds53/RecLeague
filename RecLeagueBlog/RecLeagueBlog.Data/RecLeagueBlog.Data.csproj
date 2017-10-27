@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IBlogPostRepository.cs" />
     <Compile Include="Migrations\201710261620392_Init.cs" />
     <Compile Include="Migrations\201710261620392_Init.Designer.cs">
       <DependentUpon>201710261620392_Init.cs</DependentUpon>
@@ -110,6 +111,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RecBlogDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MockPostRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -129,5 +131,6 @@
       <DependentUpon>201710262001203_InitIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

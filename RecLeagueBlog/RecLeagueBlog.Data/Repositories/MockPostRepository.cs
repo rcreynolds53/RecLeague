@@ -1,0 +1,103 @@
+﻿using RecLeagueBlog.Data.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RecLeagueBlog.Models;
+
+namespace RecLeagueBlog.Data.Repositories
+{
+    public class MockPostRepository : IBlogPostRepository
+    {
+        private static List<BlogPost> _posts;
+        static MockPostRepository()
+        {
+            List<Status> statuses = new List<Status>()
+            {
+                new Status {StatusId = 1, StatusName = "Published" },
+                new Status {StatusId = 2, StatusName = "Pending"},
+                new Status {StatusId =3, StatusName ="Deleted"}
+            };
+
+            List<Employee> employees = new List<Employee>()
+            {
+                new Employee {EmployeeId = 1, FirstName = "Lindsey", LastName = "Parlow"},
+                new Employee {EmployeeId = 2, FirstName = "AJ", LastName = "Rohde"}
+            };
+
+            List<Tag> tag1 = new List<Tag>()
+            {
+                new Tag {TagId = 1, TagName = "championship"},
+                new Tag {TagId = 2, TagName = "Global Gym Cobras"},
+                new Tag {TagId = 3, TagName = "Average Joe's"}
+            };
+            List<Tag> tag2 = new List<Tag>()
+            {
+                new Tag {TagId = 1, TagName = "sign-up"},
+                new Tag {TagId = 2, TagName = "ages 10-14"},
+                new Tag {TagId = 3, TagName = "fall2017"}
+            };
+            List<Tag> tag3 = new List<Tag>()
+            {
+                new Tag {TagId = 1, TagName = "winter2016"},
+                new Tag {TagId = 2, TagName = "canadians"},
+                new Tag {TagId = 3, TagName = "cancelled"}
+            };
+            List<Category> cat1 = new List<Category>()
+           {
+                new Category {CategoryId =1, CategoryName = "Football" },
+                new Category {CategoryId = 2, CategoryName = "Fall" }
+           };
+
+            List<Category> cat2 = new List<Category>()
+           {
+                new Category {CategoryId =1, CategoryName = "Soccer" },
+                new Category {CategoryId = 2, CategoryName = "Fall" }
+           };
+
+            List<Category> cat3 = new List<Category>()
+           {
+                new Category {CategoryId =1, CategoryName = "Curling" },
+                new Category {CategoryId = 2, CategoryName = "Winter" }
+           };
+
+            _posts = new List<BlogPost>()
+            {
+                new BlogPost {BlogPostId = 1, Title = "Football Champs", Categories = cat1, Content ="The football championship was helld this weekend...", DateCreated = DateTime.Parse("07/15/2017"), Tags = tag1, StatusId = 2, EmployeeId = 2},
+                new BlogPost {BlogPostId = 1, Title = "Soccer Sign-Up", Categories = cat2, Content = "Sign up now for our Co-ed Soccer League! Please contact Judy Thao for more information...", DateCreated = DateTime.Parse("08/01/2017"), Tags = tag2, StatusId = 1, EmployeeId = 1},
+                new BlogPost {BlogPostId = 1, Title = "Curling Cancelled", Categories = cat3, Content ="It is with sadness that we announce that the men's curling league has been cancelled due to a lack of interest in the dying sport.", DateCreated = DateTime.Parse("11/11/2016"), Tags = tag3, StatusId = 1, EmployeeId =2}
+
+            };
+        }
+        public void CreateBlogPost(BlogPost newPost)
+        {
+            if(_posts.Any())
+            {
+                newPost.BlogPostId = _posts.Max(p => p.BlogPostId) + 1;
+            }
+            newPost.BlogPostId = 1;
+        }
+
+        public void DeletePost(int postId)
+        {
+            _posts.RemoveAll(p => p.BlogPostId == postId);
+        }
+
+        public List<BlogPost> GetAllPosts()
+        {
+            return _posts;
+        }
+
+        public BlogPost GetPostById(int postId)
+        {
+            return _posts.FirstOrDefault(p => p.BlogPostId == postId);
+        }
+
+        public void UpdateBlogPost(BlogPost updatedPost)
+        {
+            _posts.RemoveAll(p => p.BlogPostId == updatedPost.BlogPostId);
+            _posts.Add(updatedPost);
+        }
+    }
+}
