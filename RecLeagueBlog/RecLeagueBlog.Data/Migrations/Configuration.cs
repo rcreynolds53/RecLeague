@@ -26,6 +26,7 @@ namespace RecLeagueBlog.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
         }
     }
 }
