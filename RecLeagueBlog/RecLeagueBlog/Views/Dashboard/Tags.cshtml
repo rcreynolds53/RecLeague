@@ -1,13 +1,13 @@
 ﻿
 @{
     ViewBag.Title = "Tags";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
+
 @Html.Action("Tags", "Dashboard", new { path = "~/Scripts/tags.html" });
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-
-<body>
     <div id="content">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -121,5 +121,5 @@
 
     </div>
     <script src="tags.js"></script>
-</body>
+
 
