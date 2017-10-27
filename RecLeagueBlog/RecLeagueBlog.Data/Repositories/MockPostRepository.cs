@@ -34,15 +34,21 @@ namespace RecLeagueBlog.Data.Repositories
             };
             List<Tag> tag2 = new List<Tag>()
             {
-                new Tag {TagId = 1, TagName = "sign-up"},
-                new Tag {TagId = 2, TagName = "ages 10-14"},
-                new Tag {TagId = 3, TagName = "fall2017"}
+                new Tag {TagId = 4, TagName = "sign-up"},
+                new Tag {TagId = 5, TagName = "ages 10-14"},
+                new Tag {TagId = 6, TagName = "fall2017"}
             };
             List<Tag> tag3 = new List<Tag>()
             {
-                new Tag {TagId = 1, TagName = "winter2016"},
-                new Tag {TagId = 2, TagName = "canadians"},
-                new Tag {TagId = 3, TagName = "cancelled"}
+                new Tag {TagId = 7, TagName = "winter2016"},
+                new Tag {TagId = 8, TagName = "canadians"},
+                new Tag {TagId = 9, TagName = "cancelled"}
+            };
+            List<Tag> tag4 = new List<Tag>()
+            {
+                new Tag {TagId = 10, TagName = "summer2017"},
+                new Tag {TagId = 11, TagName = "rankings"},
+                new Tag {TagId = 12, TagName = "lumberjacks"}
             };
             List<Category> cat1 = new List<Category>()
            {
@@ -52,22 +58,27 @@ namespace RecLeagueBlog.Data.Repositories
 
             List<Category> cat2 = new List<Category>()
            {
-                new Category {CategoryId =1, CategoryName = "Soccer" },
+                new Category {CategoryId =3, CategoryName = "Soccer" },
                 new Category {CategoryId = 2, CategoryName = "Fall" }
            };
 
             List<Category> cat3 = new List<Category>()
            {
-                new Category {CategoryId =1, CategoryName = "Curling" },
-                new Category {CategoryId = 2, CategoryName = "Winter" }
+                new Category {CategoryId =4, CategoryName = "Curling" },
+                new Category {CategoryId = 5, CategoryName = "Winter" }
+           };
+            List<Category> cat4 = new List<Category>()
+           {
+                new Category {CategoryId =3, CategoryName = "Soccer" },
+                new Category {CategoryId = 6, CategoryName = "Summer" }
            };
 
             _posts = new List<BlogPost>()
             {
                 new BlogPost {BlogPostId = 1, Title = "Football Champs", Categories = cat1, Content ="The football championship was helld this weekend...", DateCreated = DateTime.Parse("07/15/2017"), Tags = tag1, StatusId = 2, EmployeeId = 2},
                 new BlogPost {BlogPostId = 1, Title = "Soccer Sign-Up", Categories = cat2, Content = "Sign up now for our Co-ed Soccer League! Please contact Judy Thao for more information...", DateCreated = DateTime.Parse("08/01/2017"), Tags = tag2, StatusId = 1, EmployeeId = 1},
-                new BlogPost {BlogPostId = 1, Title = "Curling Cancelled", Categories = cat3, Content ="It is with sadness that we announce that the men's curling league has been cancelled due to a lack of interest in the dying sport.", DateCreated = DateTime.Parse("11/11/2016"), Tags = tag3, StatusId = 1, EmployeeId =2}
-
+                new BlogPost {BlogPostId = 1, Title = "Curling Cancelled", Categories = cat3, Content ="It is with sadness that we announce that the men's curling league has been cancelled due to a lack of interest in the dying sport.", DateCreated = DateTime.Parse("11/11/2016"), Tags = tag3, StatusId = 1, EmployeeId =2},
+                new BlogPost{ BlogPostId =4, Title = "Summer Soccer Final Rankings", Categories = cat4, Tags = tag4, Content = "After a tough loss for the previously undefeated MN Lumberjacks, there is a new team a top of the final season rankings...", DateCreated = DateTime.Parse("08/28/2017"), StatusId = 1, EmployeeId = 1}
             };
         }
         public void CreateBlogPost(BlogPost newPost)

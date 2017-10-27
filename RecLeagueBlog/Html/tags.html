@@ -1,16 +1,25 @@
-﻿
-@{
-    ViewBag.Title = "Tags";
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
-}
+<!DOCTYPE html>
+<html lang="en">
 
-@Html.Action("Tags", "Dashboard", new { path = "~/Scripts/tags.html" });
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tags</title>
 
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+</head> 
+
+<body>
     <div id="content">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
+               
                 <form class="navbar-form navbar-left" onsubmit="return false;">
                     <div class="form-group">
                         <span class="navbar-brand">Tags</span>
@@ -36,6 +45,9 @@
                         <select class="form-control" v-model="searchCategory">
                             <option value="">Search Category&nbsp;&nbsp;</option>
                             <option value="tag">Tag</option>
+                            <!-- <option value="year">Release Year</option>
+                            <option value="director">Director Name</option>
+                            <option value="rating">Rating</option> -->
                         </select>
                     </div>
                     <div class="form-group">
@@ -108,7 +120,31 @@
                             <div class="form-group">
                                 <label for="txtTitle">Tag</label>
                                 <input id="txtTitle" type="text" class="form-control" v-model="current.tagName" required>
+                            <!-- </div>
+                            <div class="form-group">
+                                <label for="txtReleaseYear">Release Year</label>
+                                <input id="txtReleaseYear" type="number" class="form-control" v-model="current.releaseYear">
                             </div>
+                            <div class="form-group">
+                                <label for="txtDirector">Director</label>
+                                <input id="txtDirector" type="text" class="form-control" v-model="current.director">
+                            </div>
+                            <div class="form-group">
+                                <label for="ddlRating">Rating</label>
+                                <select id="ddlRating" v-model="current.rating">
+                                    <option>G</option>
+                                    <option>PG</option>
+                                    <option>PG-13</option>
+                                    <option>R</option>
+                                    <option>NR</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtNotes">Notes</label>
+                                <textarea id="txtNotes" class="form-control" v-model="current.notes">
+                                    
+                                </textarea>
+                            </div> -->
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -120,6 +156,12 @@
         </div>
 
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@2.3.4"></script>
     <script src="tags.js"></script>
+</body>
 
-
+</html>
