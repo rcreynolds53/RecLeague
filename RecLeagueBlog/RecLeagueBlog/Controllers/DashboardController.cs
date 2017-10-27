@@ -11,6 +11,8 @@ namespace RecLeagueBlog.Controllers
         // GET: Dashboard
         public ActionResult Index()
         {
+            ViewBag.Message = "Welcome to Rec League Sports.";
+
             return View();
         }
 
@@ -45,6 +47,13 @@ namespace RecLeagueBlog.Controllers
         public ActionResult Users()
         {
             ViewBag.Message = "Your users page.";
+
+            return View();
+        }
+
+        public ActionResult UserProfile()
+        {
+            ViewBag.Message = "Your user profile page.";
 
             return View();
         }
