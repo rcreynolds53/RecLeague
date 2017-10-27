@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -9,15 +10,18 @@ namespace RecLeagueBlog
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+                // Web API configuration and services
+                config.EnableCors();
+                var jsonSerializerSettings = GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
+                jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                jsonSerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                // Web API routes
+                config.MapHttpAttributeRoutes();
 
-            // Web API routes
-            config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                config.Routes.MapHttpRoute(
+                    name: "DefaultApi",
+                    routeTemplate: "api/{controller}/{id}",
+                    defaults: new { id = RouteParameter.Optional }
             );
         }
     }
