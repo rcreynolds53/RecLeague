@@ -37,9 +37,9 @@ namespace RecLeagueBlog.Controllers
             var userMgr = HttpContext.GetOwinContext().GetUserManager<UserManager<IdentityUser>>();
             var user = userMgr.Find(model.Email, model.Password);
 
-            if(user ==null)
+            if(user == null)
             {
-                ModelState.AddModelError("Model", "Please enter an email or password");
+                ModelState.AddModelError("Model", "Please enter your email and password");
                 return Redirect(Url.Action("Index", "Home"));
             }
 
@@ -48,7 +48,7 @@ namespace RecLeagueBlog.Controllers
 
             if(string.IsNullOrEmpty(model.ReturnUrl) || !Url.IsLocalUrl(model.ReturnUrl))
             {
-                return Redirect(Url.Action("Index", "Home"));
+                return Redirect(Url.Action("Index", "Dashboard"));
             }
             return Redirect(model.ReturnUrl);
         }
