@@ -43,7 +43,7 @@ namespace RecLeagueBlog.Data.Migrations
 
             // create the default user
             var user = new IdentityUser()
-            {
+            { 
                 UserName = "admin@recleague.com",
                 Email = "admin@recleague.com"
             };
