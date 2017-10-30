@@ -1,13 +1,11 @@
-﻿@{
+﻿@model RecLeagueBlog.Models.BlogPost
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Rec League Sports</h1>
-    <p class="lead">Rec League Sports is your go-to blog for all things rec.</p>
-    <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
 <div class="row">
-    <h1>Most Recent Posts</h1>
+    <div class="col-xs-12">
+        <h2>Return top 3 posts ordered by date created descending</h2>
+    </div>
 </div>
