@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace RecLeagueBlog.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class DashboardController : Controller
     {
         // GET: Dashboard
@@ -42,7 +43,6 @@ namespace RecLeagueBlog.Controllers
             ViewBag.Message = "Your tags page.";
 
             return View();
-
         }
 
         public ActionResult Users()

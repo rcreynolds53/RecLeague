@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Rec League Sports</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -22,20 +22,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Posts", "Posts", "Dashboard")</li>
-                        <li>@Html.ActionLink("Pages", "Pages", "Dashboard")</li>
-                        <li>@Html.ActionLink("Categories", "Categories", "Dashboard")</li>
-                        <li>@Html.ActionLink("Tags", "tags")</li>
-                        <li>@Html.ActionLink("Users", "Users", "Dashboard")</li>
-                        <li>@Html.ActionLink(User.Identity.Name, "Profile", "Dashboard")</li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Auth")</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Login", "Login", "Auth")</li>
-                    }
+                    <li>@Html.ActionLink("Login", "Login", "Auth")</li>
                 </ul>
             </div>
         </div>
@@ -44,7 +31,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Rec League Sports</p>
         </footer>
     </div>
 
