@@ -7,119 +7,101 @@
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
-    <div id="content">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <form class="navbar-form navbar-left" onsubmit="return false;">
-                    <div class="form-group">
-                        <span class="navbar-brand">Tags</span>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#modalForm" v-on:click="create">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            Create Tag
-                        </button>
-                    </div>
-                </form>
+   <div class="container" id="pageContent">
+    <div class="container" id="mainContent">
+        <div>
+            <h1>Tag Library</h1>
+            <br />
+            <button class="btn-btn btn-primary" id="createDvdButton" float="left">Create DVD</button>
+            <div class="container" align="right">
 
-                <form class="navbar-form navbar-right" onsubmit="return false;">
+                <button class="btn-btn btn-primary" id="searchButton" align="right">Search</button>
+                <select alight="right" id="searchCategoryDropList" required>
+                    <option value="" disabled="disabled" selected="selected">Search Category</option>
+                    <option value="title">Title</option>
+                    <option value="year">Release Year</option>
+                    <option value="director">Director Name</option>
+                    <option value="rating">Rating</option>
+                </select>
+                <input class="text-box" id="searchTerm" type="text" placeholder=" search term" required />
+                <button class="btn-btn btn-default" id="clearSearchButton" align="right">Clear Search</button>
+            </div><br />
+            <ul class="list-group" id="errorMessages"></ul>
+        </div>
 
-                    <div class="form-group">
-                        <button class="btn btn-info navbar-btn" type="button" v-on:click="clear">
-                            <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-                            Clear Search
-                        </button>
-                    </div>
-                    <button type="submit" class="btn btn-default" v-on:click="search">Search</button>
-                    <div class="form-group">
-                        <select class="form-control" v-model="searchCategory">
-                            <option value="">Search Category&nbsp;&nbsp;</option>
-                            <option value="tag">Tag</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search Term" v-model="searchTerm">
-                    </div>
+        <br />
+        <div id="contentArea">
+            <table id="tagTable" class="table table-hover">
+                <tr>
+                    <th width="70%">Tag</th>
+                    <th width="30%"></th>
+                </tr>
+                <tbody id="contentRows"></tbody>
+            </table>
+        </div>
+    </div>
 
-                </form>
 
-            </div>
-        </nav>
+    <!--CREATE DVD-->
+    <div class="container" id="add-content" style="display: none">
 
-        <div class="container">
-            <div class="alert alert-danger" role="alert" v-if="searchIsInvalid">
-                Both Search Category and Search Term are required.
-            </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Tag</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="tag in tags">
-                        <td>{{tag.tagName}}</td>
-                        <td>
-                            <a href="#" data-toggle="modal" data-target="#modalForm" v-on:click="edit(tag)">Edit</a> |
-                            <a href="#" data-toggle="modal" data-target="#modalDelete" v-on:click="confirmDelete(tag)">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
+        <h1>Create Tag</h1><hr />
+        <ul class="list-group" id="addErrorMessages"></ul>
+        <div class=" container">
+
+            <table>
+                <tr>
+                    <th><label>Tag Name</label></th>
+                    <td><input class="text" type="text" id="add-title" /></td>               
+                </tr>
             </table>
         </div>
 
-        <div class="modal fade" tabindex="-1" role="dialog" id="modalDelete">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Confirm Delete</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            Are you sure you want to delete: {{current.tagName}}?
-                        </p>
-                        <p>
-                            (This can not be undone.)
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="executeDelete">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" tabindex="-1" role="dialog" id="modalForm">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">{{modalTitle}}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-danger" role="alert" v-if="errorMessage" v-html="errorMessage">
-
-                        </div>
-                        <form class="form">
-                            <div class="form-group">
-                                <label for="txtTitle">Tag</label>
-                                <input id="txtTitle" type="text" class="form-control" v-model="current.tagName" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" v-on:click="save">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <button class="btn-btn btn-standard" id="cancelAddButton">Cancel</button>
+        <button class="btn-btn btn-primary" id="addDvdButton">Create Tag</button>
     </div>
-    <script src="~/Scripts/tags.js"></script>
-<script src="https://unpkg.com/vue@2.3.4"></script>
+
+    <!--EDIT DVD-->
+    <div class="container" id="edit-content" style="display: none">
+        <h1 id="editHeader">Edit Tag:</h1><hr />
+        <ul class="list-group" id="editErrorMessages"></ul>
+        <div class=" container"></div>
+        <input type="hidden" id="textDvdId" />
+        <table>
+            <tr>
+                <th><label>Tag Name</label></th>
+                <td><input class="text" type="text" id="edit-title" /></td>
+            </tr>          
+        </table>
+        <button class="btn-btn btn-standard" id="cancelEditButton">Cancel</button>
+        <button class="btn-btn btn-primary" id="editSaveButton">Save Changes</button>
+    </div>
+
+
+    <!--DISPLAY CONTENT-->
+    @*<div class="container" id="display-content" style="display: none">
+        <h1 id="displayTitle"></h1><hr />
+        <table id="displayTable">
+            <tr>
+                <th>Release Year:</th>
+                <td id="displayReleaseYear"></td>
+            </tr>
+            <tr>
+                <th>Director:</th>
+                <td id="displayDirector"></td>
+            </tr>
+            <tr>
+                <th>Rating:</th>
+                <td id="displayRating"></td>
+            </tr>
+            <tr>
+                <th>Notes:</th>
+                <td id="displayNotes"></td>
+            </tr>
+        </table>
+        <button class="btn-btn btn-primary" id="backToMainPage">Back</button>
+    </div>*@
+</div>
+<script src="~/Scripts/dvdList.js"></script>
 
 

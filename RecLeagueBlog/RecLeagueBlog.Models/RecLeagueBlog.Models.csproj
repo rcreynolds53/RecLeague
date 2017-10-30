@@ -118,7 +118,6 @@
   <ItemGroup>
     <Compile Include="BlogPost.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="Employee.cs" />
     <Compile Include="Identity\AppRole.cs" />
     <Compile Include="Identity\AppUser.cs" />
     <Compile Include="LoginModel.cs" />

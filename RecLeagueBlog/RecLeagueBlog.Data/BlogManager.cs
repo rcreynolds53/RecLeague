@@ -36,6 +36,11 @@ namespace RecLeagueBlog.Data
             _tagRepo.DeleteTag(tagId);
         }
 
+
+        public List<Category> GetAll()
+        {
+            return _categoryRepo.GetAllCategories();
+        }
         public void DeleteCategory(int categoryId)
         {
             _categoryRepo.DeleteCateogry(categoryId);

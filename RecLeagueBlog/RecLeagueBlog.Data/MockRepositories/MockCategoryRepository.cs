@@ -18,8 +18,8 @@ namespace RecLeagueBlog.Data.Repositories
             {
                 new Category {CategoryId = 1, CategoryName = "Football"},
                 new Category {CategoryId = 2, CategoryName = "Fall" },
-                new Category {CategoryId =3, CategoryName = "Soccer" },
-                new Category {CategoryId =4, CategoryName = "Curling" },
+                new Category {CategoryId = 3, CategoryName = "Soccer" },
+                new Category {CategoryId = 4, CategoryName = "Curling" },
                 new Category {CategoryId = 5, CategoryName = "Winter" },
                 new Category {CategoryId = 6, CategoryName = "Summer" }
             };
@@ -36,8 +36,17 @@ namespace RecLeagueBlog.Data.Repositories
 
         public void DeleteCateogry(int categoryId)
         {
+            List<BlogPost> posts = new MockPostRepository().GetAllPosts();
             _categories.RemoveAll(c => c.CategoryId == categoryId);
 
+            foreach(var p in posts)
+            {
+                var category = p.Categories.SingleOrDefault(c => c.CategoryId == categoryId);
+                if(category != null)
+                {
+                    p.Categories.Remove(category);
+                }                                     
+            }
         }
 
         public List<Category> GetAllCategories()
@@ -54,6 +63,17 @@ namespace RecLeagueBlog.Data.Repositories
         {
             _categories.RemoveAll(c => c.CategoryId == updatedCategory.CategoryId);
             _categories.Add(updatedCategory);
+            List<BlogPost> posts = new MockPostRepository().GetAllPosts();
+
+            foreach (var p in posts)
+            {
+                var category = p.Categories.SingleOrDefault(c => c.CategoryId == updatedCategory.CategoryId);
+                if (category != null)
+                {
+                    p.Categories.Remove(updatedCategory);
+                    p.Categories.Add(updatedCategory);
+                }
+            }                       
         }
     }
 }
