@@ -38,11 +38,11 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
-        public ActionResult Tags(string path)
+        public ActionResult Tags()
         {
             ViewBag.Message = "Your tags page.";
 
-            return new FilePathResult(path, "text/html");
+            return View();
         }
 
         public ActionResult Users()
