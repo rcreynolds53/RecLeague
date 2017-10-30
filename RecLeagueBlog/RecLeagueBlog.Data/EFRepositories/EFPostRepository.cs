@@ -51,7 +51,10 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public List<BlogPost> GetThreeRecent()
         {
-            throw new NotImplementedException();
+            var posts = (from p in context.BlogPosts
+                         orderby p.DateCreated descending
+                         select p).Take(3).ToList();
+            return posts;
         }
     }
 }
