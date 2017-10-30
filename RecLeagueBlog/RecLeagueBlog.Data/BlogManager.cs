@@ -25,5 +25,30 @@ namespace RecLeagueBlog.Data
         {
             return _tagRepo.GetAllTags();
         }
+
+        public void CreateTag(Tag newTag)
+        {
+            _tagRepo.CreateTag(newTag);
+        }
+
+        public void DeleteTag(int tagId)
+        {
+            _tagRepo.DeleteTag(tagId);
+        }
+
+        public void DeleteCategory(int categoryId)
+        {
+            _categoryRepo.DeleteCateogry(categoryId);
+        }
+
+        public Category GetCategory(int categoryId)
+        {
+           return _categoryRepo.GetCategory(categoryId);
+        }
+
+        public BlogPost GetPost(int postId)
+        {
+            return _blogPostRepo.GetPostById(postId);
+        }
     }
 }

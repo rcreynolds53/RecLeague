@@ -37,6 +37,7 @@ namespace RecLeagueBlog.Data.Repositories
         public void DeleteCateogry(int categoryId)
         {
             _categories.RemoveAll(c => c.CategoryId == categoryId);
+
         }
 
         public List<Category> GetAllCategories()

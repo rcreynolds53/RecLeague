@@ -4,8 +4,7 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-@Html.Action("Tags", "Dashboard", new { path = "~/Scripts/tags.html" });
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
     <div id="content">
@@ -120,6 +119,7 @@
         </div>
 
     </div>
-    <script src="tags.js"></script>
+    <script src="~/Scripts/tags.js"></script>
+<script src="https://unpkg.com/vue@2.3.4"></script>
 
 

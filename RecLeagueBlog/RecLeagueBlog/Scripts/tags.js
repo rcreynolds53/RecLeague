@@ -60,11 +60,7 @@ function search(searchCategory, searchTerm) {
 function save() {
 
     var tag = {
-        "title": this.current.tagName
-        // "releaseYear": this.current.releaseYear,
-        // "director": this.current.director,
-        // "rating": this.current.rating,
-        // "notes": this.current.notes
+        "tagName": this.current.tagName
     };
 
     this.errorMessage = validate(tag);
@@ -118,9 +114,7 @@ var vue = new Vue({
         },
         create: function () {
             this.modalTitle = "Create Tag";
-            // this.current = {
-            //     rating: "G"
-            // };
+            this.current = tag.tagName;
             this.errorMessage = "";
         },
         edit: function (tag) {

@@ -1,12 +1,11 @@
 namespace RecLeagueBlog.Data.Migrations
 {
-    using RecLeagueBlog.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
 
     internal sealed class Configuration : DbMigrationsConfiguration<RecLeagueBlog.Data.RecBlogDBContext>
     {
@@ -17,6 +16,7 @@ namespace RecLeagueBlog.Data.Migrations
 
         protected override void Seed(RecLeagueBlog.Data.RecBlogDBContext context)
         {
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
@@ -43,7 +43,7 @@ namespace RecLeagueBlog.Data.Migrations
 
             // create the default user
             var user = new IdentityUser()
-            { 
+            {
                 UserName = "admin@recleague.com",
                 Email = "admin@recleague.com"
             };

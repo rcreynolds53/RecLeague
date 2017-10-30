@@ -13,10 +13,8 @@ namespace RecLeagueBlog.Models
         public string Content { get; set; }
         public DateTime DateCreated { get; set; }
         public int StatusId { get; set; }
-        public int EmployeeId { get; set; }
 
         public virtual Status Status { get; set; }
-        public virtual Employee Employee { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
     }
