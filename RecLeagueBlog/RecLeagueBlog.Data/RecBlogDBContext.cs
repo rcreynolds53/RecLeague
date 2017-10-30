@@ -18,7 +18,6 @@ namespace RecLeagueBlog.Data
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Employee> Employees { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<StaticPage> StaticPages { get; set; }
 

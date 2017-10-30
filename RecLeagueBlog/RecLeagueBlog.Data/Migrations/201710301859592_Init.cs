@@ -14,86 +14,16 @@ namespace RecLeagueBlog.Data.Migrations
                         BlogPostId = c.Int(nullable: false, identity: true),
                         Title = c.String(),
                         Content = c.String(),
-                        DateCreated = c.DateTime(nullable: false),
+                        DateCreated = c.DateTime(nullable: false, defaultValueSql: "GETUTCDATE()"),
                         StatusId = c.Int(nullable: false),
+                        UserName = c.String(),
+                        AppUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.BlogPostId)
+                .ForeignKey("dbo.AspNetUsers", t => t.AppUser_Id)
                 .ForeignKey("dbo.Status", t => t.StatusId, cascadeDelete: true)
-                .Index(t => t.StatusId);
-            
-            CreateTable(
-                "dbo.Categories",
-                c => new
-                    {
-                        CategoryId = c.Int(nullable: false, identity: true),
-                        CategoryName = c.String(),
-                    })
-                .PrimaryKey(t => t.CategoryId);
-            
-            CreateTable(
-                "dbo.Status",
-                c => new
-                    {
-                        StatusId = c.Int(nullable: false, identity: true),
-                        StatusName = c.String(),
-                    })
-                .PrimaryKey(t => t.StatusId);
-            
-            CreateTable(
-                "dbo.Tags",
-                c => new
-                    {
-                        TagId = c.Int(nullable: false, identity: true),
-                        TagName = c.String(),
-                    })
-                .PrimaryKey(t => t.TagId);
-
-            CreateTable(
-                "dbo.Employees",
-                c => new
-                {
-                    EmployeeId = c.Int(nullable: false, identity: true),
-                    FirstName = c.String(),
-                    LastName = c.String(),
-                    RoleId = c.String(nullable: false, maxLength: 128),
-                })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .PrimaryKey(t => t.EmployeeId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.StaticPages",
-                c => new
-                    {
-                        StaticPageId = c.Int(nullable: false, identity: true),
-                        Title = c.String(),
-                        Content = c.String(),
-                    })
-                .PrimaryKey(t => t.StaticPageId);
+                .Index(t => t.StatusId)
+                .Index(t => t.AppUser_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -142,6 +72,67 @@ namespace RecLeagueBlog.Data.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        CategoryId = c.Int(nullable: false, identity: true),
+                        CategoryName = c.String(),
+                    })
+                .PrimaryKey(t => t.CategoryId);
+            
+            CreateTable(
+                "dbo.Status",
+                c => new
+                    {
+                        StatusId = c.Int(nullable: false, identity: true),
+                        StatusName = c.String(),
+                    })
+                .PrimaryKey(t => t.StatusId);
+            
+            CreateTable(
+                "dbo.Tags",
+                c => new
+                    {
+                        TagId = c.Int(nullable: false, identity: true),
+                        TagName = c.String(),
+                    })
+                .PrimaryKey(t => t.TagId);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.StaticPages",
+                c => new
+                    {
+                        StaticPageId = c.Int(nullable: false, identity: true),
+                        Title = c.String(),
+                        Content = c.String(),
+                    })
+                .PrimaryKey(t => t.StaticPageId);
+            
+            CreateTable(
                 "dbo.CategoryBlogPosts",
                 c => new
                     {
@@ -180,29 +171,30 @@ namespace RecLeagueBlog.Data.Migrations
             DropForeignKey("dbo.BlogPosts", "StatusId", "dbo.Status");
             DropForeignKey("dbo.CategoryBlogPosts", "BlogPost_BlogPostId", "dbo.BlogPosts");
             DropForeignKey("dbo.CategoryBlogPosts", "Category_CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.BlogPosts", "AppUser_Id", "dbo.AspNetUsers");
             DropIndex("dbo.TagBlogPosts", new[] { "BlogPost_BlogPostId" });
             DropIndex("dbo.TagBlogPosts", new[] { "Tag_TagId" });
             DropIndex("dbo.CategoryBlogPosts", new[] { "BlogPost_BlogPostId" });
             DropIndex("dbo.CategoryBlogPosts", new[] { "Category_CategoryId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.BlogPosts", new[] { "AppUser_Id" });
             DropIndex("dbo.BlogPosts", new[] { "StatusId" });
             DropTable("dbo.TagBlogPosts");
             DropTable("dbo.CategoryBlogPosts");
-            DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.AspNetUsers");
             DropTable("dbo.StaticPages");
-            DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Employees");
             DropTable("dbo.Tags");
             DropTable("dbo.Status");
             DropTable("dbo.Categories");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
             DropTable("dbo.BlogPosts");
         }
     }
