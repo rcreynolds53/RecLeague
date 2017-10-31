@@ -293,11 +293,11 @@
     <Content Include="Views\Shared\_DashboardLayout.cshtml" />
     <Content Include="Views\Dashboard\Categories.cshtml" />
     <Content Include="Views\Dashboard\UserProfile.cshtml" />
-
     <Content Include="Views\Dashboard\ResetPassword.cshtml" />
     <Content Include="Views\Shared\_BlankPage.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Shared\PostsTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
