@@ -6,25 +6,20 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <h4>Blog List</h4>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Date Created</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var post in Model)
-                {
-                    <tr>
-                        <td>@Html.ActionLink(@post.Title, "Post", "Home", new { id = post.BlogPostId }, null)</td>
-                        <td>@post.DateCreated</td>
-                        <td>@post.Status</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <h1>Blog List</h1>
+        @foreach (var post in Model)
+        {
+                    <!-- Blog Post -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.UserName</h3>
+                </div>
+                <div class="panel-body">
+                    <h2>@post.Title</h2>
+                    <p>@post.Content</p>
+                    <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
+                </div>
+            </div>
+        }
     </div>
 </div>

@@ -3,27 +3,24 @@
     ViewBag.Title = "Home Page";
 }
 
+<h1>Most Recent Posts</h1>
 <div class="row">
-    <div class="col-xs-12">
-        <h4>Top 3 Recent Posts</h4>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Date Created</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var post in Model)
-                {
-                    <tr>
-                        <td>@Html.ActionLink(@post.Title, "Post", "Home", new { id = post.BlogPostId }, null)</td>
-                        <td>@post.DateCreated</td>
-                        <td>@post.Status</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+    @*<div class="col-xs-12">*@
+        @foreach (var post in Model)
+        {
+            <div class="col-md-4">
+                <!-- Blog Post -->
+                <div class="blog-card panel panel-default ">
+                    <div class="panel-heading">
+                        Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.UserName
+                    </div>
+                    <div class="panel-body">
+                        <h2>@post.Title</h2>
+                        <p>@post.Content</p>
+                        <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        }
+    @*</div>*@
 </div>
