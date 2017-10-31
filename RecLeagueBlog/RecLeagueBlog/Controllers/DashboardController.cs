@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecLeagueBlog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -56,6 +57,26 @@ namespace RecLeagueBlog.Controllers
         {
             ViewBag.Message = "Your user profile page.";
 
+            return View();
+        }
+
+        //public ActionResult ResetPasswordToken()
+        //{
+        //    return View();
+        //}
+
+        public ActionResult ResetPassword()
+        {
+            //ResetPasswordModel model = new ResetPasswordModel
+            //{
+            //};
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPasswordModel model)
+        {
             return View();
         }
     }
