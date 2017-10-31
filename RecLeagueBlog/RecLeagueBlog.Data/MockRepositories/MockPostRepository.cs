@@ -104,5 +104,10 @@ namespace RecLeagueBlog.Data.Repositories
             _posts.RemoveAll(p => p.BlogPostId == updatedPost.BlogPostId);
             _posts.Add(updatedPost);
         }
+
+        public List<BlogPost> GetThreeRecent()
+        {
+            return _posts.OrderByDescending(p => p.DateCreated).Take(3).ToList();
+        }
     }
 }

@@ -119,7 +119,9 @@
   <ItemGroup>
     <Compile Include="BlogManager.cs" />
     <Compile Include="BlogManagerFactory.cs" />
+    <Compile Include="EFRepositories\EFCategoryRepository.cs" />
     <Compile Include="EFRepositories\EFPostRepository.cs" />
+    <Compile Include="EFRepositories\EFTagRepository.cs" />
     <Compile Include="Interfaces\IBlogPostRepository.cs" />
     <Compile Include="Interfaces\ICategoryRepository.cs" />
     <Compile Include="Interfaces\ITagRepository.cs" />
