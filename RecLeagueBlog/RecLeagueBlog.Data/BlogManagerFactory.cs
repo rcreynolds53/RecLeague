@@ -1,4 +1,5 @@
-﻿using RecLeagueBlog.Data.Interfaces;
+﻿using RecLeagueBlog.Data.EFRepositories;
+using RecLeagueBlog.Data.Interfaces;
 using RecLeagueBlog.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace RecLeagueBlog.Data
             {
                 case "Mock":
                     return new BlogManager(new MockTagRepository(), new MockCategoryRepository(), new MockPostRepository());
+                case "EF":
+                    return new BlogManager(new EFTagRepository(), new EFCategoryRepository(), new EFPostRepository());
                 default:
                     throw new Exception("Mode value in app config is not valid.");
             }
