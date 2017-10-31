@@ -72,16 +72,20 @@ namespace RecLeagueBlog.Data.Repositories
                 new BlogPost {BlogPostId = 1, Title = "Football Champs", Categories = cat1, Content ="The football championship was held this weekend...", DateCreated = DateTime.Parse("07/15/2017"), Tags = tag1, StatusId = 2},
                 new BlogPost {BlogPostId = 2, Title = "Soccer Sign-Up", Categories = cat2, Content = "Sign up now for our Co-ed Soccer League! Please contact Judy Thao for more information...", DateCreated = DateTime.Parse("08/01/2017"), Tags = tag2, StatusId = 1},
                 new BlogPost {BlogPostId = 3, Title = "Curling Cancelled", Categories = cat3, Content ="It is with sadness that we announce that the men's curling league has been cancelled due to a lack of interest in the dying sport.", DateCreated = DateTime.Parse("11/11/2016"), Tags = tag3, StatusId = 1},
-                new BlogPost{ BlogPostId =4, Title = "Summer Soccer Final Rankings", Categories = cat4, Tags = tag4, Content = "After a tough loss for the previously undefeated MN Lumberjacks, there is a new team a top of the final season rankings...", DateCreated = DateTime.Parse("08/28/2017"), StatusId = 1}
+                new BlogPost{ BlogPostId = 4, Title = "Summer Soccer Final Rankings", Categories = cat4, Tags = tag4, Content = "After a tough loss for the previously undefeated MN Lumberjacks, there is a new team a top of the final season rankings...", DateCreated = DateTime.Parse("08/28/2017"), StatusId = 1}
             };
         }
         public void CreateBlogPost(BlogPost newPost)
         {
-            if(_posts.Any())
+            if (_posts.Any())
             {
                 newPost.BlogPostId = _posts.Max(p => p.BlogPostId) + 1;
             }
-            newPost.BlogPostId = 1;
+            else
+            {
+                newPost.BlogPostId = 1;
+            }
+            _posts.Add(newPost);
         }
 
         public void DeletePost(int postId)

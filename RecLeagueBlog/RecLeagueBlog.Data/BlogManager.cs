@@ -38,6 +38,16 @@ namespace RecLeagueBlog.Data
             _tagRepo.DeleteTag(tagId);
         }
 
+        public void UpdateTag(Tag updatedTag)
+        {
+            _tagRepo.UpdateTag(updatedTag);
+        }
+
+        public Tag GetTag(int tagId)
+        {
+            return _tagRepo.GetTag(tagId);
+        }
+
         // CATEGORY BLL
 
         public List<Category> GetAll()
@@ -54,6 +64,14 @@ namespace RecLeagueBlog.Data
            return _categoryRepo.GetCategory(categoryId);
         }
 
+        public void CreateCategory(Category newCategory)
+        {
+            _categoryRepo.CreateCategory(newCategory);
+        }
+        public void UpdateCategory(Tag updatedCategory)
+        {
+            _tagRepo.UpdateTag(updatedCategory);
+        }
 
         // POSTS BLL
 
@@ -70,6 +88,27 @@ namespace RecLeagueBlog.Data
         public List<BlogPost> GetThreeRecent()
         {
             return _blogPostRepo.GetThreeRecent();
+        }
+
+        public void CreateBlogPost(BlogPost newPost)
+        {
+            if(_blogPostRepo.GetAllPosts().Any())
+            {
+                newPost.BlogPostId = _blogPostRepo.GetAllPosts().Max(p => p.BlogPostId) + 1;
+            }
+
+            newPost.BlogPostId = 1;
+            _blogPostRepo.CreateBlogPost(newPost);
+        }
+
+        public void UpdatePost(BlogPost updatedPost)
+        {
+            _blogPostRepo.UpdateBlogPost(updatedPost);
+        }
+
+        public void DeletePost(int postId)
+        {
+            _blogPostRepo.DeletePost(postId);
         }
 
     }

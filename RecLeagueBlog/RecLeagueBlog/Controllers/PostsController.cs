@@ -1,4 +1,5 @@
 ﻿using RecLeagueBlog.Data;
+using RecLeagueBlog.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,14 @@ namespace RecLeagueBlog.Controllers
         public IHttpActionResult GetThreeRecent()
         {
             return Ok(manager.GetThreeRecent());
+        }
+
+        [Route("post")]
+        [AcceptVerbs("POST")]
+        public IHttpActionResult AddBlogPost(BlogPost newPost)
+        {
+            manager.CreateBlogPost(newPost);
+            return Created($"post/{newPost.BlogPostId}", newPost);
         }
     }
 }
