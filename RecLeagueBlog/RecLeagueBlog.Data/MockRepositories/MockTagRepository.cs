@@ -41,7 +41,18 @@ namespace RecLeagueBlog.Data.Repositories
 
         public void DeleteTag(int tagId)
         {
+            List<BlogPost> posts = new MockPostRepository().GetAllPosts();
             _tags.RemoveAll(t => t.TagId == tagId);
+
+            foreach(var p in posts)
+            {
+                var tag = p.Tags.SingleOrDefault(t => t.TagId == tagId);
+
+                if(tag != null)
+                {
+                    p.Tags.Remove(tag);
+                }
+            }
         }
 
         public List<Tag> GetAllTags()
@@ -58,6 +69,18 @@ namespace RecLeagueBlog.Data.Repositories
         {
             _tags.RemoveAll(t => t.TagId == updatedTag.TagId);
             _tags.Add(updatedTag);
+            List<BlogPost> posts = new MockPostRepository().GetAllPosts();
+
+            foreach(var p in posts)
+            {
+                var tag = p.Tags.SingleOrDefault(t => t.TagId == updatedTag.TagId);
+
+                if(tag != null)
+                {
+                    p.Tags.Remove(updatedTag);
+                    p.Tags.Add(updatedTag);
+                }
+            }
         }
     }
 }

@@ -20,12 +20,6 @@ namespace RecLeagueBlog.Data.Repositories
                 new Status {StatusId =3, StatusName ="Deleted"}
             };
 
-            List<Employee> employees = new List<Employee>()
-            {
-                new Employee {EmployeeId = 1, FirstName = "Lindsey", LastName = "Parlow"},
-                new Employee {EmployeeId = 2, FirstName = "AJ", LastName = "Rohde"}
-            };
-
             List<Tag> tag1 = new List<Tag>()
             {
                 new Tag {TagId = 1, TagName = "championship"},
@@ -75,10 +69,10 @@ namespace RecLeagueBlog.Data.Repositories
 
             _posts = new List<BlogPost>()
             {
-                new BlogPost {BlogPostId = 1, Title = "Football Champs", Categories = cat1, Content ="The football championship was helld this weekend...", DateCreated = DateTime.Parse("07/15/2017"), Tags = tag1, StatusId = 2, EmployeeId = 2},
-                new BlogPost {BlogPostId = 1, Title = "Soccer Sign-Up", Categories = cat2, Content = "Sign up now for our Co-ed Soccer League! Please contact Judy Thao for more information...", DateCreated = DateTime.Parse("08/01/2017"), Tags = tag2, StatusId = 1, EmployeeId = 1},
-                new BlogPost {BlogPostId = 1, Title = "Curling Cancelled", Categories = cat3, Content ="It is with sadness that we announce that the men's curling league has been cancelled due to a lack of interest in the dying sport.", DateCreated = DateTime.Parse("11/11/2016"), Tags = tag3, StatusId = 1, EmployeeId =2},
-                new BlogPost{ BlogPostId =4, Title = "Summer Soccer Final Rankings", Categories = cat4, Tags = tag4, Content = "After a tough loss for the previously undefeated MN Lumberjacks, there is a new team a top of the final season rankings...", DateCreated = DateTime.Parse("08/28/2017"), StatusId = 1, EmployeeId = 1}
+                new BlogPost {BlogPostId = 1, Title = "Football Champs", Categories = cat1, Content ="The football championship was held this weekend...", DateCreated = DateTime.Parse("07/15/2017"), Tags = tag1, StatusId = 2},
+                new BlogPost {BlogPostId = 2, Title = "Soccer Sign-Up", Categories = cat2, Content = "Sign up now for our Co-ed Soccer League! Please contact Judy Thao for more information...", DateCreated = DateTime.Parse("08/01/2017"), Tags = tag2, StatusId = 1},
+                new BlogPost {BlogPostId = 3, Title = "Curling Cancelled", Categories = cat3, Content ="It is with sadness that we announce that the men's curling league has been cancelled due to a lack of interest in the dying sport.", DateCreated = DateTime.Parse("11/11/2016"), Tags = tag3, StatusId = 1},
+                new BlogPost{ BlogPostId =4, Title = "Summer Soccer Final Rankings", Categories = cat4, Tags = tag4, Content = "After a tough loss for the previously undefeated MN Lumberjacks, there is a new team a top of the final season rankings...", DateCreated = DateTime.Parse("08/28/2017"), StatusId = 1}
             };
         }
         public void CreateBlogPost(BlogPost newPost)

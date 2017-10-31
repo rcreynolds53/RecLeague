@@ -41,7 +41,7 @@ function put(tag) {
     }).fail(fail);
 }
 
-function remove(dvd) {
+function remove(tag) {
     $.ajax({
         type: "DELETE",
         url: url + "/tag/" + tag.tagId
@@ -60,11 +60,7 @@ function search(searchCategory, searchTerm) {
 function save() {
 
     var tag = {
-        "title": this.current.tagName
-        // "releaseYear": this.current.releaseYear,
-        // "director": this.current.director,
-        // "rating": this.current.rating,
-        // "notes": this.current.notes
+        "tagName": this.current.tagName
     };
 
     this.errorMessage = validate(tag);
@@ -87,14 +83,6 @@ function validate(tag) {
     if (!tag.tagName) {
         message += "The tag name is required.<br />";
     }
-    // var regex = /^\d{4}$/;
-    // if (!regex.test(dvd.releaseYear)) {
-    //     message += "Release Year must be a four digit number.<br />"
-    // }
-
-    // if (!dvd.director) {
-    //     message += "The Director is required.<br />"
-    // }
     return message;
 }
 
@@ -118,9 +106,7 @@ var vue = new Vue({
         },
         create: function () {
             this.modalTitle = "Create Tag";
-            // this.current = {
-            //     rating: "G"
-            // };
+            this.current = tag.tagName;
             this.errorMessage = "";
         },
         edit: function (tag) {
