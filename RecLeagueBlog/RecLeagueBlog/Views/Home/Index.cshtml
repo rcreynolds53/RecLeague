@@ -1,10 +1,29 @@
-﻿
+﻿@model IEnumerable<RecLeagueBlog.Models.BlogPost>
 @{
     ViewBag.Title = "Home Page";
 }
 
 <div class="row">
     <div class="col-xs-12">
-        <h2>Return top 3 posts ordered by date created descending</h2>
+        <h4>Top 3 Recent Posts</h4>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date Created</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(@post.Title, "Post", "Home", new { id = post.BlogPostId }, null)</td>
+                        <td>@post.DateCreated</td>
+                        <td>@post.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

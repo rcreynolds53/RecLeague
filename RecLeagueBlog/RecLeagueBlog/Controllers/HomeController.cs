@@ -11,7 +11,9 @@ namespace RecLeagueBlog.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var repo = new MockPostRepository();
+            var model = repo.GetThreeRecent();
+            return View(model);
         }
 
         public ActionResult About()
