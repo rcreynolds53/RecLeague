@@ -21,6 +21,8 @@ namespace RecLeagueBlog.Data
             _blogPostRepo = blogPostRepo;
         }
 
+        // TAGS BLL
+
         public List<Tag> GetAllTags()
         {
             return _tagRepo.GetAllTags();
@@ -36,6 +38,7 @@ namespace RecLeagueBlog.Data
             _tagRepo.DeleteTag(tagId);
         }
 
+        // CATEGORY BLL
 
         public List<Category> GetAll()
         {
@@ -51,9 +54,23 @@ namespace RecLeagueBlog.Data
            return _categoryRepo.GetCategory(categoryId);
         }
 
+
+        // POSTS BLL
+
         public BlogPost GetPost(int postId)
         {
             return _blogPostRepo.GetPostById(postId);
         }
+
+        public List<BlogPost> GetAllPosts()
+        {
+            return _blogPostRepo.GetAllPosts();
+        }
+
+        public List<BlogPost> GetThreeRecent()
+        {
+            return _blogPostRepo.GetThreeRecent();
+        }
+
     }
 }
