@@ -1,7 +1,30 @@
-﻿
+﻿@model IEnumerable<RecLeagueBlog.Models.BlogPost>
 @{
     ViewBag.Title = "Blog";
     Layout = "~/Views/Shared/_BlankPage.cshtml";
 }
 
-<h2>Blog</h2>
+<div class="row">
+    <div class="col-xs-12">
+        <h4>Blog List</h4>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date Created</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(@post.Title, "Post", "Home", new { id = post.BlogPostId }, null)</td>
+                        <td>@post.DateCreated</td>
+                        <td>@post.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
