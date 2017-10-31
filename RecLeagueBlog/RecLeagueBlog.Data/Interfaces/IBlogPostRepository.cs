@@ -14,7 +14,9 @@ namespace RecLeagueBlog.Data.Interfaces
         void CreateBlogPost(BlogPost newPost);
         void UpdateBlogPost(BlogPost updatedPost);
         void DeletePost(int postId);
+        List<BlogPost> GetThreeRecent();
 
-        
+
+
     }
 }
