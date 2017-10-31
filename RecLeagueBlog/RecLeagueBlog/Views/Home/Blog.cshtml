@@ -1,25 +1,25 @@
-﻿@model RecLeagueBlog.Models.BlogPost
+﻿@model IEnumerable<RecLeagueBlog.Models.BlogPost>
 @{
     ViewBag.Title = "Blog";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_BlankPage.cshtml";
 }
-
-<h2>Blog</h2>
 
 <div class="row">
     <div class="col-xs-12">
-        <h3>Recently Added Posts</h3>
-            <div class="card mb-4">
-                <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
-                <div class="card-body">
-                    <h2 class="card-title">post.Title</h2>
-                    <p class="card-text">post.Content</p>
-                    <a href="#" class="btn btn-primary">Read More &rarr;</a>
+        <h1>Blog List</h1>
+        @foreach (var post in Model)
+        {
+                    <!-- Blog Post -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.UserName</h3>
                 </div>
-                <div class="card-footer text-muted">
-                    Posted on post.DateCreated by
-                    <a href="#">post.CreatedBy</a>
+                <div class="panel-body">
+                    <h2>@post.Title</h2>
+                    <p>@post.Content</p>
+                    <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
                 </div>
             </div>
+        }
     </div>
 </div>
