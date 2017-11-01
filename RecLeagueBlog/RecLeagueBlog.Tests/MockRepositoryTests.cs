@@ -48,5 +48,20 @@ namespace RecLeagueBlog.Tests
 
             Assert.AreEqual("Sports", categoryToShow.CategoryName.ToString());
         }
+        [Test]
+        public void CanAddBlogPost()
+        {
+            BlogPost post = new BlogPost();
+            MockPostRepository postRepo = new MockPostRepository();
+
+            post.Content = "This";
+            post.DateCreated = DateTime.Now;
+
+            postRepo.CreateBlogPost(post);
+
+            var postGet = postRepo.GetPostById(5);
+
+            Assert.AreEqual(5, postRepo.GetAllPosts().Count());
+        }
     }
 }

@@ -1,0 +1,20 @@
+﻿@model RecLeagueBlog.Models.BlogPost
+@{
+    ViewBag.Title = "Post";
+    Layout = "~/Views/Shared/_BlankPage.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>@Model.Title</h1>
+            <p class="lead">
+                by @Model.UserName
+            </p>
+            <hr>
+            <p><span class="glyphicon glyphicon-time"></span> Posted on @Model.DateCreated.ToString("MM/dd/yyyy")</p>
+            <hr>
+            <p class="lead">@Model.Content</p>
+        </div>
+    </div>
+</div>

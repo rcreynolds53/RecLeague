@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using RecLeagueBlog.Data;
 using RecLeagueBlog.Models;
 using RecLeagueBlog.Models.Identity;
+﻿using RecLeagueBlog.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,9 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult Posts()
         {
-            ViewBag.Message = "Your blog posts page.";
-
-            return View();
+            var repo = new MockPostRepository();
+            var model = repo.GetAllPosts();
+            return View(model);
         }
 
         public ActionResult Pages()

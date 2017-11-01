@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Rec League Sports</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/font-awesome.min.css")" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,6 +23,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Blog", "Blog", "Home")</li>
                     <li>@Html.ActionLink("Login", "Login", "Auth")</li>
                 </ul>
             </div>

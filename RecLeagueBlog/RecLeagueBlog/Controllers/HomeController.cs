@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecLeagueBlog.Data.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,9 @@ namespace RecLeagueBlog.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var repo = new MockPostRepository();
+            var model = repo.GetThreeRecent();
+            return View(model);
         }
 
         public ActionResult About()
@@ -25,6 +28,20 @@ namespace RecLeagueBlog.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Blog()
+        {
+            var repo = new MockPostRepository();
+            var model = repo.GetAllPosts();
+            return View(model);
+        }
+
+        public ActionResult Post(int id)
+        {
+            var repo = new MockPostRepository();
+            var model = repo.GetPostById(id);
+            return View(model);
         }
     }
 }

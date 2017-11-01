@@ -27,11 +27,16 @@ namespace RecLeagueBlog.Data.Repositories
 
         public void CreateCategory(Category newCategory)
         {
-            if(_categories.Any())
+            if (_categories.Any())
             {
                 newCategory.CategoryId = _categories.Max(c => c.CategoryId) + 1;
             }
-            newCategory.CategoryId = 1;
+            else
+            {
+                newCategory.CategoryId = 1;
+            }
+
+            _categories.Add(newCategory);
         }
 
         public void DeleteCateogry(int categoryId)
