@@ -6,17 +6,24 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <h1>Blog List</h1>
+        <h1>Blog Posts</h1>
+        <hr />
         @foreach (var post in Model)
         {
-                    <!-- Blog Post -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.UserName</h3>
                 </div>
                 <div class="panel-body">
                     <h2>@post.Title</h2>
-                    <p>@post.Content</p>
+                    @if (@post.Content.Length < 140)
+                    {
+                        <p>@post.Content</p>
+                    }
+                    else
+                    {
+                        <p>@post.Content.Substring(0, 140)</p>
+                    }                    
                     <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
                 </div>
             </div>
