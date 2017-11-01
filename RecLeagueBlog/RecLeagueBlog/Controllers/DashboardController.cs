@@ -1,7 +1,12 @@
-﻿using RecLeagueBlog.Models;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using RecLeagueBlog.Data;
+using RecLeagueBlog.Models;
+using RecLeagueBlog.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -60,11 +65,7 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
-        //public ActionResult ResetPasswordToken()
-        //{
-        //    return View();
-        //}
-
+        [Authorize(Roles = "admin")]
         public ActionResult ResetPassword()
         {
             //ResetPasswordModel model = new ResetPasswordModel
@@ -75,8 +76,35 @@ namespace RecLeagueBlog.Controllers
         }
 
         [HttpPost]
-        public ActionResult ResetPassword(ResetPasswordModel model)
+        [Authorize(Roles ="admin")]
+        public async Task<ActionResult> ResetPassword(string userId, string newPassword)
         {
+
+            RecBlogDBContext context = new RecBlogDBContext();
+            UserStore<IdentityUser> store = new UserStore<IdentityUser>(context);
+            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(store);
+            userId = User.Identity.GetUserId();
+            newPassword = "Test123!";
+            string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
+            IdentityUser identityUser = await store.FindByIdAsync(userId);
+            await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
+            await store.UpdateAsync(identityUser);
+
+
+
+            return View();
+        }
+
+        public ActionResult UpdatePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePassword(UpdatePasswordModel model)
+        {
+
+
             return View();
         }
     }
