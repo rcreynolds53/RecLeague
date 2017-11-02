@@ -111,5 +111,11 @@ namespace RecLeagueBlog.Data
             _blogPostRepo.DeletePost(postId);
         }
 
+        public void ConvertPostModel(AddPostViewModel postModel)
+        {
+            _blogPostRepo.ConvertPostModel(postModel);
+        }
+
+
     }
 }

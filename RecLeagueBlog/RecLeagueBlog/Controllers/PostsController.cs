@@ -31,9 +31,11 @@ namespace RecLeagueBlog.Controllers
 
         [Route("post")]
         [AcceptVerbs("POST")]
-        public IHttpActionResult AddBlogPost(BlogPost newPost)
+        //public IHttpActionResult AddBlogPost(BlogPost newPost)
+        //public IHttpActionResult AddBlogPost(string title, string content, string [] tagsToPost, string [] categories )
+        public IHttpActionResult AddBlogPost(AddPostViewModel newPost)
         {
-            manager.CreateBlogPost(newPost);
+            manager.ConvertPostModel(newPost);
             return Created($"post/{newPost.BlogPostId}", newPost);
         }
     }

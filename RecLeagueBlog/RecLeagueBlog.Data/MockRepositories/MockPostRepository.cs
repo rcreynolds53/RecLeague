@@ -13,6 +13,7 @@ namespace RecLeagueBlog.Data.Repositories
         private static List<BlogPost> _posts;
         static MockPostRepository()
         {
+            
             List<Status> statuses = new List<Status>()
             {
                 new Status {StatusId = 1, StatusName = "Published" },
@@ -75,6 +76,7 @@ namespace RecLeagueBlog.Data.Repositories
                 new BlogPost {BlogPostId = 3, Title = "Curling Cancelled", Categories = cat3, Content ="It is with sadness that we announce that the men's curling league has been cancelled due to a lack of interest in the dying sport.", DateCreated = DateTime.Parse("11/11/2016"), Tags = tag3, StatusId = 1, UserName = "Admin@recleague.com"},
                 new BlogPost{ BlogPostId =4, Title = "Summer Soccer Final Rankings", Categories = cat4, Tags = tag4, Content = "After a tough loss for the previously undefeated MN Lumberjacks, there is a new team a top of the final season rankings...", DateCreated = DateTime.Parse("08/28/2017"), StatusId = 1, UserName = "Manager@recleague.com"}
             };
+
         }
         public void CreateBlogPost(BlogPost newPost)
         {
@@ -113,6 +115,60 @@ namespace RecLeagueBlog.Data.Repositories
         public List<BlogPost> GetThreeRecent()
         {
             return _posts.OrderByDescending(p => p.DateCreated).Take(3).ToList();
+        }
+
+        public void ConvertPostModel(AddPostViewModel postModel)
+        {
+            List<Tag> tags = new MockTagRepository().GetAllTags();
+            List<Category> categories = new MockCategoryRepository().GetAllCategories();
+
+            foreach (var t in postModel.TagsToPost)
+            {
+                if (!tags.Any(tag => tag.TagName == t))
+                {
+                    Tag tagToAdd = new Tag();
+                    tagToAdd.TagId = tags.Max(tag => tag.TagId) + 1;
+                    tagToAdd.TagName = t;
+                    tags.Add(tagToAdd);
+                }
+            }
+
+            foreach(var c in postModel.Categories)
+            {
+                if(!categories.Any(cat=>cat.CategoryName ==c))
+                {
+                    Category catToAdd = new Category();
+                    catToAdd.CategoryId = categories.Max(cat => cat.CategoryId) + 1;
+                    catToAdd.CategoryName = c;
+                    categories.Add(catToAdd);
+                }
+            }
+                 
+            BlogPost convertedPost = new BlogPost();
+            convertedPost.BlogPostId = _posts.Max(p => p.BlogPostId) + 1;
+            List<Tag> newTags = new List<Tag>();
+            foreach(var t in postModel.TagsToPost)
+            {
+                
+                var tagToAdd = tags.SingleOrDefault(tag => tag.TagName == t);
+                newTags.Add(tagToAdd);
+
+                
+            }
+            convertedPost.Tags = newTags;
+            List<Category> newCategories = new List<Category>();
+
+            foreach (var c in postModel.Categories)
+            {
+                var catToAdd = categories.SingleOrDefault(cat => cat.CategoryName == c);
+                newCategories.Add(catToAdd);
+            }
+            convertedPost.Categories = newCategories;
+            convertedPost.Title = postModel.Title;
+            convertedPost.DateCreated = DateTime.Now;
+            convertedPost.UserName = "Mark";
+
+            _posts.Add(convertedPost); 
         }
     }
 }

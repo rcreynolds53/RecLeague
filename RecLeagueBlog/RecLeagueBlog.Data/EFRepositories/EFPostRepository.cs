@@ -56,5 +56,10 @@ namespace RecLeagueBlog.Data.EFRepositories
                          select p).Take(3).ToList();
             return posts;
         }
+
+        public void ConvertPostModel(AddPostViewModel postModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
