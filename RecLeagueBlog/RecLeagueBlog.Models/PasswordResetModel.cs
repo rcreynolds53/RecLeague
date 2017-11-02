@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace RecLeagueBlog.Models
 {
-    public class UpdatePasswordModel
+    public class PasswordResetModel
     {
-        [Required]
-        public string UserId { get; set; }
-
         [Required]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("NewPassword", ErrorMessage ="The passwords do not match")]
         public string ConfirmPassword { get; set; }
     }
 }
