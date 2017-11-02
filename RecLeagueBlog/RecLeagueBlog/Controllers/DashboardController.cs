@@ -101,12 +101,12 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult UpdatePassword(UpdatePasswordModel model)
-        {
+        //[HttpPost]
+        //public ActionResult UpdatePassword(UpdatePasswordModel model)
+        //{
 
 
-            return View();
-        }
+        //    return View();
+        //}
     }
 }

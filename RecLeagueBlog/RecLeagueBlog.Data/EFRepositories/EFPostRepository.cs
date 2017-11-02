@@ -61,5 +61,10 @@ namespace RecLeagueBlog.Data.EFRepositories
         {
             throw new NotImplementedException();
         }
+
+        public BlogPost UpdatePostModel(AddPostViewModel postModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
