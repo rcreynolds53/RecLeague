@@ -16,6 +16,7 @@ namespace RecLeagueBlog.Data.Interfaces
         void DeletePost(int postId);
         List<BlogPost> GetThreeRecent();
         void ConvertPostModel(AddPostViewModel postModel);
+        BlogPost UpdatePostModel(AddPostViewModel postModel);
 
 
     }

@@ -38,5 +38,27 @@ namespace RecLeagueBlog.Controllers
             manager.ConvertPostModel(newPost);
             return Created($"post/{newPost.BlogPostId}", newPost);
         }
+
+        [Route("post/{id}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetPost(int id)
+        {
+            return Ok(manager.GetPost(id));
+        }
+
+        [Route("post/{id}")]
+        [AcceptVerbs("PUT")]
+        public void EditPost(AddPostViewModel updatedPost)
+        {
+            var post = manager.UpdatePostModel(updatedPost);
+            manager.UpdatePost(post);
+        }
+
+        [Route("post/{id}")]
+        [AcceptVerbs("DELETE")]
+        public void DeletePost(int id)
+        {
+            manager.DeletePost(id);
+        }
     }
 }

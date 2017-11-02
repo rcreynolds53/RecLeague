@@ -116,6 +116,12 @@ namespace RecLeagueBlog.Data
             _blogPostRepo.ConvertPostModel(postModel);
         }
 
+        public BlogPost UpdatePostModel(AddPostViewModel postModel)
+        {
+            return _blogPostRepo.UpdatePostModel(postModel);
+        }
+
+
 
     }
 }

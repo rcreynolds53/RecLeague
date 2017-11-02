@@ -1,9 +1,9 @@
 $(document).ready(function () {
     loadPosts();
     $('#create-dvd-button').on('click', function () {
-        $('#addMovieFormDiv').toggle('slow');
-        $('#dvdTableDiv').hide();
-        $('editMovieFormDiv').hide();
+        $('#addPostDiv').toggle('slow');
+        $('#postTableDiv').hide();
+        $('editPostDiv').hide();
     });
 
     $('#addPostBtn').click(function (event) {
@@ -20,7 +20,7 @@ $(document).ready(function () {
                 content: $('#addPostContent').val(),
                 tagsToPost: postTags(),
                 categories: postCategories()
-                                
+
             }),
             headers: {
                 'Accept': 'application/json',
@@ -31,7 +31,7 @@ $(document).ready(function () {
                 $('#errorMessages').empty();
                 $('#addPostTitle').val('');
                 $('#addPostContent').val('');
-                loadPosts();
+                $('#editPostDiv').hide('');
 
 
 
@@ -47,15 +47,15 @@ $(document).ready(function () {
     });
 });
 function hideAddPostForm() {
-    $('#dvdTableDiv').show();
+    $('#postTableDiv').show();
     $('#addMovieFormDiv').hide();
 }
 function loadPosts() {
     clearMoviesTable();
     var contentRows = $('#contentRows');
-    $('#addMovieFormDiv').hide();
-    $('#dvdTableDiv').show();
-    $('#editMovieFormDiv').hide();
+    $('#addPostDiv').hide();
+    $('#postTableDiv').show();
+    $('#editPostDiv').hide();
 
     $.ajax({
         type: 'GET',
@@ -81,6 +81,7 @@ function loadPosts() {
                     row += '<li>' + categoryName + '</li>';
                 });
                 row += '</ul></td>';
+                row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit |</a><a onclick ="deletePost(' + blogPostId + ')"> Delete</a></td>';
                 row += '</tr>';
 
                 contentRows.append(row);
@@ -95,32 +96,109 @@ function loadPosts() {
         }
     });
 }
-function deleteMovie() {
-    var deleteMovie = confirm("Are you sure you want to delete this DVD from the collection?");
-    if (deleteMovie = true) {
-        function deleteMovieFromCollection(postId) {
-            $.ajax({
-                type: "DELETE",
-                url: 'http://localhost:60542/post/' + postId,
-                success: function (status) {
-                    loadContacts();
-                }
-            });
+
+$('#editPostBtn').click(function (event) {
+
+    var postId = $('#postId').val();
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:60542/post/' + postId,
+        data: JSON.stringify({
+            blogPostId: parseInt(postId),
+            title: $('#editPostTitle').val(),
+            content: $('#editPostContent').val(),
+            tagsToPost: editTags(),
+            categories: editCategories()
+
+        }),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'dataType': 'json',
+        success: function (data, status) {
+            $('#errorMessages').empty();
+            $('#editPostTitle').val('');
+            $('#editPostContent').val('');
+            loadPosts();
+
+
+
+        },
+        error: function (jpXHR, textStatus, errorThrown) {
+            $('#errorMessages')
+                .append($('<li>')
+                    .attr({ class: 'list-group-item list-group-item-danger' })
+                    .text('Error calling webservice. Please try again later.'));
+
         }
+    })
+});
+function deletePost(postId) {
+
+    var deletePost = confirm("Are you sure you want to delete this DVD from the collection?");
+    if (deletePost) {
+
+        $.ajax({
+            type: "DELETE",
+            url: 'http://localhost:60542/post/' + postId,
+            success: function () {
+                loadPosts();
+            },
+            error: function (jpXHR, textStatus, errorThrown) {
+                $('#errorMessages')
+                    .append($('<li>')
+                        .attr({ class: 'list-group-item list-group-item-danger' })
+                        .text('Error calling webservice. Please try again later.'));
+            }
+        });
     }
 }
+
+$('')
 function clearMoviesTable() {
     $('#contentRows').empty();
 }
-function showEditForm() {
+function showEditPost(postId) {
     $('#errorMessages').empty();
+    $('#postTableDiv').hide();
+    $('#editPostDiv').show();
+    $('#postId').val(postId);
 
-    $('#dvdTableDiv').hide();
-    $('#editMovieFormDiv').show();
-}
+    var tagNames = "";
+    var catagoryNames = "";
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:60542/post/' + postId,
+        success: function (blogPost, status) {
+            $('#editPostTitle').val(blogPost.title),
+                $('#editPostContent').val(blogPost.content),
+                $.each(blogPost.tags, function (index, tag) {
+                    tagNames += (String(tag.tagName)) + ",";
+                });
+            $('#editTags').val((String(tagNames))),
+                $('#editTags').tagsInput(),
+                $.each(blogPost.categories, function (index, catagory) {
+                    catagoryNames += (String(catagory.categoryName)) + ",";
+                });
+            $('#editCategories').val((String(catagoryNames))),
+
+                $('#editCategories').tagsInput()
+
+
+        },
+        error: function (jqXHR, testStatus, errorThrow) {
+            $('#editErrorMessages').append($('<li>')
+                .attr({ class: 'list-group-item list-group-item' })
+                .text('Error communicating with web service'));
+        }
+
+    });
+};
+
 function hideEditPostForm() {
-    $('#dvdTableDiv').show();
-    $('#editMovieFormDiv').hide();
+    $('#postTableDiv').show();
+    $('#editPostDiv').hide();
 }
 function checkAndDisplayValidationErrors(input) {
     // clear displayed error message if there are any
@@ -150,27 +228,40 @@ function checkAndDisplayValidationErrors(input) {
         return false;
     }
 };
-
 $('#tags').tagsInput();
 $('#categories').tagsInput();
-$(function () {
-    $('textarea').froalaEditor()
-});
 
 function postTags() {
     var tagsArray = [];
-    $.each($('#tags_tagsinput>.tag>span'), function(index, span) {
+    $.each($('#tags_tagsinput>.tag>span'), function (index, span) {
         tagsArray.push(span.textContent.trim());
-    
+
     });
     return tagsArray;
 }
 
 function postCategories() {
     var categoriesArray = [];
-    $.each($('#categories_tagsinput>.tag>span'), function(index, span) {
+    $.each($('#categories_tagsinput>.tag>span'), function (index, span) {
         categoriesArray.push(span.textContent.trim());
-    
+
+    });
+    return categoriesArray;
+}
+function editTags() {
+    var tagsArray = [];
+    $.each($('#editTags_tagsinput>.tag>span'), function (index, span) {
+        tagsArray.push(span.textContent.trim());
+
+    });
+    return tagsArray;
+}
+
+function editCategories() {
+    var categoriesArray = [];
+    $.each($('#editCategories_tagsinput>.tag>span'), function (index, span) {
+        categoriesArray.push(span.textContent.trim());
+
     });
     return categoriesArray;
 }
