@@ -17,7 +17,7 @@ $(document).ready(function () {
             url: 'http://localhost:60542/post',
             data: JSON.stringify({
                 title: $('#addPostTitle').val(),
-                content: $('#addPostContent').val(),
+                content: $('#addPostContent').val().replace(/<\/?[^>]+>/gi, ''),
                 tagsToPost: postTags(),
                 categories: postCategories()
 
@@ -106,7 +106,7 @@ $('#editPostBtn').click(function (event) {
         data: JSON.stringify({
             blogPostId: parseInt(postId),
             title: $('#editPostTitle').val(),
-            content: $('#editPostContent').val(),
+            content: $('#editPostContent').val().replace(/<\/?[^>]+>/gi, ''),
             tagsToPost: editTags(),
             categories: editCategories()
 
