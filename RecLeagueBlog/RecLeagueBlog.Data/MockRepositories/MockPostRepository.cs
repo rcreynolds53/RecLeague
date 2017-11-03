@@ -117,7 +117,7 @@ namespace RecLeagueBlog.Data.Repositories
             return _posts.OrderByDescending(p => p.DateCreated).Take(3).ToList();
         }
 
-        public void ConvertPostModel(AddPostViewModel postModel)
+        public BlogPost ConvertPostModel(AddPostViewModel postModel)
         {
             List<Tag> tags = new MockTagRepository().GetAllTags();
             List<Category> categories = new MockCategoryRepository().GetAllCategories();
@@ -168,7 +168,7 @@ namespace RecLeagueBlog.Data.Repositories
             convertedPost.DateCreated = DateTime.Now;
             convertedPost.UserName = "Mark";
 
-            _posts.Add(convertedPost); 
+            return convertedPost;
         }
 
         public BlogPost UpdatePostModel(AddPostViewModel postModel)

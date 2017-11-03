@@ -57,12 +57,12 @@ namespace RecLeagueBlog.Data.EFRepositories
             return posts;
         }
 
-        public void ConvertPostModel(AddPostViewModel postModel)
+        public BlogPost UpdatePostModel(AddPostViewModel postModel)
         {
             throw new NotImplementedException();
         }
 
-        public BlogPost UpdatePostModel(AddPostViewModel postModel)
+        BlogPost IBlogPostRepository.ConvertPostModel(AddPostViewModel postModel)
         {
             throw new NotImplementedException();
         }

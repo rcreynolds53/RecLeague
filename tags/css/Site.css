@@ -1,0 +1,12 @@
+.newPost {
+    font-size: 24px;
+    display: block;
+    text-align: center;
+    line-height: 150%;    
+    font-weight: bold;
+}
+
+#tagsinput {
+    padding-left: 15px;
+    padding-right: 15px;
+}

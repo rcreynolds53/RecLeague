@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using RecLeagueBlog.Models;
+using RecLeagueBlog.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RecLeagueBlog.Data
 {
-   public class RecBlogDBContext : IdentityDbContext
+   public class RecBlogDBContext : IdentityDbContext<AppUser>
     {
         public RecBlogDBContext() : base("RecLeagueBlog")
         {

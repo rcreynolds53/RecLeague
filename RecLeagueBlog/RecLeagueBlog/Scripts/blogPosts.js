@@ -1,6 +1,6 @@
 $(document).ready(function () {
     loadPosts();
-    $('#create-dvd-button').on('click', function () {
+    $('#createPostBtn').on('click', function () {
         $('#addPostDiv').toggle('slow');
         $('#postTableDiv').hide();
         $('editPostDiv').hide();
@@ -32,7 +32,7 @@ $(document).ready(function () {
                 $('#addPostTitle').val('');
                 $('#addPostContent').val('');
                 $('#editPostDiv').hide('');
-
+                loadPosts();
 
 
             },

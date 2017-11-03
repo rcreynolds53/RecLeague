@@ -47,10 +47,10 @@ namespace RecLeagueBlog.Data.Repositories
             foreach(var p in posts)
             {
                 var category = p.Categories.SingleOrDefault(c => c.CategoryId == categoryId);
-                if(category != null)
+                if (category != null)
                 {
                     p.Categories.Remove(category);
-                }                                     
+                }                
             }
         }
 

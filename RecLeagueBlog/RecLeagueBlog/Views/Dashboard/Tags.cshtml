@@ -7,101 +7,105 @@
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
-   <div class="container" id="pageContent">
-    <div class="container" id="mainContent">
-        <div>
-            <h1>Tag Library</h1>
-            <br />
-            <button class="btn-btn btn-primary" id="createDvdButton" float="left">Create DVD</button>
-            <div class="container" align="right">
-
-                <button class="btn-btn btn-primary" id="searchButton" align="right">Search</button>
-                <select alight="right" id="searchCategoryDropList" required>
-                    <option value="" disabled="disabled" selected="selected">Search Category</option>
-                    <option value="title">Title</option>
-                    <option value="year">Release Year</option>
-                    <option value="director">Director Name</option>
-                    <option value="rating">Rating</option>
-                </select>
-                <input class="text-box" id="searchTerm" type="text" placeholder=" search term" required />
-                <button class="btn-btn btn-default" id="clearSearchButton" align="right">Clear Search</button>
-            </div><br />
-            <ul class="list-group" id="errorMessages"></ul>
+<div class="container">
+    <div class=" row">
+        <h3>Tags</h3>
+        <div class="col-xs-2">
+            <div class="form-group">
+                <button class="btn btn-default btn-lg" type="button" id="createTagBtn">Create Tag</button>
+            </div>
         </div>
-
-        <br />
-        <div id="contentArea">
-            <table id="tagTable" class="table table-hover">
-                <tr>
-                    <th width="70%">Tag</th>
-                    <th width="30%"></th>
-                </tr>
-                <tbody id="contentRows"></tbody>
-            </table>
+        <div class="col-sm-offset-1 col-xs-1">
+            <div class="form-group">
+                <button class="btn btn-default btn-lg" type="button" id="search-button">Search</button>
+            </div>
+        </div>
+        <div class="dropdown col-xs-3">
+            <div class="col-xs-3">
+                <button class="btn btn-primary dropdown-toggle btn-lg" type="button" data-toggle="dropdown">
+                    Category Search
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">Action</a>
+                    </li>
+                    <li>
+                        <a href="#">Chick Flick</a>
+                    </li>
+                    <li>
+                        <a href="#">Comedy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-5">
+            <div class="form-group">
+                <input type="text" class="input-lg form-control" id="search-by-term" placeholder="Search Term">
+            </div>
         </div>
     </div>
-
-
-    <!--CREATE DVD-->
-    <div class="container" id="add-content" style="display: none">
-
-        <h1>Create Tag</h1><hr />
-        <ul class="list-group" id="addErrorMessages"></ul>
-        <div class=" container">
-
-            <table>
-                <tr>
-                    <th><label>Tag Name</label></th>
-                    <td><input class="text" type="text" id="add-title" /></td>               
-                </tr>
-            </table>
-        </div>
-
-        <button class="btn-btn btn-standard" id="cancelAddButton">Cancel</button>
-        <button class="btn-btn btn-primary" id="addDvdButton">Create Tag</button>
-    </div>
-
-    <!--EDIT DVD-->
-    <div class="container" id="edit-content" style="display: none">
-        <h1 id="editHeader">Edit Tag:</h1><hr />
-        <ul class="list-group" id="editErrorMessages"></ul>
-        <div class=" container"></div>
-        <input type="hidden" id="textDvdId" />
-        <table>
-            <tr>
-                <th><label>Tag Name</label></th>
-                <td><input class="text" type="text" id="edit-title" /></td>
-            </tr>          
-        </table>
-        <button class="btn-btn btn-standard" id="cancelEditButton">Cancel</button>
-        <button class="btn-btn btn-primary" id="editSaveButton">Save Changes</button>
-    </div>
-
-
-    <!--DISPLAY CONTENT-->
-    @*<div class="container" id="display-content" style="display: none">
-        <h1 id="displayTitle"></h1><hr />
-        <table id="displayTable">
-            <tr>
-                <th>Release Year:</th>
-                <td id="displayReleaseYear"></td>
-            </tr>
-            <tr>
-                <th>Director:</th>
-                <td id="displayDirector"></td>
-            </tr>
-            <tr>
-                <th>Rating:</th>
-                <td id="displayRating"></td>
-            </tr>
-            <tr>
-                <th>Notes:</th>
-                <td id="displayNotes"></td>
-            </tr>
-        </table>
-        <button class="btn-btn btn-primary" id="backToMainPage">Back</button>
-    </div>*@
 </div>
-<script src="~/Scripts/dvdList.js"></script>
-
-
+<hr>
+<div class="container">
+    <ul class="list-group" id="errorMessages"></ul>
+    <div id="tagTableDiv" class="col-xs-12">
+        <table id="postsTable" class="table table-striped table-bordered">
+            <tr>
+                <th width="50%">Tag</th>
+                <th width="50%"></th>
+            </tr>
+            <tbody id="contentRows"></tbody>
+        </table>
+    </div>
+</div>
+<div class="container" id="addTagDiv" style="display: none">
+    <div class="col-xs-9">
+        <h2 class="newPost">Create Tag</h2>
+        <form class="form-horizontal" role="form" id="addTagForm">
+            <div class="form-group">
+                <label for="addTag" class="col-xs-12 control-label">Tag:</label>
+                <div class="col-xs-12">
+                    <input type="text" class="form-control" id="addTag" placeholder="Tag" required>
+                </div>
+            </div>
+            <div class="col-md-offset-4 col-md-2">
+                <input type="hidden" id="add-movie-id">
+                <button id="addTagCancelBtn" class="btn btn-danger" onclick="hideAddTag()">
+                    Cancel
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" id="addTagBtn" class="btn btn-primary">
+                    Save Tag
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container" id="editTagDiv" style="display: none">
+    <h2>Edit Tag</h2>
+    <form class="form-horizontal" role="form" id="editTagForm">
+        <input type="hidden" id="tagId" />
+        <div class="form-group">
+            <label for="editTag" class="col-md-2 control-label">Tag:</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" id="editTag" placeholder="Tag">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-2">
+                <input type="hidden" id="edit-movie-id">
+                <button type="submit" id="editTagCancelBtn" type="submit" class="btn btn-danger" onclick="hideEditPostForm()">
+                    Cancel Edit
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" id="editTagBtn" type="submit" class="btn btn-primary">
+                    Update Tag
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/home.js"></script>

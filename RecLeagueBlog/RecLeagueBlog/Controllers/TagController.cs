@@ -30,5 +30,12 @@ namespace RecLeagueBlog.Controllers
             manager.CreateTag(newTag);
             return Created($"tag/{newTag.TagId}", newTag);
         }
+
+        [Route("tag/{id}")]
+        [AcceptVerbs("DELETE")]
+        public void Delete(int id)
+        {
+            manager.DeleteTag(id);
+        }
     }
 }

@@ -32,11 +32,15 @@ namespace RecLeagueBlog.Data.Repositories
         }        
         public void CreateTag(Tag newTag)
         {
-            if(_tags.Any())
+            if (_tags.Any())
             {
                 newTag.TagId = _tags.Max(t => t.TagId) + 1;
             }
-            newTag.TagId = 1;
+            else
+            {
+                newTag.TagId = 1;
+            }
+            _tags.Add(newTag);
         }
 
         public void DeleteTag(int tagId)

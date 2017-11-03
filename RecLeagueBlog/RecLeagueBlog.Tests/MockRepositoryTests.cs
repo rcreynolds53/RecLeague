@@ -15,15 +15,13 @@ namespace RecLeagueBlog.Tests
         [Test]
         public void CanDeleteCategoryFromAllPosts()
         {
-            Category category = new Category();
-            BlogPost post = new BlogPost();
+ 
             MockCategoryRepository categoryRepo = new MockCategoryRepository();
             MockPostRepository postRepo = new MockPostRepository();
 
-            category.CategoryId = 1;
-            var categoryToDelete = categoryRepo.GetCategory(category.CategoryId);
+            var categoryToDelete = categoryRepo.GetCategory(1);
             categoryRepo.DeleteCateogry(categoryToDelete.CategoryId);
-            post.BlogPostId = 1;
+            var post = postRepo.GetPostById(1);
             var postToDisplay = postRepo.GetPostById(post.BlogPostId);
 
             Assert.AreEqual(1, postToDisplay.Categories.Count());
@@ -62,6 +60,20 @@ namespace RecLeagueBlog.Tests
             var postGet = postRepo.GetPostById(5);
 
             Assert.AreEqual(5, postRepo.GetAllPosts().Count());
+        }
+
+        [Test]
+        public void CanDeleteTag()
+        {          
+
+            MockTagRepository tagRepo = new MockTagRepository();
+
+            var tag = tagRepo.GetTag(1);
+
+            tagRepo.DeleteTag(tag.TagId);
+
+            Assert.AreEqual(11, tagRepo.GetAllTags().Count());
+
         }
     }
 }
