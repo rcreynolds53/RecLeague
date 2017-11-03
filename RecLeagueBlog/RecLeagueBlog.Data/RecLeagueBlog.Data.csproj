@@ -133,6 +133,10 @@
     <Compile Include="Migrations\201711031426113_AppUser.Designer.cs">
       <DependentUpon>201711031426113_AppUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711031558321_testingmigration.cs" />
+    <Compile Include="Migrations\201711031558321_testingmigration.Designer.cs">
+      <DependentUpon>201711031558321_testingmigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RecBlogDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711031426113_AppUser.resx">
       <DependentUpon>201711031426113_AppUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711031558321_testingmigration.resx">
+      <DependentUpon>201711031558321_testingmigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

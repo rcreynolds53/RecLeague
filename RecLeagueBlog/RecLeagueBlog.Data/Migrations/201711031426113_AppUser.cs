@@ -3,7 +3,7 @@ namespace RecLeagueBlog.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AppUser : DbMigration
+    public partial class AppUserMigration : DbMigration
     {
         public override void Up()
         {
