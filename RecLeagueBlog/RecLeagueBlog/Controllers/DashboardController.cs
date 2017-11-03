@@ -55,8 +55,9 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult Users()
         {
-
-            return View();
+            var repo = new MockUserRepository();
+            var model = repo.GetAllUsers();
+            return View(model);
         }
 
         public ActionResult UserProfile()
