@@ -55,7 +55,6 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult Users()
         {
-            ViewBag.Message = "Your users page.";
 
             return View();
         }

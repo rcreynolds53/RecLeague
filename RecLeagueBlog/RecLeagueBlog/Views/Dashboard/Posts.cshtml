@@ -158,33 +158,3 @@
 <link href="~/Scripts/trix.css" rel="stylesheet" />
 <script src="~/Scripts/trix.js"></script>
 <link href="~/Scripts/jquery.tagsinput.css" rel="stylesheet" />*@
-@*<div class="col-xs-12 col-sm-9">
-    <div class="row">
-        <div class="col-xs-12">
-            <h2>Blog Posts</h2>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Date Created</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var post in Model)
-                    {
-                        <tr>
-                            <td>@Html.ActionLink(@post.Title, "Posts", "Dashboard", new { id = post.BlogPostId }, null)</td>
-                            <td>@post.DateCreated.ToString("MM/dd/yyyy")</td>
-                            <td>@post.Status</td>
-                            <td>
-                                Edit | Delete
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>*@
