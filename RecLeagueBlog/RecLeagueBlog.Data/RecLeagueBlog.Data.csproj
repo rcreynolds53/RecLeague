@@ -125,13 +125,9 @@
     <Compile Include="Interfaces\IBlogPostRepository.cs" />
     <Compile Include="Interfaces\ICategoryRepository.cs" />
     <Compile Include="Interfaces\ITagRepository.cs" />
-    <Compile Include="Migrations\201710301859592_Init.cs" />
-    <Compile Include="Migrations\201710301859592_Init.Designer.cs">
-      <DependentUpon>201710301859592_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711031426113_AppUser.cs" />
-    <Compile Include="Migrations\201711031426113_AppUser.Designer.cs">
-      <DependentUpon>201711031426113_AppUser.cs</DependentUpon>
+    <Compile Include="Migrations\201711031613370_Init.cs" />
+    <Compile Include="Migrations\201711031613370_Init.Designer.cs">
+      <DependentUpon>201711031613370_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RecBlogDBContext.cs" />
@@ -153,11 +149,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710301859592_Init.resx">
-      <DependentUpon>201710301859592_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711031426113_AppUser.resx">
-      <DependentUpon>201711031426113_AppUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711031613370_Init.resx">
+      <DependentUpon>201711031613370_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

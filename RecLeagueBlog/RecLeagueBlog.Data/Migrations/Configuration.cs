@@ -2,6 +2,7 @@ namespace RecLeagueBlog.Data.Migrations
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using RecLeagueBlog.Models.Identity;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -16,13 +17,7 @@ namespace RecLeagueBlog.Data.Migrations
 
         protected override void Seed(RecLeagueBlog.Data.RecBlogDBContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
-
-            // Load the user and role managers with our custom models
-            var userMgr = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
+            var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
             var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
             // have we loaded roles already?
@@ -34,7 +29,7 @@ namespace RecLeagueBlog.Data.Migrations
 
 
             // create the default user
-            var user = new IdentityUser()
+            var user = new AppUser()
             {
                 UserName = "admin@recleague.com",
                 Email = "admin@recleague.com"
@@ -54,7 +49,7 @@ namespace RecLeagueBlog.Data.Migrations
 
             roleMgr.Create(new IdentityRole() { Name = "manager" });
 
-            var lesserUser = new IdentityUser()
+            var lesserUser = new AppUser()
             {
                 UserName = "manager@recleague.com",
                 Email = "manager@recleague.com",
