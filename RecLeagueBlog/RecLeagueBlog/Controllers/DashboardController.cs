@@ -1,8 +1,8 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using RecLeagueBlog.Data;
-using RecLeagueBlog.Models;
 using RecLeagueBlog.Models.Identity;
+using RecLeagueBlog.Models;
 ﻿using RecLeagueBlog.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -83,12 +83,12 @@ namespace RecLeagueBlog.Controllers
         {
 
             RecBlogDBContext context = new RecBlogDBContext();
-            UserStore<IdentityUser> store = new UserStore<IdentityUser>(context);
-            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(store);
+            UserStore<AppUser> store = new UserStore<AppUser>(context);
+            UserManager<AppUser> userManager = new UserManager<AppUser>(store);
             userId = User.Identity.GetUserId();
             newPassword = "Test123!";
             string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
-            IdentityUser identityUser = await store.FindByIdAsync(userId);
+            AppUser identityUser = await store.FindByIdAsync(userId);
             await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
             await store.UpdateAsync(identityUser);
 
@@ -116,12 +116,12 @@ namespace RecLeagueBlog.Controllers
         public async Task<ActionResult> UpdatePassword(UpdatePasswordModel model, string userId, string newPassword)
         {
             RecBlogDBContext context = new RecBlogDBContext();
-            UserStore<IdentityUser> store = new UserStore<IdentityUser>(context);
-            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(store);
+            UserStore<AppUser> store = new UserStore<AppUser>(context);
+            UserManager<AppUser> userManager = new UserManager<AppUser>(store);
             userId = User.Identity.GetUserId();
             newPassword =model.ConfirmPassword;
             string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
-            IdentityUser identityUser = await store.FindByIdAsync(userId);
+            AppUser identityUser = await store.FindByIdAsync(userId);
             await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
             await store.UpdateAsync(identityUser);
 

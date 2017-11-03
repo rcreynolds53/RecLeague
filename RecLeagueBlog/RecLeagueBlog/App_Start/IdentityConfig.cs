@@ -27,7 +27,7 @@ namespace RecLeagueBlog.App_Start
 
 
             app.CreatePerOwinContext(() => new RecBlogDBContext());
-            app.CreatePerOwinContext<UserManager<IdentityUser>>((options, context) => new UserManager<IdentityUser>(new UserStore<IdentityUser>(context.Get<RecBlogDBContext>())));
+            app.CreatePerOwinContext<UserManager<AppUser>>((options, context) => new UserManager<AppUser>(new UserStore<AppUser>(context.Get<RecBlogDBContext>())));
             app.CreatePerOwinContext(() => new RecBlogDBContext());
             app.CreatePerOwinContext<RoleManager<IdentityRole>>((options, context) => new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context.Get<RecBlogDBContext>())));
         }

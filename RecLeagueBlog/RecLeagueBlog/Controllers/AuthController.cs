@@ -34,7 +34,7 @@ namespace RecLeagueBlog.Controllers
 
             var ctx = Request.GetOwinContext();
             var authMgr = ctx.Authentication;
-            var userMgr = HttpContext.GetOwinContext().GetUserManager<UserManager<IdentityUser>>();
+            var userMgr = HttpContext.GetOwinContext().GetUserManager<UserManager<AppUser>>();
             var user = userMgr.Find(model.Email, model.Password);
 
             if(user == null)
