@@ -16,11 +16,5 @@ namespace RecLeagueBlog.Models
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
-        //[Required]
-        //[DataType(DataType.Password)]
-        //public string ConfirmPassword { get; set; }
-
-        //[Required]
-        //public string Token { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -91,9 +92,19 @@ namespace RecLeagueBlog.Controllers
             await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
             await store.UpdateAsync(identityUser);
 
+            if (ModelState.IsValid)
+            {
+                TempData["PasswordReset"] = "Password has been successfully reset";
+                return View("UserProfile");
+            }
+            else
+            {
+                ViewData["Error"] = "An error has occured";
+                return View("UserProfile");
+            }
 
 
-            return View();
+            //return View("UserProfile");
         }
 
         public ActionResult UpdatePassword()
@@ -101,12 +112,26 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult UpdatePassword(UpdatePasswordModel model)
-        //{
+        [HttpPost]
+        public async Task<ActionResult> UpdatePassword(UpdatePasswordModel model, string userId, string newPassword)
+        {
+            RecBlogDBContext context = new RecBlogDBContext();
+            UserStore<IdentityUser> store = new UserStore<IdentityUser>(context);
+            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(store);
+            userId = User.Identity.GetUserId();
+            newPassword =model.ConfirmPassword;
+            string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
+            IdentityUser identityUser = await store.FindByIdAsync(userId);
+            await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
+            await store.UpdateAsync(identityUser);
 
+            if (ModelState.IsValid)
+            {
+                TempData["PasswordUpdate"] = "Password has been successfully Updated!";
+                return View("UpdatePassword");
+            }
 
-        //    return View();
-        //}
+            return View();
+        }
     }
 }
