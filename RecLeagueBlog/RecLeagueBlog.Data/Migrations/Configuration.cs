@@ -17,46 +17,55 @@ namespace RecLeagueBlog.Data.Migrations
 
         protected override void Seed(RecLeagueBlog.Data.RecBlogDBContext context)
         {
+
+
             var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
             var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            // have we loaded roles already?
-            if (roleMgr.RoleExists("admin"))
-                return;
-
-            // create the admin role
-            roleMgr.Create(new IdentityRole() { Name = "admin" });
-
-
-            // create the default user
-            var user = new AppUser()
+            if (!roleMgr.RoleExists("admin"))
             {
-                UserName = "admin@recleague.com",
-                Email = "admin@recleague.com"
-            };
-
-
-
-            // create the user with the manager class
-            userMgr.Create(user, "Testing123");
-
-            // add the user to the admin role
-            userMgr.AddToRole(user.Id, "admin");
-
-
-            if (roleMgr.RoleExists("manager"))
-                return;
-
-            roleMgr.Create(new IdentityRole() { Name = "manager" });
-
-            var lesserUser = new AppUser()
+                roleMgr.Create(new IdentityRole() { Name = "admin" });
+            }
+            if (userMgr.FindByName("admin@recleague.com") == null)
             {
-                UserName = "manager@recleague.com",
-                Email = "manager@recleague.com",
-            };
+                var newuser = new AppUser()
+                {
+                    FirstName = "Kipp",
+                    LastName = "Graham",
+                    UserName = "admin@recleague.com",
+                    Email = "admin@recleague.com"
 
-            userMgr.Create(lesserUser, "Testing456");
-            userMgr.AddToRole(lesserUser.Id, "manager");
+                };
+                userMgr.Create(newuser, "Testing123");
+            }
+            var user = userMgr.FindByName("admin@recleague.com");
+            if (!userMgr.IsInRole(user.Id, "admin"))
+            {
+                userMgr.AddToRole(user.Id, "admin");
+            }
+
+
+            if (!roleMgr.RoleExists("manager"))
+            {
+                roleMgr.Create(new IdentityRole() { Name = "manager" });
+            }
+            if (userMgr.FindByName("manager@recleague.com") == null)
+            {
+                var newuser = new AppUser()
+                {
+                    FirstName = "AJ",
+                    LastName = "Rohde",
+                    UserName = "manager@recleague.com",
+                    Email = "manager@recleague.com"
+
+                };
+                userMgr.Create(newuser, "Testing456");
+            }
+            var userMan = userMgr.FindByName("manager@recleague.com");
+            if (!userMgr.IsInRole(user.Id, "manager"))
+            {
+                userMgr.AddToRole(user.Id, "manager");
+            }
         }
     }
 }

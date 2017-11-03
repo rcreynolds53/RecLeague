@@ -41,7 +41,7 @@ $(document).ready(function () {
                         .text('Error calling webservice. Please try again later.'));
 
             }
-        })
+        });
     });
 });
 function hideAddTag() {
@@ -88,8 +88,8 @@ $('#editTagBtn').click(function (event) {
         type: 'PUT',
         url: 'http://localhost:60542/tag/' + tagId,
         data: JSON.stringify({
-           tagId: parseInt(tagId),
-            tagName: $('#editTag').val(),
+            tagId: parseInt(tagId),
+            tagName: $('#editTag').val()
 
         }),
         headers: {
@@ -112,7 +112,7 @@ $('#editTagBtn').click(function (event) {
                     .text('Error calling webservice. Please try again later.'));
 
         }
-    })
+    });
 });
 function deleteTag(tagId) {
 
@@ -135,7 +135,7 @@ function deleteTag(tagId) {
     }
 }
 
-$('')
+
 function clearTagsTable() {
     $('#contentRows').empty();
 }
@@ -149,7 +149,7 @@ function showEditTag(tagId) {
         type: 'GET',
         url: 'http://localhost:60542/tag/' + postId,
         success: function (tag, status) {
-            $('#editTag').val(tag.tagName)
+            $('#editTag').val(tag.tagName);
 
         },
         error: function (jqXHR, testStatus, errorThrow) {
@@ -159,7 +159,7 @@ function showEditTag(tagId) {
         }
 
     });
-};
+}
 
 function hideEditTagForm() {
     $('#tagTableDiv').show();
@@ -192,7 +192,7 @@ function checkAndDisplayValidationErrors(input) {
         // return false, indicating that there were no errors
         return false;
     }
-};
+}
 // $('#tags').tagsInput();
 // $('#categories').tagsInput();
 

@@ -50,7 +50,7 @@ namespace RecLeagueBlog.Data
 
         // CATEGORY BLL
 
-        public List<Category> GetAll()
+        public List<Category> GetAllCategories()
         {
             return _categoryRepo.GetAllCategories();
         }
