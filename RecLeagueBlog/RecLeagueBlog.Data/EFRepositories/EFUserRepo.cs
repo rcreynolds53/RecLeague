@@ -39,5 +39,10 @@ namespace RecLeagueBlog.Data.EFRepositories
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteUser(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
