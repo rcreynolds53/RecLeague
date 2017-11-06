@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using RecLeagueBlog.Data;
 using RecLeagueBlog.Models.Identity;
 using RecLeagueBlog.Models;
-﻿using RecLeagueBlog.Data.Repositories;
+using RecLeagueBlog.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,41 +70,30 @@ namespace RecLeagueBlog.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult ResetPassword()
         {
-            //ResetPasswordModel model = new ResetPasswordModel
-            //{
-            //};
-
             return View();
         }
 
         [HttpPost]
-        [Authorize(Roles ="admin")]
-        public async Task<ActionResult> ResetPassword(string userId, string newPassword)
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> ResetPassword(string userId, string newPassword, ResetPasswordModel model)
         {
 
             RecBlogDBContext context = new RecBlogDBContext();
             UserStore<AppUser> store = new UserStore<AppUser>(context);
             UserManager<AppUser> userManager = new UserManager<AppUser>(store);
             userId = User.Identity.GetUserId();
-            newPassword = "Test123!";
-            string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
-            AppUser identityUser = await store.FindByIdAsync(userId);
-            await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
-            await store.UpdateAsync(identityUser);
-
-            if (ModelState.IsValid)
+            if (model.NewPassword != null && model.Email != null)
             {
+                newPassword = model.NewPassword;
+                string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
+                AppUser identityUser = await store.FindByIdAsync(userId);
+                await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
+                await store.UpdateAsync(identityUser);
+
                 TempData["PasswordReset"] = "Password has been successfully reset";
                 return View("UserProfile");
             }
-            else
-            {
-                ViewData["Error"] = "An error has occured";
-                return View("UserProfile");
-            }
-
-
-            //return View("UserProfile");
+            return View("UserProfile");
         }
 
         public ActionResult UpdatePassword()
@@ -119,19 +108,24 @@ namespace RecLeagueBlog.Controllers
             UserStore<AppUser> store = new UserStore<AppUser>(context);
             UserManager<AppUser> userManager = new UserManager<AppUser>(store);
             userId = User.Identity.GetUserId();
-            newPassword =model.ConfirmPassword;
-            string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
-            AppUser identityUser = await store.FindByIdAsync(userId);
-            await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
-            await store.UpdateAsync(identityUser);
 
-            if (ModelState.IsValid)
+            if ((model.NewPassword == null) && (model.ConfirmPassword == null))
             {
-                TempData["PasswordUpdate"] = "Password has been successfully Updated!";
+                return View("UpdatePassword");
+            }
+            else if (model.NewPassword == model.ConfirmPassword)
+            {
+                newPassword = model.ConfirmPassword;
+                string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
+                AppUser identityUser = await store.FindByIdAsync(userId);
+                await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
+                await store.UpdateAsync(identityUser);
+
+                TempData["PasswordUpdate"] = "Password has been successfully updated!";
                 return View("UpdatePassword");
             }
 
-            return View();
+            return View("UpdatePassword");
         }
     }
 }

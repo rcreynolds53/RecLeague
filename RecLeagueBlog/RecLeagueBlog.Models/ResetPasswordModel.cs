@@ -9,10 +9,10 @@ namespace RecLeagueBlog.Models
 {
     public class ResetPasswordModel
     {
-        [Required]
+        [Required(AllowEmptyStrings =false)]
         public string Email { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings =false)]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
