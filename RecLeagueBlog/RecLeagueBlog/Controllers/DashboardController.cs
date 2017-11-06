@@ -11,12 +11,16 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
+using RecLeagueBlog.Data.MockRepositories;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace RecLeagueBlog.Controllers
 {
     [Authorize(Roles = "admin")]
     public class DashboardController : Controller
     {
+        BlogManager manager = BlogManagerFactory.Create();
+
         // GET: Dashboard
         public ActionResult Index()
         {
@@ -55,8 +59,17 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult Users()
         {
-            var repo = new MockUserRepository();
-            var model = repo.GetAllUsers();
+            //var userMgr = HttpContext.GetOwinContext().GetUserManager<UserManager<AppUser>>();
+            
+
+            //var allUsers = userMgr.Users.ToList();
+
+            //foreach (var u in allUsers)
+            //{
+            //    var role = u.Roles.First().RoleId;
+               
+            //}
+            var model = manager.GetAllUsers();
             return View(model);
         }
 
