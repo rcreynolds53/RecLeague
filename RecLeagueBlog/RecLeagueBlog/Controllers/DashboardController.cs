@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using RecLeagueBlog.Data;
 using RecLeagueBlog.Models.Identity;
 using RecLeagueBlog.Models;
-﻿using RecLeagueBlog.Data.Repositories;
+using RecLeagueBlog.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
 using RecLeagueBlog.Data.MockRepositories;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -20,7 +19,6 @@ namespace RecLeagueBlog.Controllers
     public class DashboardController : Controller
     {
         BlogManager manager = BlogManagerFactory.Create();
-
         // GET: Dashboard
         public ActionResult Index()
         {
@@ -57,20 +55,28 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Users()
         {
-            //var userMgr = HttpContext.GetOwinContext().GetUserManager<UserManager<AppUser>>();
-            
-
-            //var allUsers = userMgr.Users.ToList();
-
-            //foreach (var u in allUsers)
-            //{
-            //    var role = u.Roles.First().RoleId;
-               
-            //}
             var model = manager.GetAllUsers();
             return View(model);
+
+        }
+
+        [HttpGet]
+        public ActionResult DeleteUser(string id)
+        {
+            var repo = new MockUserRepository();
+            var user = repo.GetUser(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUser(AppUser user)
+        {
+            var repo = new MockUserRepository();
+            repo.DeleteUser(user.Id);
+            return RedirectToAction("Users");
         }
 
         public ActionResult UserProfile()
@@ -83,41 +89,31 @@ namespace RecLeagueBlog.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult ResetPassword()
         {
-            //ResetPasswordModel model = new ResetPasswordModel
-            //{
-            //};
-
             return View();
         }
 
         [HttpPost]
-        [Authorize(Roles ="admin")]
-        public async Task<ActionResult> ResetPassword(string userId, string newPassword)
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> ResetPassword(string userId, string newPassword, ResetPasswordModel model)
         {
 
             RecBlogDBContext context = new RecBlogDBContext();
             UserStore<AppUser> store = new UserStore<AppUser>(context);
             UserManager<AppUser> userManager = new UserManager<AppUser>(store);
             userId = User.Identity.GetUserId();
-            newPassword = "Test123!";
-            string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
-            AppUser identityUser = await store.FindByIdAsync(userId);
-            await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
-            await store.UpdateAsync(identityUser);
-
+            //if (model.NewPassword != null && model.Email != null)
             if (ModelState.IsValid)
             {
+                newPassword = model.NewPassword;
+                string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
+                AppUser identityUser = await store.FindByIdAsync(userId);
+                await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
+                await store.UpdateAsync(identityUser);
+
                 TempData["PasswordReset"] = "Password has been successfully reset";
                 return View("UserProfile");
             }
-            else
-            {
-                ViewData["Error"] = "An error has occured";
-                return View("UserProfile");
-            }
-
-
-            //return View("UserProfile");
+            return View("UserProfile");
         }
 
         public ActionResult UpdatePassword()
@@ -132,19 +128,26 @@ namespace RecLeagueBlog.Controllers
             UserStore<AppUser> store = new UserStore<AppUser>(context);
             UserManager<AppUser> userManager = new UserManager<AppUser>(store);
             userId = User.Identity.GetUserId();
-            newPassword =model.ConfirmPassword;
-            string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
-            AppUser identityUser = await store.FindByIdAsync(userId);
-            await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
-            await store.UpdateAsync(identityUser);
 
-            if (ModelState.IsValid)
+            //if ((model.NewPassword == null) && (model.ConfirmPassword == null))
+            if (!ModelState.IsValid)
             {
-                TempData["PasswordUpdate"] = "Password has been successfully Updated!";
+                return View("UpdatePassword");
+            }
+            //else if (model.NewPassword == model.ConfirmPassword)
+            else
+            {
+                newPassword = model.ConfirmPassword;
+                string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
+                AppUser identityUser = await store.FindByIdAsync(userId);
+                await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
+                await store.UpdateAsync(identityUser);
+
+                TempData["PasswordUpdate"] = "Password has been successfully updated!";
                 return View("UpdatePassword");
             }
 
-            return View();
+            //return View("UpdatePassword");
         }
     }
 }

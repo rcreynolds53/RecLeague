@@ -13,5 +13,6 @@ namespace RecLeagueBlog.Data.Interfaces
         List<AppUser> GetAllUsers();
         AppUser GetUser(string id);
         void UpdateUser(AppUser updatedUser);
+        void DeleteUser(string id);
     }
 }

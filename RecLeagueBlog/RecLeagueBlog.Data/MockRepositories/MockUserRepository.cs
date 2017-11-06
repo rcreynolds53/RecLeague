@@ -43,5 +43,10 @@ namespace RecLeagueBlog.Data.MockRepositories
             _users.RemoveAll(u => u.Id == updatedUser.Id);
             _users.Add(updatedUser);
         }
+
+        public void DeleteUser(string id)
+        {
+            _users.RemoveAll(u => u.Id == id);
+        }
     }
 }
