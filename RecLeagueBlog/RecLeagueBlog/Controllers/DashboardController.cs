@@ -146,7 +146,7 @@ namespace RecLeagueBlog.Controllers
                 return View("UpdatePassword");
             }
 
-            return View("UpdatePassword");
+            //return View("UpdatePassword");
         }
     }
 }
