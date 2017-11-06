@@ -9,11 +9,12 @@ namespace RecLeagueBlog.Models
 {
     public class ResetPasswordModel
     {
-        [Required(AllowEmptyStrings =false)]
+        [Required(AllowEmptyStrings =false, ErrorMessage ="Please enter an email")]
         public string Email { get; set; }
 
-        [Required(AllowEmptyStrings =false)]
+        [Required(AllowEmptyStrings =false, ErrorMessage ="Please enter a new password")]
         [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "The password must be at least {2} characters long.", MinimumLength = 6)]
         public string NewPassword { get; set; }
 
     }

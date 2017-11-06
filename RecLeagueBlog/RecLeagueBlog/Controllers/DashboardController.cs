@@ -100,7 +100,8 @@ namespace RecLeagueBlog.Controllers
             UserStore<AppUser> store = new UserStore<AppUser>(context);
             UserManager<AppUser> userManager = new UserManager<AppUser>(store);
             userId = User.Identity.GetUserId();
-            if (model.NewPassword != null && model.Email != null)
+            //if (model.NewPassword != null && model.Email != null)
+            if (ModelState.IsValid)
             {
                 newPassword = model.NewPassword;
                 string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
@@ -127,11 +128,13 @@ namespace RecLeagueBlog.Controllers
             UserManager<AppUser> userManager = new UserManager<AppUser>(store);
             userId = User.Identity.GetUserId();
 
-            if ((model.NewPassword == null) && (model.ConfirmPassword == null))
+            //if ((model.NewPassword == null) && (model.ConfirmPassword == null))
+            if (!ModelState.IsValid)
             {
                 return View("UpdatePassword");
             }
-            else if (model.NewPassword == model.ConfirmPassword)
+            //else if (model.NewPassword == model.ConfirmPassword)
+            else
             {
                 newPassword = model.ConfirmPassword;
                 string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
