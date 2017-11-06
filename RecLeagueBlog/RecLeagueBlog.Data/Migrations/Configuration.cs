@@ -17,20 +17,7 @@ namespace RecLeagueBlog.Data.Migrations
 
         protected override void Seed(RecLeagueBlog.Data.RecBlogDBContext context)
         {
-           
-            //if (roleMgr.RoleExists("manager"))
-            //    return;
 
-            //roleMgr.Create(new IdentityRole() { Name = "manager" });
-
-            //var lesserUser = new AppUser()
-            //{
-            //    UserName = "manager@recleague.com",
-            //    Email = "manager@recleague.com",
-            //};
-
-            //userMgr.Create(lesserUser, "Testing456");
-            //userMgr.AddToRole(lesserUser.Id, "manager");
 
             var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
             var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
@@ -43,6 +30,8 @@ namespace RecLeagueBlog.Data.Migrations
             {
                 var newuser = new AppUser()
                 {
+                    FirstName = "Kipp",
+                    LastName = "Graham",
                     UserName = "admin@recleague.com",
                     Email = "admin@recleague.com"
 
@@ -53,6 +42,29 @@ namespace RecLeagueBlog.Data.Migrations
             if (!userMgr.IsInRole(user.Id, "admin"))
             {
                 userMgr.AddToRole(user.Id, "admin");
+            }
+
+
+            if (!roleMgr.RoleExists("manager"))
+            {
+                roleMgr.Create(new IdentityRole() { Name = "manager" });
+            }
+            if (userMgr.FindByName("manager@recleague.com") == null)
+            {
+                var newuser = new AppUser()
+                {
+                    FirstName = "AJ",
+                    LastName = "Rohde",
+                    UserName = "manager@recleague.com",
+                    Email = "manager@recleague.com"
+
+                };
+                userMgr.Create(newuser, "Testing456");
+            }
+            var userMan = userMgr.FindByName("manager@recleague.com");
+            if (!userMgr.IsInRole(user.Id, "manager"))
+            {
+                userMgr.AddToRole(user.Id, "manager");
             }
         }
     }

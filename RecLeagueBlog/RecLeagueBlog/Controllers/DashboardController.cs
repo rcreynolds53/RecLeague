@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
+using RecLeagueBlog.Data.MockRepositories;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -53,11 +54,28 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Users()
         {
-            ViewBag.Message = "Your users page.";
+            var repo = new MockUserRepository();
+            var model = repo.GetAllUsers();
+            return View(model);
+        }
 
-            return View();
+        [HttpGet]
+        public ActionResult DeleteUser(string id)
+        {
+            var repo = new MockUserRepository();
+            var user = repo.GetUser(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUser(AppUser user)
+        {
+            var repo = new MockUserRepository();
+            repo.DeleteUser(user.Id);
+            return RedirectToAction("Users");
         }
 
         public ActionResult UserProfile()

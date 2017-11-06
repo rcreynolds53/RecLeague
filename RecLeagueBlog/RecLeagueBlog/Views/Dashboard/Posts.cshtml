@@ -94,7 +94,7 @@
                 </button>
             </div>
             <div class="col-md-2">
-                <button type="button" id="addPostBtn" class="btn btn-primary">
+                <button type="submit" id="addPostBtn" class="btn btn-primary">
                     Save Post
                 </button>
             </div>
@@ -129,20 +129,27 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-2">
                 <input type="hidden" id="edit-movie-id">
-                <button type="submit" id="edit-movie-cancel-button" type="submit" class="btn btn-danger" onclick="hideEditPostForm()">
+                <button type="button" id="edit-movie-cancel-button" class="btn btn-danger" onclick="hideEditPostForm()">
                     Cancel Edit
                 </button>
             </div>
             <div class="col-md-2">
-                <button type="button" id="editPostBtn" class="btn btn-primary">
+                <button type="submit" id="editPostBtn" class="btn btn-primary">
                     Update Post
                 </button>
             </div>
         </div>
     </form>
 </div>
-<script src="~/Scripts/blogPosts.js"></script>
-@*<script src="js/jquery-2.2.4.min.js"></script>*@
+
+@section scripts {
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/jquery.tagsinput.js"></script>
+    <script src="~/Scripts/blogPosts.js"></script>
+    <script src="~/Scripts/trix.js"></script>
+}
+
 @*<script src="bootstrap-tagsinput.js"></script>*@
 @*<script src="js/bootstrap.min.js"></script>*@
 @*<script src="~/Scripts/jquery-3.2.1.js"></script>
@@ -151,33 +158,3 @@
 <link href="~/Scripts/trix.css" rel="stylesheet" />
 <script src="~/Scripts/trix.js"></script>
 <link href="~/Scripts/jquery.tagsinput.css" rel="stylesheet" />*@
-@*<div class="col-xs-12 col-sm-9">
-    <div class="row">
-        <div class="col-xs-12">
-            <h2>Blog Posts</h2>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Date Created</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var post in Model)
-                    {
-                        <tr>
-                            <td>@Html.ActionLink(@post.Title, "Posts", "Dashboard", new { id = post.BlogPostId }, null)</td>
-                            <td>@post.DateCreated.ToString("MM/dd/yyyy")</td>
-                            <td>@post.Status</td>
-                            <td>
-                                Edit | Delete
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>*@

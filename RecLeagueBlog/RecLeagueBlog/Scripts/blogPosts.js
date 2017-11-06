@@ -17,7 +17,7 @@ $(document).ready(function () {
             url: 'http://localhost:60542/post',
             data: JSON.stringify({
                 title: $('#addPostTitle').val(),
-                content: $('#addPostContent').val(),
+                content: $('#addPostContent').val().replace(/<\/?[^>]+>/gi, ''),
                 tagsToPost: postTags(),
                 categories: postCategories()
 
@@ -43,7 +43,7 @@ $(document).ready(function () {
                         .text('Error calling webservice. Please try again later.'));
 
             }
-        })
+        });
     });
 });
 function hideAddPostForm() {
@@ -106,7 +106,7 @@ $('#editPostBtn').click(function (event) {
         data: JSON.stringify({
             blogPostId: parseInt(postId),
             title: $('#editPostTitle').val(),
-            content: $('#editPostContent').val(),
+            content: $('#editPostContent').val().replace(/<\/?[^>]+>/gi, ''),
             tagsToPost: editTags(),
             categories: editCategories()
 
@@ -132,7 +132,7 @@ $('#editPostBtn').click(function (event) {
                     .text('Error calling webservice. Please try again later.'));
 
         }
-    })
+    });
 });
 function deletePost(postId) {
 
@@ -155,7 +155,6 @@ function deletePost(postId) {
     }
 }
 
-$('')
 function clearMoviesTable() {
     $('#contentRows').empty();
 }
@@ -174,16 +173,16 @@ function showEditPost(postId) {
             $('#editPostTitle').val(blogPost.title),
                 $('#editPostContent').val(blogPost.content),
                 $.each(blogPost.tags, function (index, tag) {
-                    tagNames += (String(tag.tagName)) + ",";
+                    tagNames += String(tag.tagName) + ",";
                 });
-            $('#editTags').val((String(tagNames))),
+            $('#editTags').val(String(tagNames)),
                 $('#editTags').tagsInput(),
                 $.each(blogPost.categories, function (index, catagory) {
-                    catagoryNames += (String(catagory.categoryName)) + ",";
+                    catagoryNames += String(catagory.categoryName) + ",";
                 });
-            $('#editCategories').val((String(catagoryNames))),
+            $('#editCategories').val(String(catagoryNames)),
 
-                $('#editCategories').tagsInput()
+                $('#editCategories').tagsInput();
 
 
         },
@@ -194,7 +193,7 @@ function showEditPost(postId) {
         }
 
     });
-};
+}
 
 function hideEditPostForm() {
     $('#postTableDiv').show();
@@ -227,7 +226,7 @@ function checkAndDisplayValidationErrors(input) {
         // return false, indicating that there were no errors
         return false;
     }
-};
+}
 $('#tags').tagsInput();
 $('#categories').tagsInput();
 

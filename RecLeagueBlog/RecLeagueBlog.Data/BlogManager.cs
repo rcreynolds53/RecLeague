@@ -1,5 +1,6 @@
 ﻿using RecLeagueBlog.Data.Interfaces;
 using RecLeagueBlog.Models;
+using RecLeagueBlog.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,14 @@ namespace RecLeagueBlog.Data
          private ITagRepository _tagRepo;
          private ICategoryRepository _categoryRepo;
          private IBlogPostRepository _blogPostRepo;
+        private IUserRepo _userRepo;
 
-        public BlogManager(ITagRepository tagRepo, ICategoryRepository categoryRepo, IBlogPostRepository blogPostRepo)
+        public BlogManager(ITagRepository tagRepo, ICategoryRepository categoryRepo, IBlogPostRepository blogPostRepo, IUserRepo userRepo)
         {
             _tagRepo = tagRepo;
             _categoryRepo = categoryRepo;
             _blogPostRepo = blogPostRepo;
+            _userRepo = userRepo;
         }
 
         // TAGS BLL
@@ -121,6 +124,12 @@ namespace RecLeagueBlog.Data
             return _blogPostRepo.UpdatePostModel(postModel);
         }
 
+        // ***** User MEthods ********
+
+        public List<AppUser> GetAllUsers()
+        {
+            return _userRepo.GetAllUsers();
+        }
 
 
     }

@@ -1,15 +1,37 @@
-﻿
+﻿@model IEnumerable<RecLeagueBlog.Models.Identity.AppUser>
 @{
 	ViewBag.Title = "Users";
 	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<div class="row">
-	<div class="col-lg-12">
-		<h2>@ViewBag.Title.</h2>
-		<h3>@ViewBag.Message</h3>
-
-		<p>Use this area to do users crud.</p>
-	</div>
-</div>
-
+<div class="col-xs-12 col-sm-9">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Users</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email Address</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.Email</td>
+                                <td>
+                                    @Html.ActionLink("Edit", "EditUser", "Dashboard", new { id = user.Id }, null) | 
+                                    @Html.ActionLink("Delete", "DeleteUser", "Dashboard", new { id = user.Id }, null)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
