@@ -4,10 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace RecLeagueBlog.Controllers
 {
-    public class StaticController : ApiController
+    public class StaticController : Controller
     {
         // GET api/<controller>
         public IEnumerable<string> Get()
