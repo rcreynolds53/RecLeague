@@ -59,5 +59,11 @@ namespace RecLeagueBlog.Data.EFRepositories
         {
             throw new NotImplementedException();
         }
+
+        public void CreateUser(AppUser newUser)
+        {
+            context.Users.Add(newUser);
+            context.SaveChanges();
+        }
     }
 }

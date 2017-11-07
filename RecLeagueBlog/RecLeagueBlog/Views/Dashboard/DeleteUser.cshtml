@@ -4,18 +4,14 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<div class="row">
-    <div class="col-xs-12">
-        <h2>Delete User</h2>
-        @Html.ActionLink("Return to Users", "Users", "Dashboard")
-    </div>
-</div>
+<h1>Delete User</h1>
+<hr />
 <div class="row">
     <div class="col-xs-12">
         @using (Html.BeginForm("DeleteUser", "Dashboard", FormMethod.Post))
         {
             @Html.HiddenFor(u => u.Id)
-            <p>Are you sure that you wish to delete this user: @Html.DisplayFor(u => u.UserName)?</p>
+            <p>Are you sure that you wish to delete this user: @Html.DisplayFor(u => u.Email) show the email address here.</p>
             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
             @Html.ActionLink("Cancel", "Users", "Dashboard", null, new { @class = "btn btn-sm btn-info" })
         }
