@@ -125,10 +125,12 @@
     <Compile Include="BlogManagerFactory.cs" />
     <Compile Include="EFRepositories\EFCategoryRepository.cs" />
     <Compile Include="EFRepositories\EFPostRepository.cs" />
+    <Compile Include="EFRepositories\EFStaticPageRepository.cs" />
     <Compile Include="EFRepositories\EFTagRepository.cs" />
     <Compile Include="EFRepositories\EFUserRepo.cs" />
     <Compile Include="Interfaces\IBlogPostRepository.cs" />
     <Compile Include="Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Interfaces\IStaticPageRepository.cs" />
     <Compile Include="Interfaces\ITagRepository.cs" />
     <Compile Include="Interfaces\IUserRepo.cs" />
     <Compile Include="Migrations\201711031613370_Init.cs" />

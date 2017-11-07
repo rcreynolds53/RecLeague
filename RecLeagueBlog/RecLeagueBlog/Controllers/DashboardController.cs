@@ -37,12 +37,6 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
-        public ActionResult Pages()
-        {
-            ViewBag.Message = "Your static pages page.";
-
-            return View();
-        }
 
         public ActionResult Categories()
         {
