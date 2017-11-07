@@ -70,7 +70,7 @@ namespace RecLeagueBlog.Controllers
         public ActionResult AddUser()
         {
             var model = new UserRoleViewModel();
-            //model.SetRoleItems(EFUserRepo.GetAllRoles());
+            // UNCOMMENT THIS OUT                         model.SetRoleItems(EFUserRepo.GetAllRoles());
             return View(model);
         }
 
