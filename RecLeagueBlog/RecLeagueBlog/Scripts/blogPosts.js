@@ -67,18 +67,18 @@ function loadPosts() {
                 var blogPostTags = post.tags;
                 var blogPostCats = post.categories;
 
-                var row = '<tr id ="' + title + '">';
-                row += '<td id ="' + title + '">' + title + '</td>';
+                var row = '<tr>';
+                row += '<td>' + title + '</td>';
                 row += '<td><ul>';
                 $.each(blogPostTags, function (index, tags) {
                     var tagName = tags.tagName;
-                    row += '<li value ="' + title + tagName + '">' + tagName + '</li>';
+                    row += '<li>' + tagName + '</li>';
                 });
                 row += '</ul></td>';
                 row += '<td><ul>';
                 $.each(blogPostCats, function (index, categories) {
                     var categoryName = categories.categoryName;
-                    row += '<li value= "' + title + categoryName + '">' + categoryName + '</li>';
+                    row += '<li>' + categoryName + '</li>';
                 });
                 row += '</ul></td>';
                 row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit |</a><a onclick ="deletePost(' + blogPostId + ')"> Delete</a></td>';
