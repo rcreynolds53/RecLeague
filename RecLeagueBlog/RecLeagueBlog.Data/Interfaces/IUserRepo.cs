@@ -1,4 +1,5 @@
-﻿using RecLeagueBlog.Models;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using RecLeagueBlog.Models;
 using RecLeagueBlog.Models.Identity;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,6 @@ namespace RecLeagueBlog.Data.Interfaces
         void UpdateUser(AppUser updatedUser);
         void DeleteUser(string id);
         void CreateUser(AppUser newUser);
+        IEnumerable<IdentityRole> GetAllRoles();
     }
 }

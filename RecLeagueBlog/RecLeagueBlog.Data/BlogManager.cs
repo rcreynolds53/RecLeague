@@ -15,14 +15,15 @@ namespace RecLeagueBlog.Data
          private ICategoryRepository _categoryRepo;
          private IBlogPostRepository _blogPostRepo;
          private IUserRepo _userRepo;
-        private IStaticPageRepository _staticPageRepository;
+         private IStaticPageRepository _staticPageRepository;
 
-        public BlogManager(ITagRepository tagRepo, ICategoryRepository categoryRepo, IBlogPostRepository blogPostRepo, IUserRepo userRepo)
+        public BlogManager(ITagRepository tagRepo, ICategoryRepository categoryRepo, IBlogPostRepository blogPostRepo, IUserRepo userRepo, IStaticPageRepository staticRepo)
         {
             _tagRepo = tagRepo;
             _categoryRepo = categoryRepo;
             _blogPostRepo = blogPostRepo;
             _userRepo = userRepo;
+            _staticPageRepository = staticRepo;
         }
 
         // TAGS BLL
@@ -185,5 +186,10 @@ namespace RecLeagueBlog.Data
         }
 
 
+        //Uncomment this out
+        //public IEnumerable<AppRole> GetAllRoles()
+        //{
+        //    return _userRepo.GetAllRoles();
+        //}
     }
 }

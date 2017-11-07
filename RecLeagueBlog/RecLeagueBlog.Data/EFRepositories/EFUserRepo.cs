@@ -47,23 +47,36 @@ namespace RecLeagueBlog.Data.EFRepositories
         }
         public AppUser GetUser(string id)
         {
-            throw new NotImplementedException();
+            return context.Users.FirstOrDefault(u => u.Id == id);
         }
 
         public void UpdateUser(AppUser updatedUser)
         {
-            throw new NotImplementedException();
+            context.Entry(updatedUser).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
         }
 
         public void DeleteUser(string id)
         {
-            throw new NotImplementedException();
+            var userToDelete = context.Users.FirstOrDefault(u => u.Id == id);
+
+            context.Users.Remove(userToDelete);
+            context.SaveChanges();
+
         }
 
         public void CreateUser(AppUser newUser)
         {
             context.Users.Add(newUser);
             context.SaveChanges();
+        }
+
+        public IEnumerable<IdentityRole> GetAllRoles()
+        {
+            var roles = (from r in context.Roles
+                         select r).ToList();
+
+            return roles;
         }
     }
 }
