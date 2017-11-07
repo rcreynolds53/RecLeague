@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
 using RecLeagueBlog.Data.MockRepositories;
+using RecLeagueBlog.Data.EFRepositories;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -61,6 +62,14 @@ namespace RecLeagueBlog.Controllers
             var model = manager.GetAllUsers();
             return View(model);
 
+        }
+
+        [HttpGet]
+        public ActionResult AddUser()
+        {
+            var model = new UserRoleViewModel();
+            //model.SetRoleItems(EFUserRepo.GetAllRoles());
+            return View(model);
         }
 
         [HttpGet]
