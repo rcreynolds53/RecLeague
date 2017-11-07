@@ -67,18 +67,18 @@ function loadPosts() {
                 var blogPostTags = post.tags;
                 var blogPostCats = post.categories;
 
-                var row = '<tr>';
-                row += '<td>' + title + '</td>';
+                var row = '<tr id ="' + title + '">';
+                row += '<td id ="' + title + '">' + title + '</td>';
                 row += '<td><ul>';
                 $.each(blogPostTags, function (index, tags) {
                     var tagName = tags.tagName;
-                    row += '<li>' + tagName + '</li>';
+                    row += '<li value ="' + title + tagName + '">' + tagName + '</li>';
                 });
                 row += '</ul></td>';
                 row += '<td><ul>';
                 $.each(blogPostCats, function (index, categories) {
                     var categoryName = categories.categoryName;
-                    row += '<li>' + categoryName + '</li>';
+                    row += '<li value= "' + title + categoryName + '">' + categoryName + '</li>';
                 });
                 row += '</ul></td>';
                 row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit |</a><a onclick ="deletePost(' + blogPostId + ')"> Delete</a></td>';
@@ -263,5 +263,36 @@ function editCategories() {
 
     });
     return categoriesArray;
+}
+
+
+// Ignore this for now, it doesnt work quite yet.
+
+
+function searchFilter() {
+    var searchTerm = $('#searchTerm').val();
+    var filter = searchTerm.toUpperCase();
+    var posts = document.getElementById('postTableDiv');
+    var post = posts.getElementsByTagName('tr');
+    
+    for (i = 0; i < post.length; i++)
+    {
+        var postContents = post[i].getElementsByTagName('td');
+    }
+    for (j = 0; j < postContents.length; j++)
+    {
+        var items = postContents[j].getElementsByTagName('ul');
+    }
+    for (k = 0; k < items.length; k++) {
+        var value = items[k].attr('value')[0];
+        if (value.toUpperCase().indexOf(filter) > -1) {
+            items[i].style.display = "";
+        }
+        else {
+            items[i].style.display = "none";
+        }
+
+    }
+  
 }
 
