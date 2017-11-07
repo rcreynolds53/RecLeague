@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RecLeagueBlog.Models.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace RecLeagueBlog.Data.MockRepositories
 {
@@ -52,6 +53,11 @@ namespace RecLeagueBlog.Data.MockRepositories
         public void CreateUser(AppUser newUser)
         {
             _users.Add(newUser);
+        }
+
+        public IEnumerable<IdentityRole> GetAllRoles()
+        {
+            return _roles;
         }
     }
 }
