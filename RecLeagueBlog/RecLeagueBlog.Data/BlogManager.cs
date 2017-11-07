@@ -14,7 +14,7 @@ namespace RecLeagueBlog.Data
          private ITagRepository _tagRepo;
          private ICategoryRepository _categoryRepo;
          private IBlogPostRepository _blogPostRepo;
-        private IUserRepo _userRepo;
+         private IUserRepo _userRepo;
 
         public BlogManager(ITagRepository tagRepo, ICategoryRepository categoryRepo, IBlogPostRepository blogPostRepo, IUserRepo userRepo)
         {
@@ -124,13 +124,31 @@ namespace RecLeagueBlog.Data
             return _blogPostRepo.UpdatePostModel(postModel);
         }
 
-        // ***** User MEthods ********
+        // ***** User Methods ********
 
         public List<AppUser> GetAllUsers()
         {
             return _userRepo.GetAllUsers();
         }
 
+        public AppUser GetUser(string id)
+        {
+            return _userRepo.GetUser(id);
+        }
 
+        public void UpdateUser(AppUser updatedUser)
+        {
+            _userRepo.UpdateUser(updatedUser);
+        }
+
+        public void DeleteUser(string id)
+        {
+            _userRepo.DeleteUser(id);
+        }
+
+        public void CreateUser(AppUser newUser)
+        {
+            _userRepo.CreateUser(newUser);
+        }
     }
 }

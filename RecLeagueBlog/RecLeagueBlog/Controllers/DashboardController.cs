@@ -13,6 +13,7 @@ using System.Web.Mvc;
 using System.Web.Services.Description;
 using RecLeagueBlog.Data.MockRepositories;
 using RecLeagueBlog.Data.EFRepositories;
+using RecLeagueBlog.Data.Interfaces;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -20,6 +21,7 @@ namespace RecLeagueBlog.Controllers
     public class DashboardController : Controller
     {
         BlogManager manager = BlogManagerFactory.Create();
+
         // GET: Dashboard
         public ActionResult Index()
         {
@@ -72,19 +74,41 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult AddUser(AppUser user)
+        {
+            if(!ModelState.IsValid)
+            {
+                throw new Exception("Error placeholder for now");
+            }
+            else
+            {
+                var model = new UserRoleViewModel();
+                //model.SetRoleItems(EFUserRepo.GetAllRoles());
+                return View(model);
+            }
+
+        }
+
+        [HttpGet]
+        public ActionResult EditUser(string id)
+        {
+            var model = manager.GetUser(id);
+
+            return View(model);
+        }
+
         [HttpGet]
         public ActionResult DeleteUser(string id)
         {
-            var repo = new MockUserRepository();
-            var user = repo.GetUser(id);
+            var user = manager.GetUser(id);
             return View(user);
         }
 
         [HttpPost]
         public ActionResult DeleteUser(AppUser user)
         {
-            var repo = new MockUserRepository();
-            repo.DeleteUser(user.Id);
+            manager.DeleteUser(user.Id);
             return RedirectToAction("Users");
         }
 
