@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
+using RecLeagueBlog.Data.MockRepositories;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -55,9 +56,9 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult Users()
         {
-            ViewBag.Message = "Your users page.";
-
-            return View();
+            var repo = new MockUserRepository();
+            var model = repo.GetAllUsers();
+            return View(model);
         }
 
         public ActionResult UserProfile()

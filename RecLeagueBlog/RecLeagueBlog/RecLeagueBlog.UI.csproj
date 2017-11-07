@@ -304,6 +304,9 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
+    <Content Include="Views\Dashboard\DeleteUser.cshtml" />
+    <Content Include="Views\Dashboard\EditUser.cshtml" />
+    <Content Include="Views\Dashboard\AddUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

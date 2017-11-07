@@ -1,44 +1,38 @@
-﻿@model RecLeagueBlog.Models.Identity.AppUser
 
+﻿@model IEnumerable<RecLeagueBlog.Models.Identity.AppUser>
 @{
 	ViewBag.Title = "Users";
 	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-6"> @*May need to fiddle with this styling later*@
-            <h3>User Profile</h3>
-            <div class="row">
-                @using (Html.BeginForm())
-                {
-                    @Html.ValidationSummary()
-                    @*Come back and add/finish this later*@
-
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            <label class="control-label">First Name: </label>
-                            @Html.TextBoxFor(u => u.FirstName, new { @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Last Name: </label>
-                            @Html.TextBoxFor(u => u.LastName, new { @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Email Address: </label>
-                            @Html.TextBoxFor(u => u.Email, new { @class = "form-control" })
-                        </div>
-                        @*<div class="form-group">
-                            <label class="control-label">Password: </label>
-                            @Html.TextBoxFor(u=>u.Password)
-                        </div>*@
-                        @Html.ActionLink("Cancel", "???", "???", null, new { @class = "btn btn-sm btn-info" })
-                        <button type="submit" class="btn btn-sm btn-danger">Save</button>
-                    </div>
-                }
+<div class="col-xs-12 col-sm-9">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Users</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email Address</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.Email</td>
+                                <td>
+                                    @Html.ActionLink("Edit", "EditUser", "Dashboard", new { id = user.Id }, null) | 
+                                    @Html.ActionLink("Delete", "EditUser", "Dashboard", new { id = user.Id }, null)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
-@*<script src="~/Scripts/XXX.js"></script>*@
-@* Will this need its own js file in Script Documents? *@
