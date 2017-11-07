@@ -8,10 +8,12 @@ using RecLeagueBlog.Models.Identity;
 using RecLeagueBlog.Models;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using System.Web;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
+using System.Net.Http;
+using System.Web;
 
 namespace RecLeagueBlog.Data.EFRepositories
 {
@@ -21,15 +23,28 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public List<AppUser> GetAllUsers()
         {
-            //RoleManager<IdentityRole> test = ;
 
             var users = context.Users.ToList();
+            var roles = context.Roles.ToList();
+
+            foreach (var u in users)
+            {
+                foreach (var r in u.Roles)
+                {
+                    if (roles.Any(ur => ur.Id == r.RoleId))
+                    {
+                        var roleFound = roles.First(ur=> ur.Id == r.RoleId);
+
+                        u.RoleName = roleFound.Name;
+                    }
+                }
 
                 //test.FindById(users[0].Roles.First().RoleId).Name
 
+
+            }
             return users;
         }
-
         public AppUser GetUser(string id)
         {
             throw new NotImplementedException();

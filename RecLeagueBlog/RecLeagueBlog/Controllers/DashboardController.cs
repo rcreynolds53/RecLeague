@@ -18,6 +18,7 @@ namespace RecLeagueBlog.Controllers
     [Authorize(Roles = "admin")]
     public class DashboardController : Controller
     {
+        BlogManager manager = BlogManagerFactory.Create();
         // GET: Dashboard
         public ActionResult Index()
         {
@@ -57,9 +58,9 @@ namespace RecLeagueBlog.Controllers
         [HttpGet]
         public ActionResult Users()
         {
-            var repo = new MockUserRepository();
-            var model = repo.GetAllUsers();
+            var model = manager.GetAllUsers();
             return View(model);
+
         }
 
         [HttpGet]
