@@ -1,4 +1,5 @@
-﻿using RecLeagueBlog.Models.Identity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using RecLeagueBlog.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,7 +35,7 @@ namespace RecLeagueBlog.Models
             RoleItems = new List<SelectListItem>();
         }
 
-        public void SetRoleItems(IEnumerable<AppRole> roles)
+        public void SetRoleItems(IEnumerable<IdentityRole> roles)
         {
             foreach (var role in roles)
             {

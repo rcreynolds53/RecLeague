@@ -1,4 +1,5 @@
-﻿using RecLeagueBlog.Data.Interfaces;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using RecLeagueBlog.Data.Interfaces;
 using RecLeagueBlog.Models;
 using RecLeagueBlog.Models.Identity;
 using System;
@@ -151,10 +152,9 @@ namespace RecLeagueBlog.Data
             _userRepo.CreateUser(newUser);
         }
 
-        //Uncomment this out
-        //public IEnumerable<AppRole> GetAllRoles()
-        //{
-        //    return _userRepo.GetAllRoles();
-        //}
+        public IEnumerable<IdentityRole> GetAllRoles()
+        {
+            return _userRepo.GetAllRoles();
+        }
     }
 }

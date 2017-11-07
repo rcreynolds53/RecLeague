@@ -61,7 +61,7 @@ namespace RecLeagueBlog.Controllers
         public ActionResult AddUser()
         {
             var model = new UserRoleViewModel();
-            //model.SetRoleItems(manager.GetAllRoles());
+            model.SetRoleItems(manager.GetAllRoles());
             return View(model);
         }
 
@@ -75,7 +75,7 @@ namespace RecLeagueBlog.Controllers
             else
             {
                 var model = new UserRoleViewModel();
-                //model.SetRoleItems(manager.GetAllRoles());
+                model.SetRoleItems(manager.GetAllRoles());
                 return View(model);
             }
 
