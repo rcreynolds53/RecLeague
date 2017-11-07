@@ -16,13 +16,15 @@ namespace RecLeagueBlog.Data
          private ICategoryRepository _categoryRepo;
          private IBlogPostRepository _blogPostRepo;
          private IUserRepo _userRepo;
+         private IStaticPageRepository _staticPageRepository;
 
-        public BlogManager(ITagRepository tagRepo, ICategoryRepository categoryRepo, IBlogPostRepository blogPostRepo, IUserRepo userRepo)
+        public BlogManager(ITagRepository tagRepo, ICategoryRepository categoryRepo, IBlogPostRepository blogPostRepo, IUserRepo userRepo, IStaticPageRepository staticRepo)
         {
             _tagRepo = tagRepo;
             _categoryRepo = categoryRepo;
             _blogPostRepo = blogPostRepo;
             _userRepo = userRepo;
+            _staticPageRepository = staticRepo;
         }
 
         // TAGS BLL
@@ -124,6 +126,38 @@ namespace RecLeagueBlog.Data
         {
             return _blogPostRepo.UpdatePostModel(postModel);
         }
+        
+        //Static Page Methods//
+
+        public StaticPage GetStaticPage (int staticPageId)
+        {
+            return _staticPageRepository.GetPageByID(staticPageId);
+        }
+
+        public List<StaticPage> GetAllStaticPages ()
+        {
+            return _staticPageRepository.GetAllPages();
+        }
+
+        public void CreateStaticPage (StaticPage newPage)
+        {
+            if (_staticPageRepository.GetAllPages().Any())
+            {
+                newPage.StaticPageId = _staticPageRepository.GetAllPages().Max(p => p.StaticPageId) + 1;
+            }
+            newPage.StaticPageId = 1;
+            _staticPageRepository.CreateStaticPage(newPage);
+        }
+
+        public void EditStaticPage(StaticPage updatedPage)
+        {
+            _staticPageRepository.EditStaticPage(updatedPage);
+        }
+
+        public void DeleteStaticPage(int staticPageId)
+        {
+            _staticPageRepository.DeleteStaticPage(staticPageId);
+        }
 
         // ***** User Methods ********
 
@@ -156,5 +190,6 @@ namespace RecLeagueBlog.Data
         {
             return _userRepo.GetAllRoles();
         }
+
     }
 }

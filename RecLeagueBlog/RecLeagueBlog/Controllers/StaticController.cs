@@ -1,40 +1,39 @@
-﻿using System;
+﻿using RecLeagueBlog.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace RecLeagueBlog.Controllers
 {
     public class StaticController : Controller
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        BlogManager manager = BlogManagerFactory.Create();
+        public ActionResult Pages()
         {
-            return new string[] { "value1", "value2" };
+            var model = manager.GetAllPosts();
+
+            return View(model);
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        public ActionResult AddPages()
         {
-            return "value";
+            return View();
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        public ActionResult DeletePages()
         {
+            return View();
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public ActionResult EditPages()
         {
+            return View();
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }
