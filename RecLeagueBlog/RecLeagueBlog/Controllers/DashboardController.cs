@@ -3,17 +3,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using RecLeagueBlog.Data;
 using RecLeagueBlog.Models.Identity;
 using RecLeagueBlog.Models;
-using RecLeagueBlog.Data.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Services.Description;
-using RecLeagueBlog.Data.MockRepositories;
-using RecLeagueBlog.Data.EFRepositories;
-using RecLeagueBlog.Data.Interfaces;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -32,8 +24,7 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult Posts()
         {
-            var repo = new MockPostRepository();
-            var model = repo.GetAllPosts();
+            var model = manager.GetAllPosts();
             return View(model);
         }
 
@@ -70,7 +61,7 @@ namespace RecLeagueBlog.Controllers
         public ActionResult AddUser()
         {
             var model = new UserRoleViewModel();
-            //model.SetRoleItems(EFUserRepo.GetAllRoles());
+            //model.SetRoleItems(manager.GetAllRoles());
             return View(model);
         }
 
@@ -84,7 +75,7 @@ namespace RecLeagueBlog.Controllers
             else
             {
                 var model = new UserRoleViewModel();
-                //model.SetRoleItems(EFUserRepo.GetAllRoles());
+                //model.SetRoleItems(manager.GetAllRoles());
                 return View(model);
             }
 
@@ -94,8 +85,14 @@ namespace RecLeagueBlog.Controllers
         public ActionResult EditUser(string id)
         {
             var model = manager.GetUser(id);
-
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(AppUser editedUser)
+        {
+            manager.UpdateUser(editedUser);
+            return RedirectToAction("Users");
         }
 
         [HttpGet]

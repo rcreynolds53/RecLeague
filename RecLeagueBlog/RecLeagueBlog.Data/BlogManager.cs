@@ -150,5 +150,11 @@ namespace RecLeagueBlog.Data
         {
             _userRepo.CreateUser(newUser);
         }
+
+        //Uncomment this out
+        //public IEnumerable<AppRole> GetAllRoles()
+        //{
+        //    return _userRepo.GetAllRoles();
+        //}
     }
 }
