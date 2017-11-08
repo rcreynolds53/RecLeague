@@ -31,14 +31,12 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult Categories()
         {
-            ViewBag.Message = "Your categories page.";
 
             return View();
         }
 
         public ActionResult Tags()
         {
-            ViewBag.Message = "Your tags page.";
 
             return View();
         }
@@ -109,7 +107,6 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult UserProfile()
         {
-            ViewBag.Message = "Your user profile page.";
 
             return View();
         }
