@@ -60,16 +60,16 @@ namespace RecLeagueBlog.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddUser(AppUser user)
+        public ActionResult AddUser(UserRoleViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                throw new Exception("Error placeholder for now");
+                manager.ConvertVMtoUserForAdd(model);
+                return RedirectToAction("Users");
+                //throw new Exception("Error placeholder for now");
             }
             else
             {
-                var model = new UserRoleViewModel();
-                model.SetRoleItems(manager.GetAllRoles());
                 return View(model);
             }
 
@@ -78,14 +78,15 @@ namespace RecLeagueBlog.Controllers
         [HttpGet]
         public ActionResult EditUser(string id)
         {
-            var model = manager.GetUser(id);
+            var user = manager.GetUser(id);
+            var model = manager.ConvertUserToVM(user);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult EditUser(AppUser editedUser)
+        public ActionResult EditUser(UserRoleViewModel viewModel)
         {
-            manager.UpdateUser(editedUser);
+            manager.ConvertVMtoUserForEdit(viewModel);
             return RedirectToAction("Users");
         }
 

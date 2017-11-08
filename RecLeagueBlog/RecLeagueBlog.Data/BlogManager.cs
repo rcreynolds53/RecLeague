@@ -12,11 +12,11 @@ namespace RecLeagueBlog.Data
 {
     public class BlogManager
     {
-         private ITagRepository _tagRepo;
-         private ICategoryRepository _categoryRepo;
-         private IBlogPostRepository _blogPostRepo;
-         private IUserRepo _userRepo;
-         private IStaticPageRepository _staticPageRepository;
+         static ITagRepository _tagRepo;
+         static ICategoryRepository _categoryRepo;
+         static IBlogPostRepository _blogPostRepo;
+         static IUserRepo _userRepo;
+        static IStaticPageRepository _staticPageRepository;
 
         public BlogManager(ITagRepository tagRepo, ICategoryRepository categoryRepo, IBlogPostRepository blogPostRepo, IUserRepo userRepo, IStaticPageRepository staticRepo)
         {
@@ -64,7 +64,7 @@ namespace RecLeagueBlog.Data
         {
             _categoryRepo.DeleteCateogry(categoryId);
         }
-
+       
         public Category GetCategory(int categoryId)
         {
            return _categoryRepo.GetCategory(categoryId);
@@ -169,11 +169,26 @@ namespace RecLeagueBlog.Data
         public AppUser GetUser(string id)
         {
             return _userRepo.GetUser(id);
+        }   
+
+        public IEnumerable<IdentityRole> GetAllRoles()
+        {
+            return _userRepo.GetAllRoles();
         }
 
-        public void UpdateUser(AppUser updatedUser)
+        public void ConvertVMtoUserForAdd(UserRoleViewModel model)
         {
-            _userRepo.UpdateUser(updatedUser);
+            _userRepo.ConvertVMtoUserForAdd(model);
+        }
+
+        public void ConvertVMtoUserForEdit(UserRoleViewModel model)
+        {
+            _userRepo.ConvertVMtoUserForEdit(model);
+        }
+
+        public UserRoleViewModel ConvertUserToVM(AppUser user)
+        {
+            return _userRepo.ConvertUserToVM(user);
         }
 
         public void DeleteUser(string id)
@@ -181,15 +196,6 @@ namespace RecLeagueBlog.Data
             _userRepo.DeleteUser(id);
         }
 
-        public void CreateUser(AppUser newUser)
-        {
-            _userRepo.CreateUser(newUser);
-        }
-
-        public IEnumerable<IdentityRole> GetAllRoles()
-        {
-            return _userRepo.GetAllRoles();
-        }
 
     }
 }

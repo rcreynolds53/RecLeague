@@ -13,9 +13,10 @@ namespace RecLeagueBlog.Data.Interfaces
     {
         List<AppUser> GetAllUsers();
         AppUser GetUser(string id);
-        void UpdateUser(AppUser updatedUser);
         void DeleteUser(string id);
-        void CreateUser(AppUser newUser);
         IEnumerable<IdentityRole> GetAllRoles();
+        UserRoleViewModel ConvertUserToVM(AppUser user);
+        void ConvertVMtoUserForAdd(UserRoleViewModel viewModel);
+        void ConvertVMtoUserForEdit(UserRoleViewModel viewModel);
     }
 }

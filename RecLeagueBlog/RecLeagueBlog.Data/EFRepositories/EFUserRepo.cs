@@ -38,10 +38,6 @@ namespace RecLeagueBlog.Data.EFRepositories
                         u.RoleName = roleFound.Name;
                     }
                 }
-
-                //test.FindById(users[0].Roles.First().RoleId).Name
-
-
             }
             return users;
         }
@@ -77,6 +73,26 @@ namespace RecLeagueBlog.Data.EFRepositories
                          select r).ToList();
 
             return roles;
+        }
+
+        public void ConvertVMtoUser(UserRoleViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserRoleViewModel ConvertUserToVM(AppUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConvertVMtoUserForAdd(UserRoleViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConvertVMtoUserForEdit(UserRoleViewModel viewModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }
