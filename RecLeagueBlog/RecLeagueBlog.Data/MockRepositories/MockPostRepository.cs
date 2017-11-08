@@ -222,5 +222,10 @@ namespace RecLeagueBlog.Data.Repositories
             
             return convertedPost;
         }
+
+        public BlogPost UpdatePostModel(int postId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

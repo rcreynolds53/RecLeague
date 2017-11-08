@@ -3,7 +3,6 @@
     ViewBag.Title = "Posts";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-
 <div class="container">
     <div class=" row">
         <h3>Blog Posts</h3>
@@ -72,8 +71,7 @@
             <div class="form-group">
                 <label class="col-xs-12 newPost">Content:</label>
                 <div class="col-xs-12">
-                    <input class="form-control" id="addPostContent">
-                    @*<trix-editor input="addPostContent"></trix-editor>*@
+                    <textarea id="addPostContent" class="col-xs-12 postContent"></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -104,6 +102,7 @@
 </div>
 <div class="container" id="editPostDiv" style="display: none">
     <h2>Edit Post</h2>
+    @*@using( Html.BeginForm())*@
     <form class="form-horizontal" role="form" id="edit-movie-form">
         <input type="hidden" id="postId" />
         <div class="form-group">
@@ -115,8 +114,7 @@
         <div class="form-group">
             <label class="col-xs-12 newPost">Content:</label>
             <div class="col-xs-12">
-                <input class="form-control" id="editPostContent">
-                @*<trix-editor input="editPostContent"></trix-editor>*@
+                <textarea class="form-control postContent" id="editPostContent"></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -135,7 +133,7 @@
                 </button>
             </div>
             <div class="col-md-2">
-                <button type="submit" id="editPostBtn" class="btn btn-primary">
+                <button type="button" id="editPostBtn" class="btn btn-primary">
                     Update Post
                 </button>
             </div>
@@ -148,5 +146,10 @@
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Scripts/jquery.tagsinput.js"></script>
     <script src="~/Scripts/blogPosts.js"></script>
-    <script src="~/Scripts/trix.js"></script>
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=n82lwolij6mcnt7nsfm87fe9e2przxq549pkx0nbs47xzx9s'></script>
+<script>
+    tinymce.init({
+        selector: '.postContent'
+    });
+</script>
 }

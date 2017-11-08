@@ -7,6 +7,7 @@ $(document).ready(function () {
     });
 
     $('#addPostBtn').click(function (event) {
+        tinyMCE.triggerSave();
         // var haveValidationErrors = checkAndDisplayValidationErrors($('#addMovieFormDiv').find('input'));
 
         // if (haveValidationErrors) {
@@ -17,7 +18,7 @@ $(document).ready(function () {
             url: 'http://localhost:60542/post',
             data: JSON.stringify({
                 title: $('#addPostTitle').val(),
-                content: $('#addPostContent').val().replace(/<\/?[^>]+>/gi, ''),
+                content: $('#addPostContent').val(),
                 tagsToPost: postTags(),
                 categories: postCategories()
 
@@ -106,7 +107,7 @@ $('#editPostBtn').click(function (event) {
         data: JSON.stringify({
             blogPostId: parseInt(postId),
             title: $('#editPostTitle').val(),
-            content: $('#editPostContent').val().replace(/<\/?[^>]+>/gi, ''),
+            content: $('#tinymce').html(),
             tagsToPost: editTags(),
             categories: editCategories()
 
@@ -171,16 +172,17 @@ function showEditPost(postId) {
         url: 'http://localhost:60542/post/' + postId,
         success: function (blogPost, status) {
             $('#editPostTitle').val(blogPost.title),
-                $('#editPostContent').val(blogPost.content),
+                tinyMCE.get('editPostContent').getContent();
                 $.each(blogPost.tags, function (index, tag) {
                     tagNames += String(tag.tagName) + ",";
                 });
-            $('#editTags').val(String(tagNames)),
+            $('#editTags').importTags(tagNames);
+            //$('#editTags').append(String(tagNames)),
                 $('#editTags').tagsInput(),
                 $.each(blogPost.categories, function (index, catagory) {
                     catagoryNames += String(catagory.categoryName) + ",";
                 });
-            $('#editCategories').val(String(catagoryNames)),
+                $('#editCategories').importTags(catagoryNames);
 
                 $('#editCategories').tagsInput();
 
