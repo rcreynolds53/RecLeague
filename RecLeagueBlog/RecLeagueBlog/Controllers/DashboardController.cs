@@ -80,6 +80,7 @@ namespace RecLeagueBlog.Controllers
         {
             var user = manager.GetUser(id);
             var model = manager.ConvertUserToVM(user);
+            model.SetRoleItems(manager.GetAllRoles());
             return View(model);
         }
 
