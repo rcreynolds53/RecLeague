@@ -4,30 +4,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
+//using System.Web.Http;
 using System.Web.Mvc;
 using System.Threading.Tasks;
+using RecLeagueBlog.Models;
 
 namespace RecLeagueBlog.Controllers
 {
     public class StaticController : Controller
     {
         BlogManager manager = BlogManagerFactory.Create();
+
         public ActionResult Pages()
         {
-            var model = manager.GetAllPosts();
+            var model = manager.GetAllStaticPages();
 
             return View(model);
         }
 
-        public ActionResult AddPages()
+        [HttpGet]
+        public ActionResult AddPage()
         {
-            return View();
+            var model = new StaticPage();
+            //model.SetRoleItems(manager.GetAllRoles());
+            return View(model);
         }
 
-        public ActionResult DeletePages()
+        [HttpPost]
+        public ActionResult AddUser(UserRoleViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                manager.ConvertVMtoUserForAdd(model);
+                return RedirectToAction("Users");
+                //throw new Exception("Error placeholder for now");
+            }
+            else
+            {
+                return View(model);
+            }
+
         }
 
         public ActionResult EditPages()
@@ -35,5 +51,18 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult DeletePage(int id)
+        {
+            var page = manager.GetStaticPage(id);
+            return View(page);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePage(StaticPage page)
+        {
+            manager.DeleteStaticPage(page.StaticPageId);
+            return RedirectToAction("Pages");
+        }
     }
 }
