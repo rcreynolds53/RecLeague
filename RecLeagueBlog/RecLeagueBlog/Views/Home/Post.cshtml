@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
             <h1>@Model.Title</h1>
             <p class="lead">
                 by @Model.UserName
@@ -14,7 +14,42 @@
             <hr>
             <p><span class="glyphicon glyphicon-time"></span> Posted on @Model.DateCreated.ToString("MM/dd/yyyy")</p>
             <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
             <p class="lead">@Model.Content</p>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <div class="row">
+                <div class="blog-card panel panel-default ">
+                    <div class="panel-heading">
+                        Tags
+                    </div>
+                    <div class="panel-body">
+                        @foreach (var tag in Model.Tags)
+                        {
+                            @tag.TagName;
+                            <br />
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="blog-card panel panel-default ">
+                    <div class="panel-heading">
+                        Categories
+                    </div>
+                    <div class="panel-body">
+                        @foreach (var category in Model.Categories)
+                        {
+                            @category.CategoryName;
+                            <br />
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
