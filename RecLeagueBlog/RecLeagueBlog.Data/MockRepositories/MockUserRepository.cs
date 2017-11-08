@@ -80,7 +80,7 @@ namespace RecLeagueBlog.Data.MockRepositories
         {
             var user = viewModel.AppUser;
 
-            //not sure iif we need these,
+            //not sure if we need these,
             //user.Id = viewModel.UserId;
             //user.FirstName = viewModel.FirstName;
             //user.LastName = viewModel.LastName;
