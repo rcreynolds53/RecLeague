@@ -51,6 +51,8 @@ namespace RecLeagueBlog.Controllers
 
         }
 
+
+
         [HttpGet]
         public ActionResult AddUser()
         {
