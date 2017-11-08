@@ -14,6 +14,7 @@
     <div class="row">
         @using (Html.BeginForm())
         {
+            @Html.HiddenFor(u => u.AppUser.Id)
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -22,13 +23,13 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <label>First Name:</label>
-                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.FirstName)
+                            @Html.TextBoxFor(m => m.AppUser.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.AppUser.FirstName)
                         </div>
                         <div class="form-group">
                             <label>Last Name:</label>
-                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.LastName)
+                            @Html.TextBoxFor(m => m.AppUser.LastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.AppUser.LastName)
                         </div>
                         <div class="form-group">
                             <label>Role:</label>
@@ -36,8 +37,8 @@
                         </div>
                         <div class="form-group">
                             <label>Email:</label>
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.AppUser.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.AppUser.Email)
                         </div>
                         <div class="form-group">
                             <label>New Password</label>
