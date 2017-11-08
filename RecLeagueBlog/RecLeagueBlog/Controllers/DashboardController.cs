@@ -110,6 +110,60 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
+        public ActionResult Pages()
+        {
+            var model = manager.GetAllStaticPages();
+
+            return View(model);
+        }
+
+        public ActionResult AddPages()
+        {
+            var model = manager.GetAllStaticPages();
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddPages(StaticPage staticPage)
+        {
+            if(!ModelState.IsValid)
+            {
+                throw new Exception("placeholder for error");
+            }
+            else
+            {
+                var model = new StaticPage();
+                manager.CreateStaticPage(staticPage);
+                return View(model);
+            }
+        }
+
+        public ActionResult DeletePages(int id)
+        {
+            var page = manager.GetStaticPage(id);
+            return View(page);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePages(StaticPage staticPage)
+
+        {
+            manager.DeleteStaticPage(staticPage.StaticPageId);
+            return View("Pages");
+        }
+
+        public ActionResult EditPages(int id)
+        {
+            var model = manager.GetStaticPage(id);
+            return View(model);
+        }
+
+        public ActionResult EditPages(StaticPage editPage)
+        {
+            manager.EditStaticPage(editPage);
+            return RedirectToAction("Pages");
+        }
+
         [Authorize(Roles = "admin")]
         public ActionResult ResetPassword()
         {
