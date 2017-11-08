@@ -22,9 +22,9 @@ namespace RecLeagueBlog.Data
             switch (mode)
             {
                 case "Mock":
-                    return new BlogManager(new MockTagRepository(), new MockCategoryRepository(), new MockPostRepository(), new MockUserRepository());
+                    return new BlogManager(new MockTagRepository(), new MockCategoryRepository(), new MockPostRepository(), new MockUserRepository(), new MockStaticPageRepository());
                 case "EF":
-                    return new BlogManager(new EFTagRepository(), new EFCategoryRepository(), new EFPostRepository(), new EFUserRepo());
+                    return new BlogManager(new EFTagRepository(), new EFCategoryRepository(), new EFPostRepository(), new EFUserRepo(), new EFStaticPageRepository());
                 default:
                     throw new Exception("Mode value in app config is not valid.");
             }
