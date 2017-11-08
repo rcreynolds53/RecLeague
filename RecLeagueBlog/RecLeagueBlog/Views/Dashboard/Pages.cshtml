@@ -43,8 +43,8 @@
                             <td>@page.Title</td>
                             <td>@page.Content</td>
                             <td>
-                                @Html.ActionLink("Edit", "EditPage", "Static", new { id = page.Id }, null)
-                                @Html.ActionLink("Delete", "DeletePage", "Static", new { id = page.Id}, null)
+                                @Html.ActionLink("Edit", "EditPages", "Dashboard", null, null) | 
+                                @Html.ActionLink("Delete", "DeletePages", "Dashboard", null, null)
                             </td>
                         </tr>
                     }
