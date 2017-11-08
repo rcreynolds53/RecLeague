@@ -23,10 +23,10 @@ namespace RecLeagueBlog.Data.MockRepositories
             };
             _users = new List<AppUser>()
             {
-                new AppUser {FirstName = "Drew", LastName ="K", Email = "drew@recleague.com"},
-                new AppUser {FirstName = "Mark", LastName ="J", Email = "mark@recleague.com"},
-                new AppUser {FirstName = "Alex", LastName ="C", Email = "alex@recleague.com"},
-                new AppUser {FirstName = "Rob", LastName ="R", Email = "rob@recleague.com"},
+                new AppUser {FirstName = "Drew", LastName ="K", Email = "drew@recleague.com", Id = "1"},
+                new AppUser {FirstName = "Mark", LastName ="J", Email = "mark@recleague.com", Id = "2"},
+                new AppUser {FirstName = "Alex", LastName ="C", Email = "alex@recleague.com", Id = "3"},
+                new AppUser {FirstName = "Rob", LastName ="R", Email = "rob@recleague.com", Id = "5"},
 
             };
         }
@@ -68,10 +68,7 @@ namespace RecLeagueBlog.Data.MockRepositories
             return viewModel;
         }
         public void ConvertVMtoUserForAdd(UserRoleViewModel viewModel)
-        { // not sure if we need these so leave them in until later
-          //user.Email = viewModel.Email;
-          //user.FirstName = viewModel.FirstName;
-          //user.LastName = viewModel.LastName;
+        { 
             var user = viewModel.AppUser;
             _users.Add(user);
 
@@ -79,12 +76,6 @@ namespace RecLeagueBlog.Data.MockRepositories
         public void ConvertVMtoUserForEdit(UserRoleViewModel viewModel)
         {
             var user = viewModel.AppUser;
-
-            //not sure iif we need these,
-            //user.Id = viewModel.UserId;
-            //user.FirstName = viewModel.FirstName;
-            //user.LastName = viewModel.LastName;
-            //user.Email = viewModel.UserId;
             _users.RemoveAll(u => u.Id == viewModel.AppUser.Id);
             _users.Add(user);
         }
