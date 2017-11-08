@@ -74,12 +74,6 @@ namespace RecLeagueBlog.Data.EFRepositories
 
             return roles;
         }
-
-        public void ConvertVMtoUser(UserRoleViewModel viewModel)
-        {
-            throw new NotImplementedException();
-        }
-
         public UserRoleViewModel ConvertUserToVM(AppUser user)
         {
             throw new NotImplementedException();
@@ -87,12 +81,15 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public void ConvertVMtoUserForAdd(UserRoleViewModel viewModel)
         {
-            throw new NotImplementedException();
+            var user = viewModel.AppUser;
+            context.Users.Add(user);
+            context.SaveChanges();
         }
 
         public void ConvertVMtoUserForEdit(UserRoleViewModel viewModel)
         {
-            throw new NotImplementedException();
+            var user = viewModel.AppUser;
+            context.Entry(user).State = System.Data.Entity.EntityState.Modified;
         }
     }
 }
