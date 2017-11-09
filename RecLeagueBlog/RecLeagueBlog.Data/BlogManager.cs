@@ -159,6 +159,16 @@ namespace RecLeagueBlog.Data
             _staticPageRepository.DeleteStaticPage(staticPageId);
         }
 
+        public List<StaticPage> GetAllPublishedPages()
+        {
+            return _staticPageRepository.GetAllPublishedPages();
+        }
+
+        public IEnumerable<Status> GetAllStatuses()
+        {
+            return _staticPageRepository.GetAllStatuses();
+        }
+
         // ***** User Methods ********
 
         public List<AppUser> GetAllUsers()

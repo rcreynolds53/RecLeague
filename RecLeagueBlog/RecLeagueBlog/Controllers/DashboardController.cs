@@ -119,8 +119,8 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult AddPages()
         {
-            var model = new StaticPage();
-
+            var model = new StaticPageViewModel();
+            model.SetStatusItems(manager.GetAllStatuses());
             return View(model);
         }
 
