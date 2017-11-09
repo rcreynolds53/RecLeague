@@ -25,7 +25,7 @@ namespace RecLeagueBlog.Data.MockRepositories
                 "barack obama religions their parents don't belong to. Taking a year off being offended book deals study abroad sushi wrigley field manhattan (now brooklyn too!) david sedaris having two last names writers workshops " +
                 "traveling hating their parents tea wes anderson movies. Banksy pea coats facebook the wire oscar parties toyota prius vintage indie music wine religions their parents don't belong to. Funny or ironic tattoos taking a" +
                 " year off rugby san francisco the wire the idea of soccer difficult breakups divorce recycling natural medicine juno dogs sarah silverman vintage apple products snowboarding wrigley field david sedaris being an expert on " +
-                "your culture wes anderson movies religions their parents don't belong to coffee. Hating people who wear ed hardy taking a year off halloween being offended st. patrick's day juno sarah silverman irony plays snowboarding.</div>",
+                "your culture wes anderson movies religions their parents don't belong to coffee. Hating people who wear ed hardy taking a year off halloween being offended st. patrick's day juno sarah silverman irony plays snowboarding.",
                 },
 
                 new StaticPage
