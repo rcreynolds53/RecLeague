@@ -3,13 +3,32 @@
     ViewBag.Title = "Blog";
     Layout = "~/Views/Shared/_BlankPage.cshtml";
 }
-
 <div class="row">
     <div class="col-xs-12">
         <h1>Blog Posts</h1>
         <hr />
+        <div class="col-xs-2">
+            <div class="form-group">
+                <button class="btn btn-default btn-lg" type="button" id="createPostBtn">Create Post</button>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <input type="text" class="input-lg form-control" id="searchTerm" placeholder="Search Term">
+            </div>
+        </div>
+        <div class="col-sm-offset-1 col-xs-1">
+            <div class="form-group">
+                <button class="btn btn-default btn-lg" type="button" id="searchBtn">Search</button>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <div class="col-xs-12">
+        <div class="panel panel-default" hidden>
+        </div>
         @foreach (var post in Model)
-        {
+            {
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.UserName</h3>
@@ -23,10 +42,22 @@
                     else
                     {
                         <p>@post.Content.Substring(0, 140)</p>
+                        <p hidden>@post.Content.Substring(140) </p>
                     }
+                    <p hidden>
+                        @foreach (var t in post.Tags)
+                        {
+                            String.Format($"{t.TagName},");
+                        }
+                    </p>
+
                     <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
                 </div>
             </div>
         }
     </div>
 </div>
+
+@section scripts {
+    <script src="~/Scripts/trix.js"></script>
+}

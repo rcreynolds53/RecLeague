@@ -100,6 +100,7 @@ function loadPosts() {
 
 $('#editPostBtn').click(function (event) {
 
+    tinyMCE.triggerSave();
     var postId = $('#postId').val();
     $.ajax({
         type: 'PUT',
@@ -107,7 +108,7 @@ $('#editPostBtn').click(function (event) {
         data: JSON.stringify({
             blogPostId: parseInt(postId),
             title: $('#editPostTitle').val(),
-            content: $('#tinymce').html(),
+            content: $('#editPostContent').val(),
             tagsToPost: editTags(),
             categories: editCategories()
 
@@ -172,7 +173,8 @@ function showEditPost(postId) {
         url: 'http://localhost:60542/post/' + postId,
         success: function (blogPost, status) {
             $('#editPostTitle').val(blogPost.title),
-                tinyMCE.get('editPostContent').getContent();
+                tinymce.get('editPostContent').setContent(blogPost.content),
+                //$('#editPostContent').val(blogPost.content),
                 $.each(blogPost.tags, function (index, tag) {
                     tagNames += String(tag.tagName) + ",";
                 });
@@ -269,32 +271,17 @@ function editCategories() {
 
 
 // Ignore this for now, it doesnt work quite yet.
+$("#searchTerm").keyup(function () {
+    var value = this.value.toLowerCase().trim();
 
-
-function searchFilter() {
-    var searchTerm = $('#searchTerm').val();
-    var filter = searchTerm.toUpperCase();
-    var posts = document.getElementById('postTableDiv');
-    var post = posts.getElementsByTagName('tr');
-    
-    for (i = 0; i < post.length; i++)
-    {
-        var postContents = post[i].getElementsByTagName('td');
-    }
-    for (j = 0; j < postContents.length; j++)
-    {
-        var items = postContents[j].getElementsByTagName('ul');
-    }
-    for (k = 0; k < items.length; k++) {
-        var value = items[k].attr('value')[0];
-        if (value.toUpperCase().indexOf(filter) > -1) {
-            items[i].style.display = "";
-        }
-        else {
-            items[i].style.display = "none";
-        }
-
-    }
-  
-}
+    $("table tr").each(function (index) {
+        if (!index) return;
+        $(this).find("td").each(function () {
+            var id = $(this).text().toLowerCase().trim();
+            var not_found = (id.indexOf(value) == -1);
+            $(this).closest('tr').toggle(!not_found);
+            return not_found;
+        });
+    });
+});
 
