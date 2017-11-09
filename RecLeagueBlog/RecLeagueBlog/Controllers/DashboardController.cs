@@ -153,9 +153,11 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Pages");
         }
 
+        [HttpGet]
         public ActionResult EditPages(int id)
         {
-            var model = manager.GetStaticPage(id);
+            StaticPage model = manager.GetStaticPage(id);
+            //model.SetStatusItems(manager.GetAllStatuses());
             return View(model);
         }
 

@@ -134,7 +134,7 @@ namespace RecLeagueBlog.Data
             return _staticPageRepository.GetPageByID(staticPageId);
         }
 
-        public List<StaticPage> GetAllStaticPages ()
+        public List<StaticPage> GetAllStaticPages()
         {
             return _staticPageRepository.GetAllPages();
         }
