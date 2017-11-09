@@ -6,6 +6,9 @@ using RecLeagueBlog.Models;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Security;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -24,8 +27,7 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult Posts()
         {
-            var model = manager.GetAllPosts();
-            return View(model);
+            return View();
         }
 
 
