@@ -4,30 +4,28 @@
 }
 
 <h1>Most Recent Posts</h1>
+<hr />
 <div class="row">
-    @*<div class="col-xs-12">*@
-        @foreach (var post in Model)
-        {
-            <div class="col-md-4">
-                <!-- Blog Post -->
-                <div class="blog-card panel panel-default ">
-                    <div class="panel-heading">
-                        Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.UserName
-                    </div>
-                    <div class="panel-body">
-                        <h2>@post.Title</h2>
-                        @if(@post.Content.Length < 140)
-                        {
+    @foreach (var post in Model)
+    {
+        <div class="col-md-4">
+            <div class="blog-card panel panel-default ">
+                <div class="panel-heading">
+                    Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.UserName
+                </div>
+                <div class="panel-body">
+                    <h2>@post.Title</h2>
+                    @if (@post.Content.Length < 140)
+                    {
                         <p>@post.Content</p>
-                        }
-                        else
-                        {
+                    }
+                    else
+                    {
                         <p>@post.Content.Substring(0, 140)</p>
-                        }                       
-                        <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
-                    </div>
+                    }
+                    <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
                 </div>
             </div>
-        }
-    @*</div>*@
+        </div>
+    }
 </div>

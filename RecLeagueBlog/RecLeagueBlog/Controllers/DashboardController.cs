@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace RecLeagueBlog.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, manager")]
     public class DashboardController : Controller
     {
         BlogManager manager = BlogManagerFactory.Create();
