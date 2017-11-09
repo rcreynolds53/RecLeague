@@ -41,8 +41,8 @@
                         <tr>
                             <td>@page.Title</td>
                             <td>
-                                @Html.ActionLink("Edit", "EditPages", "Dashboard", null, null) | 
-                                @Html.ActionLink("Delete", "DeletePages", "Dashboard", null, null)
+                                @Html.ActionLink("Edit", "EditPages", "Dashboard", new { id = page.StaticPageId }, null) | 
+                                @Html.ActionLink("Delete", "DeletePages", "Dashboard", new { id = page.StaticPageId }, null)
                             </td>
                         </tr>
                     }
@@ -51,74 +51,5 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-@*<div class="container" id="addPageDiv" style="display: none">
-    <div class="col-xs-9">
-        <h2 class="newPost">Create Page</h2>
-        <form class="form-horizontal" role="form" id="add-page-form">
-            <div class="form-group">
-                <label for="addPage" class="col-xs-12 newPage">Title:</label>
-                <div class="col-xs-12">
-                    <input type="text" class="form-control" id="addPageTitle" placeholder="Title" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-xs-12 newPage">Content:</label>
-                <div class="col-xs-12">
-                    <input class="form-control" value="" id="addPageContent" type="hidden">
-                    <trix-editor input="addPageContent"></trix-editor>
-                </div>
-            </div>
-            <div class="col-md-offset-4 col-md-2">
-                <input type="hidden" id="add-page-id">
-                <button id="add-page-cancel-button" class="btn btn-danger" onclick="hideAddPostForm()">
-                    Cancel
-                </button>
-            </div>
-            <div class="col-md-2">
-                <button type="button" id="addPageBtn" class="btn btn-primary">
-                    Save Page
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="container" id="editPageDiv" style="display: none">
-    <h2>Edit Page</h2>
-    <form class="form-horizontal" role="form" id="edit-page-form">
-        <input type="hidden" id="pageId" />
-        <div class="form-group">
-            <label for="editPTitle" class="col-md-2 control-label">Title:</label>
-            <div class="col-md-8">
-                <input type="text" class="form-control" id="editPageTitle" placeholder="Title">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-xs-12 newPost">Content:</label>
-            <div class="col-xs-12">
-                <input class="form-control" id="editPageContent" name="content" type="hidden" value="">
-                <trix-editor input="editPageContent"></trix-editor>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-2">
-                <input type="hidden" id="edit-page-id">
-                <button type="button" id="edit-page-cancel-button" class="btn btn-danger" onclick="hideEditPageForm()">
-                    Cancel Edit
-                </button>
-            </div>
-            <div class="col-md-2">
-                <button type="submit" id="editPageBtn" class="btn btn-primary">
-                    Update Page
-                </button>
-            </div>
-        </div>
-    </form>
-</div>*@
-
 
 
