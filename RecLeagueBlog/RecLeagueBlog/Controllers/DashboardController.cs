@@ -14,7 +14,7 @@ namespace RecLeagueBlog.Controllers
     {
         BlogManager manager = BlogManagerFactory.Create();
 
-        // GET: Dashboard
+        [Authorize(Roles = "manager")]
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to Rec League Sports.";
@@ -22,6 +22,7 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
+        [Authorize(Roles = "manager")]
         public ActionResult Posts()
         {
             var model = manager.GetAllPosts();
@@ -41,7 +42,6 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult Users()
         {
@@ -50,8 +50,6 @@ namespace RecLeagueBlog.Controllers
 
         }
 
-
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult AddUser()
         {
@@ -60,7 +58,6 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult AddUser(UserRoleViewModel model)
         {
@@ -77,7 +74,6 @@ namespace RecLeagueBlog.Controllers
 
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditUser(string id)
         {
@@ -87,7 +83,6 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditUser(UserRoleViewModel viewModel)
         {
@@ -95,7 +90,6 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Users");
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult DeleteUser(string id)
         {
@@ -103,7 +97,6 @@ namespace RecLeagueBlog.Controllers
             return View(user);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult DeleteUser(AppUser user)
         {
@@ -146,14 +139,12 @@ namespace RecLeagueBlog.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult DeletePages(int id)
         {
             var page = manager.GetStaticPage(id);
             return View(page);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult DeletePages(StaticPage staticPage)
 
@@ -175,14 +166,12 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Pages");
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult ResetPassword()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
         public async Task<ActionResult> ResetPassword(string userId, string newPassword, ResetPasswordModel model)
         {
 
