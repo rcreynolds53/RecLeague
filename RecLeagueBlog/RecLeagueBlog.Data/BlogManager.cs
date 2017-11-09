@@ -134,7 +134,7 @@ namespace RecLeagueBlog.Data
             return _staticPageRepository.GetPageByID(staticPageId);
         }
 
-        public List<StaticPage> GetAllStaticPages ()
+        public List<StaticPage> GetAllStaticPages()
         {
             return _staticPageRepository.GetAllPages();
         }
@@ -157,6 +157,16 @@ namespace RecLeagueBlog.Data
         public void DeleteStaticPage(int staticPageId)
         {
             _staticPageRepository.DeleteStaticPage(staticPageId);
+        }
+
+        public List<StaticPage> GetAllPublishedPages()
+        {
+            return _staticPageRepository.GetAllPublishedPages();
+        }
+
+        public IEnumerable<Status> GetAllStatuses()
+        {
+            return _staticPageRepository.GetAllStatuses();
         }
 
         // ***** User Methods ********

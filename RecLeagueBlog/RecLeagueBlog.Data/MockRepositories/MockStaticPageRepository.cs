@@ -11,8 +11,17 @@ namespace RecLeagueBlog.Data.MockRepositories
     public class MockStaticPageRepository : IStaticPageRepository
     {
         private static List<StaticPage> _pages;
+        private static List<Status> _statuses;
+
         static MockStaticPageRepository()
         {
+            _statuses = new List<Status>()
+            {
+                new Status {StatusId = 1, StatusName = "Published" },
+                new Status {StatusId = 2, StatusName = "Pending"},
+                new Status {StatusId =3, StatusName ="Deleted"}
+            };
+
             _pages = new List<StaticPage>()
             {
                 new StaticPage
@@ -26,10 +35,17 @@ namespace RecLeagueBlog.Data.MockRepositories
                 "traveling hating their parents tea wes anderson movies. Banksy pea coats facebook the wire oscar parties toyota prius vintage indie music wine religions their parents don't belong to. Funny or ironic tattoos taking a" +
                 " year off rugby san francisco the wire the idea of soccer difficult breakups divorce recycling natural medicine juno dogs sarah silverman vintage apple products snowboarding wrigley field david sedaris being an expert on " +
                 "your culture wes anderson movies religions their parents don't belong to coffee. Hating people who wear ed hardy taking a year off halloween being offended st. patrick's day juno sarah silverman irony plays snowboarding.",
+                Status = _statuses[0]
                 },
 
                 new StaticPage
-                 { StaticPageId = 2, Title = "Curling Canceled", Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport."},                
+                 { StaticPageId = 2, Title = "Curling Canceled", Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", Status = _statuses[0]},
+
+                new StaticPage
+                 { StaticPageId = 2, Title = "Pending Status Page", Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", Status = _statuses[1]},
+
+                new StaticPage
+                 { StaticPageId = 2, Title = "Delete Status Page", Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", Status = _statuses[2]},
             };
         }
 
@@ -60,6 +76,16 @@ namespace RecLeagueBlog.Data.MockRepositories
         public List<StaticPage> GetAllPages()
         {
             return _pages.OrderBy(p => p.StaticPageId).ToList();
+        }
+
+        public List<StaticPage> GetAllPublishedPages()
+        {
+            return _pages.Where(p => p.Status.StatusId == 1).ToList();
+        }
+
+        public IEnumerable<Status> GetAllStatuses()
+        {
+            return _statuses;
         }
 
         public StaticPage GetPageByID(int staticPageId)

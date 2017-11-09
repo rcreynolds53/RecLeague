@@ -17,7 +17,7 @@ namespace RecLeagueBlog.Controllers
     {
         BlogManager manager = BlogManagerFactory.Create();
 
-        // GET: Dashboard
+        [Authorize(Roles = "manager")]
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to Rec League Sports.";
@@ -25,6 +25,7 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
+        [Authorize(Roles = "manager")]
         public ActionResult Posts()
         {
             return View();
@@ -50,8 +51,6 @@ namespace RecLeagueBlog.Controllers
             return View(model);
 
         }
-
-
 
         [HttpGet]
         public ActionResult AddUser()
@@ -122,8 +121,8 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult AddPages()
         {
-            var model = new StaticPage();
-
+            var model = new StaticPageViewModel();
+            model.SetStatusItems(manager.GetAllStatuses());
             return View(model);
         }
 
@@ -156,9 +155,11 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Pages");
         }
 
+        [HttpGet]
         public ActionResult EditPages(int id)
         {
-            var model = manager.GetStaticPage(id);
+            StaticPage model = manager.GetStaticPage(id);
+            //model.SetStatusItems(manager.GetAllStatuses());
             return View(model);
         }
 
@@ -169,14 +170,12 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Pages");
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult ResetPassword()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
         public async Task<ActionResult> ResetPassword(string userId, string newPassword, ResetPasswordModel model)
         {
 
