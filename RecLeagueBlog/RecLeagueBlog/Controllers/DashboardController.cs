@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace RecLeagueBlog.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, manager")]
     public class DashboardController : Controller
     {
         BlogManager manager = BlogManagerFactory.Create();
@@ -120,10 +120,11 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult AddPages()
         {
-            var model = manager.GetAllStaticPages();
+            var model = new StaticPage();
 
             return View(model);
         }
+
         [HttpPost]
         public ActionResult AddPages(StaticPage staticPage)
         {
@@ -135,7 +136,7 @@ namespace RecLeagueBlog.Controllers
             {
                 var model = new StaticPage();
                 manager.CreateStaticPage(staticPage);
-                return View(model);
+                return RedirectToAction("Pages");
             }
         }
 
@@ -150,7 +151,7 @@ namespace RecLeagueBlog.Controllers
 
         {
             manager.DeleteStaticPage(staticPage.StaticPageId);
-            return View("Pages");
+            return RedirectToAction("Pages");
         }
 
         public ActionResult EditPages(int id)
@@ -158,6 +159,7 @@ namespace RecLeagueBlog.Controllers
             var model = manager.GetStaticPage(id);
             return View(model);
         }
+
         [HttpPost]
         public ActionResult EditPages(StaticPage editPage)
         {

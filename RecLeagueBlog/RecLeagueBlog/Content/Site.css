@@ -26,3 +26,7 @@ textarea {
 .blog-card {
     min-height: 300px;
 }
+
+#searchTerm {
+    margin-top: 20px;
+}
