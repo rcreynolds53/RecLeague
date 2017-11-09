@@ -18,27 +18,11 @@
                         </a>
                     </div>
                 </form>
-                @*<form class="navbar-form navbar-right" onsubmit="return false;">
+               <form class="navbar-form navbar-right" onsubmit="return false;">
                     <div class="form-group">
-                        <select class="form-control" v-model="searchCategory">
-                            <option value="">Search Category&nbsp;&nbsp;</option>
-                            <option value="FirstName">First Name</option>
-                            <option value="LastName">Last Name</option>
-                            <option value="Email">Email Address</option>
-                            <option value="Role">Role</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search Term" v-model="searchTerm">
-                    </div>
-                    <button type="submit" class="btn btn-default" v-on:click="search">Search</button>
-                    <div class="form-group">
-                        <button class="btn btn-info navbar-btn" type="button" v-on:click="clear">
-                            <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
-                            Clear Search
-                        </button>
-                    </div>
-                </form>*@
+                        <input type="text" class="form-control" placeholder="Search Term" id="searchTerm">
+                    </div>                  
+                </form>
             </div>
         </nav>
     </div>
@@ -73,3 +57,20 @@
         </table>
     </div>
 </div>
+@section scripts {
+    <script>
+        $("#searchTerm").keyup(function () {
+            var value = this.value.toLowerCase().trim();
+
+            $("table tr").each(function (index) {
+                if (!index) return;
+                $(this).find("td").each(function () {
+                    var id = $(this).text().toLowerCase().trim();
+                    var not_found = (id.indexOf(value) == -1);
+                    $(this).closest('tr').toggle(!not_found);
+                    return not_found;
+                });
+            });
+        });
+</script>
+    }
