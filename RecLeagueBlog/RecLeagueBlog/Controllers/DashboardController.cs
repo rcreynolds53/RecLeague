@@ -158,7 +158,7 @@ namespace RecLeagueBlog.Controllers
             var model = manager.GetStaticPage(id);
             return View(model);
         }
-
+        [HttpPost]
         public ActionResult EditPages(StaticPage editPage)
         {
             manager.EditStaticPage(editPage);
