@@ -5,7 +5,19 @@ $(document).ready(function () {
         $('#postTableDiv').hide();
         $('editPostDiv').hide();
     });
+    var status = $('#statusId').val();
 
+    $('#statusId').change(function () {
+        status = $(this).val();
+        alert(status);
+    });
+
+    var editStatus = $('#editStatusId').val();
+
+        $('#editStatusId').change(function () {
+            editStatus = $(this).val();
+            alert(editStatus);
+    }),
     $('#addPostBtn').click(function (event) {
         tinyMCE.triggerSave();
         // var haveValidationErrors = checkAndDisplayValidationErrors($('#addMovieFormDiv').find('input'));
@@ -19,6 +31,7 @@ $(document).ready(function () {
             data: JSON.stringify({
                 title: $('#addPostTitle').val(),
                 content: $('#addPostContent').val(),
+                statusName: status,               
                 tagsToPost: postTags(),
                 categories: postCategories()
 
@@ -99,7 +112,7 @@ function loadPosts() {
 }
 
 $('#editPostBtn').click(function (event) {
-
+    var editStatus = $('#editStatusId').val();
     tinyMCE.triggerSave();
     var postId = $('#postId').val();
     $.ajax({
@@ -109,6 +122,7 @@ $('#editPostBtn').click(function (event) {
             blogPostId: parseInt(postId),
             title: $('#editPostTitle').val(),
             content: $('#editPostContent').val(),
+            statusName: editStatus,   
             tagsToPost: editTags(),
             categories: editCategories()
 
@@ -187,6 +201,8 @@ function showEditPost(postId) {
                 $('#editCategories').importTags(catagoryNames);
 
                 $('#editCategories').tagsInput();
+                $('#editstatusId').val(blogPost.status.statusName);
+
 
 
         },
@@ -269,8 +285,6 @@ function editCategories() {
     return categoriesArray;
 }
 
-
-// Ignore this for now, it doesnt work quite yet.
 $("#searchTerm").keyup(function () {
     var value = this.value.toLowerCase().trim();
 
@@ -278,10 +292,9 @@ $("#searchTerm").keyup(function () {
         if (!index) return;
         $(this).find("td").each(function () {
             var id = $(this).text().toLowerCase().trim();
-            var not_found = (id.indexOf(value) == -1);
+            var not_found = id.indexOf(value) === -1;
             $(this).closest('tr').toggle(!not_found);
             return not_found;
         });
     });
 });
-

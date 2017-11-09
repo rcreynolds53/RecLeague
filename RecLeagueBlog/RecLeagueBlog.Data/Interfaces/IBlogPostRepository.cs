@@ -17,6 +17,7 @@ namespace RecLeagueBlog.Data.Interfaces
         List<BlogPost> GetThreeRecent();
         BlogPost ConvertPostModel(AddPostViewModel postModel);
         BlogPost UpdatePostModel(AddPostViewModel postModel);
+        List<BlogPost> GetAllPublishedPosts();
 
 
     }

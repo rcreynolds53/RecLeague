@@ -66,5 +66,10 @@ namespace RecLeagueBlog.Data.EFRepositories
         {
             throw new NotImplementedException();
         }
+
+        public List<BlogPost> GetAllPublishedPosts()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

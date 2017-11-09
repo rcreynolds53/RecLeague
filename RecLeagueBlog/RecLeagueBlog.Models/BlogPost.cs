@@ -16,7 +16,6 @@ namespace RecLeagueBlog.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DateCreated { get; set; }
-        public int StatusId { get; set; }
         public string UserName { get; set; }
 
         public virtual Status Status { get; set; }

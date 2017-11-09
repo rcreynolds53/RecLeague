@@ -43,14 +43,7 @@
                     {
                         <p>@post.Content.Substring(0, 140)</p>
                         <p hidden>@post.Content.Substring(140) </p>
-                    }
-                    <p hidden>
-                        @foreach (var t in post.Tags)
-                        {
-                            String.Format($"{t.TagName},");
-                        }
-                    </p>
-
+                    }                   
                     <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
                 </div>
             </div>

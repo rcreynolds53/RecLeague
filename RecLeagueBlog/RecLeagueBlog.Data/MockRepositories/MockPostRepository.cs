@@ -11,10 +11,12 @@ namespace RecLeagueBlog.Data.Repositories
     public class MockPostRepository : IBlogPostRepository
     {
         private static List<BlogPost> _posts;
+        static List<Status> _statuses;
+           
         static MockPostRepository()
         {
             
-            List<Status> statuses = new List<Status>()
+            _statuses = new List<Status>()
             {
                 new Status {StatusId = 1, StatusName = "Published" },
                 new Status {StatusId = 2, StatusName = "Pending"},
@@ -71,10 +73,10 @@ namespace RecLeagueBlog.Data.Repositories
             _posts = new List<BlogPost>()
             {
 
-                new BlogPost {BlogPostId = 1, Title = "Football Champs", Categories = cat1, Content = "Music piracy book deals having gay friends t-shirts study abroad standing still at concerts co-ed sports knowing what's best for poor people wrigley field making you feel bad about not going outside. The world cup conan o'brien mad men sea salt ugly sweater parties sweaters having gay friends bad memories of high school graduate school musical comedy threatening to move to canada expensive sandwiches toyota prius kitchen gadgets asian fusion food plays the daily show/colbert report architecture vegan/vegetarianism wrigley field david sedaris wine microbreweries yoga having black friends wes anderson movies coffee. Picking their own fruit banksy hating people who wear ed hardy moleskine notebooks funny or ironic tattoos taking a year off ugly sweater parties san francisco the wire hating corporations the idea of soccer musical comedy oscar parties study abroad divorce expensive sandwiches knowing what's best for poor people toyota prius asian fusion food renovations wrigley field being an expert on your culture awareness wes anderson movies barack obama religions their parents don't belong to. Taking a year off being offended book deals study abroad sushi wrigley field manhattan (now brooklyn too!) david sedaris having two last names writers workshops traveling hating their parents tea wes anderson movies. Banksy pea coats facebook the wire oscar parties toyota prius vintage indie music wine religions their parents don't belong to. Funny or ironic tattoos taking a year off rugby san francisco the wire the idea of soccer difficult breakups divorce recycling natural medicine juno dogs sarah silverman vintage apple products snowboarding wrigley field david sedaris being an expert on your culture wes anderson movies religions their parents don't belong to coffee. Hating people who wear ed hardy taking a year off halloween being offended st. patrick's day juno sarah silverman irony plays snowboarding.</div>", DateCreated = DateTime.Parse("07/15/2017"), Tags = tag1, StatusId = 2, UserName = "Admin@recleague.com"},
-                new BlogPost {BlogPostId = 2, Title = "Soccer Sign-Up", Categories = cat2, Content = "Sign up now for our Co-ed Soccer League! Please contact Judy Thao for more information...", DateCreated = DateTime.Parse("08/01/2017"), Tags = tag2, StatusId = 1, UserName = "Manager@recleague.com"},
-                new BlogPost {BlogPostId = 3, Title = "Curling Canceled", Categories = cat3, Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", DateCreated = DateTime.Parse("11/11/2016"), Tags = tag3, StatusId = 1, UserName = "Admin@recleague.com"},
-                new BlogPost{ BlogPostId =4, Title = "Summer Soccer Final Rankings", Categories = cat4, Tags = tag4, Content = "Music piracy book deals having gay friends t-shirts study abroad standing still at concerts co-ed sports knowing what's best for poor people wrigley field making you feel bad about not going outside. The world cup conan o'brien mad men sea salt ugly sweater parties sweaters having gay friends bad memories of high school graduate school musical comedy threatening to move to canada expensive sandwiches toyota prius kitchen gadgets asian fusion food plays the daily show/colbert report architecture vegan/vegetarianism wrigley field david sedaris wine microbreweries yoga having black friends wes anderson movies coffee. Picking their own fruit banksy hating people who wear ed hardy moleskine notebooks funny or ironic tattoos taking a year off ugly sweater parties san francisco the wire hating corporations the idea of soccer musical comedy oscar parties study abroad divorce expensive sandwiches knowing what's best for poor people toyota prius asian fusion food renovations wrigley field being an expert on your culture awareness wes anderson movies barack obama religions their parents don't belong to. Taking a year off being offended book deals study abroad sushi wrigley field manhattan (now brooklyn too!) david sedaris having two last names writers workshops traveling hating their parents tea wes anderson movies. Banksy pea coats facebook the wire oscar parties toyota prius vintage indie music wine religions their parents don't belong to. Funny or ironic tattoos taking a year off rugby san francisco the wire the idea of soccer difficult breakups divorce recycling natural medicine juno dogs sarah silverman vintage apple products snowboarding wrigley field david sedaris being an expert on your culture wes anderson movies religions their parents don't belong to coffee. Hating people who wear ed hardy taking a year off halloween being offended st. patrick's day juno sarah silverman irony plays snowboarding.", DateCreated = DateTime.Parse("08/28/2017"), StatusId = 1, UserName = "Manager@recleague.com"}
+                new BlogPost {BlogPostId = 1, Title = "Football Champs", Categories = cat1, Content = "Music piracy book deals having gay friends t-shirts study abroad standing still at concerts co-ed sports knowing what's best for poor people wrigley field making you feel bad about not going outside. The world cup conan o'brien mad men sea salt ugly sweater parties sweaters having gay friends bad memories of high school graduate school musical comedy threatening to move to canada expensive sandwiches toyota prius kitchen gadgets asian fusion food plays the daily show/colbert report architecture vegan/vegetarianism wrigley field david sedaris wine microbreweries yoga having black friends wes anderson movies coffee. Picking their own fruit banksy hating people who wear ed hardy moleskine notebooks funny or ironic tattoos taking a year off ugly sweater parties san francisco the wire hating corporations the idea of soccer musical comedy oscar parties study abroad divorce expensive sandwiches knowing what's best for poor people toyota prius asian fusion food renovations wrigley field being an expert on your culture awareness wes anderson movies barack obama religions their parents don't belong to. Taking a year off being offended book deals study abroad sushi wrigley field manhattan (now brooklyn too!) david sedaris having two last names writers workshops traveling hating their parents tea wes anderson movies. Banksy pea coats facebook the wire oscar parties toyota prius vintage indie music wine religions their parents don't belong to. Funny or ironic tattoos taking a year off rugby san francisco the wire the idea of soccer difficult breakups divorce recycling natural medicine juno dogs sarah silverman vintage apple products snowboarding wrigley field david sedaris being an expert on your culture wes anderson movies religions their parents don't belong to coffee. Hating people who wear ed hardy taking a year off halloween being offended st. patrick's day juno sarah silverman irony plays snowboarding.</div>", DateCreated = DateTime.Parse("07/15/2017"), Tags = tag1, Status = _statuses[1], UserName = "Admin@recleague.com"},
+                new BlogPost {BlogPostId = 2, Title = "Soccer Sign-Up", Categories = cat2, Content = "Sign up now for our Co-ed Soccer League! Please contact Judy Thao for more information...", DateCreated = DateTime.Parse("08/01/2017"), Tags = tag2, Status = _statuses[0], UserName = "Manager@recleague.com"},
+                new BlogPost {BlogPostId = 3, Title = "Curling Canceled", Categories = cat3, Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", DateCreated = DateTime.Parse("11/11/2016"), Tags = tag3, Status = _statuses[0], UserName = "Admin@recleague.com"},
+                new BlogPost{ BlogPostId =4, Title = "Summer Soccer Final Rankings", Categories = cat4, Tags = tag4, Content = "Music piracy book deals having gay friends t-shirts study abroad standing still at concerts co-ed sports knowing what's best for poor people wrigley field making you feel bad about not going outside. The world cup conan o'brien mad men sea salt ugly sweater parties sweaters having gay friends bad memories of high school graduate school musical comedy threatening to move to canada expensive sandwiches toyota prius kitchen gadgets asian fusion food plays the daily show/colbert report architecture vegan/vegetarianism wrigley field david sedaris wine microbreweries yoga having black friends wes anderson movies coffee. Picking their own fruit banksy hating people who wear ed hardy moleskine notebooks funny or ironic tattoos taking a year off ugly sweater parties san francisco the wire hating corporations the idea of soccer musical comedy oscar parties study abroad divorce expensive sandwiches knowing what's best for poor people toyota prius asian fusion food renovations wrigley field being an expert on your culture awareness wes anderson movies barack obama religions their parents don't belong to. Taking a year off being offended book deals study abroad sushi wrigley field manhattan (now brooklyn too!) david sedaris having two last names writers workshops traveling hating their parents tea wes anderson movies. Banksy pea coats facebook the wire oscar parties toyota prius vintage indie music wine religions their parents don't belong to. Funny or ironic tattoos taking a year off rugby san francisco the wire the idea of soccer difficult breakups divorce recycling natural medicine juno dogs sarah silverman vintage apple products snowboarding wrigley field david sedaris being an expert on your culture wes anderson movies religions their parents don't belong to coffee. Hating people who wear ed hardy taking a year off halloween being offended st. patrick's day juno sarah silverman irony plays snowboarding.", DateCreated = DateTime.Parse("08/28/2017"), Status = _statuses[0], UserName = "Manager@recleague.com"}
             };
 
         }
@@ -166,7 +168,8 @@ namespace RecLeagueBlog.Data.Repositories
             convertedPost.Categories = newCategories;
             convertedPost.Title = postModel.Title;
             convertedPost.DateCreated = DateTime.Now;
-            convertedPost.UserName = "Mark";
+
+            convertedPost.Status = _statuses.FirstOrDefault(s => s.StatusName == postModel.StatusName);
 
             return convertedPost;
         }
@@ -219,13 +222,20 @@ namespace RecLeagueBlog.Data.Repositories
             convertedPost.Categories = newCategories;
             convertedPost.Title = postModel.Title;
             convertedPost.Content = postModel.Content;
-            
+            convertedPost.Status = _statuses.FirstOrDefault(s => s.StatusName == postModel.StatusName);
+
+
             return convertedPost;
         }
 
         public BlogPost UpdatePostModel(int postId)
         {
             throw new NotImplementedException();
+        }
+
+        public List<BlogPost> GetAllPublishedPosts()
+        {
+            return _posts.Where(p => p.Status.StatusId == 1).ToList();
         }
     }
 }
