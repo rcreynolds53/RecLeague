@@ -310,6 +310,9 @@
     <Content Include="Views\Dashboard\EditUser.cshtml" />
     <Content Include="Views\Dashboard\AddUser.cshtml" />
     <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Dashboard\AddPages.cshtml" />
+    <Content Include="Views\Dashboard\EditPages.cshtml" />
+    <Content Include="Views\Dashboard\DeletePages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

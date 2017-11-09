@@ -13,7 +13,7 @@
                 <div class="container-fluid">
                     <form class="navbar-form navbar-left" onsubmit="return false;">
                         <div class="form-group">
-                            <a href="@Url.Action("AddPage", "Static")" class="btn btn-primary navbar-btn">
+                            <a href="@Url.Action("AddPages", "Dashboard")" class="btn btn-primary navbar-btn">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                 Create Page
                             </a>
@@ -31,8 +31,7 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th width="30%">Title</th>
-                        <th width="50%">Content</th>
+                        <th width="70%">Title</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -41,7 +40,6 @@
                     {
                         <tr>
                             <td>@page.Title</td>
-                            <td>@page.Content</td>
                             <td>
                                 @Html.ActionLink("Edit", "EditPages", "Dashboard", null, null) | 
                                 @Html.ActionLink("Delete", "DeletePages", "Dashboard", null, null)
