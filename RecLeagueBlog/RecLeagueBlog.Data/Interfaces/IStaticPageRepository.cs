@@ -10,6 +10,7 @@ namespace RecLeagueBlog.Data.Interfaces
     public interface IStaticPageRepository 
     {
         List<StaticPage> GetAllPages();
+        List<StaticPage> GetAllPublishedPages();
         StaticPage GetPageByID(int staticPageId);
         void CreateStaticPage(StaticPage newPage);
         void EditStaticPage(StaticPage updatedPage);
