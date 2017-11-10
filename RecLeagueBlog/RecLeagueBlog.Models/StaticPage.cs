@@ -12,5 +12,7 @@ namespace RecLeagueBlog.Models
         public string Title { get; set; }
         public string Content { get; set; }
 
+        public virtual Status Status { get; set; }
+
     }
 }

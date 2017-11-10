@@ -17,7 +17,8 @@ $(document).ready(function () {
         $('#editStatusId').change(function () {
             editStatus = $(this).val();
             alert(editStatus);
-    }),
+        }),
+
     $('#addPostBtn').click(function (event) {
         tinyMCE.triggerSave();
         // var haveValidationErrors = checkAndDisplayValidationErrors($('#addMovieFormDiv').find('input'));
@@ -70,7 +71,6 @@ function loadPosts() {
     $('#addPostDiv').hide();
     $('#postTableDiv').show();
     $('#editPostDiv').hide();
-
     $.ajax({
         type: 'GET',
         url: 'http://localhost:60542/posts',
@@ -95,9 +95,18 @@ function loadPosts() {
                     row += '<li>' + categoryName + '</li>';
                 });
                 row += '</ul></td>';
-                row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit |</a><a onclick ="deletePost(' + blogPostId + ')"> Delete</a></td>';
-                row += '</tr>';
+                if (AppGlobal.user.role) {
+                    row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit |</a><a onclick ="deletePost(' + blogPostId + ')"> Delete</a></td>';
+                }
+                else if (post.status.statusName == "Pending" && post.userName == AppGlobal.user.name) {
 
+                    row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit</a></td>';
+                }
+                else {
+                    row += '<td>Can\'t edit post</td>';
+                }   
+                row += '</tr>';
+                
                 contentRows.append(row);
             });
         },

@@ -145,6 +145,10 @@
     <Compile Include="Migrations\201711091552536_RemoveStatusIdFromPostModel.Designer.cs">
       <DependentUpon>201711091552536_RemoveStatusIdFromPostModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711092011077_postAndPagesModelChanges.cs" />
+    <Compile Include="Migrations\201711092011077_postAndPagesModelChanges.Designer.cs">
+      <DependentUpon>201711092011077_postAndPagesModelChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockRepositories\MockCategoryRepository.cs" />
     <Compile Include="MockRepositories\MockPostRepository.cs" />
@@ -175,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711091552536_RemoveStatusIdFromPostModel.resx">
       <DependentUpon>201711091552536_RemoveStatusIdFromPostModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711092011077_postAndPagesModelChanges.resx">
+      <DependentUpon>201711092011077_postAndPagesModelChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

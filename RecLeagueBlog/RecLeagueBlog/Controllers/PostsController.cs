@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -31,8 +32,6 @@ namespace RecLeagueBlog.Controllers
 
         [Route("post")]
         [AcceptVerbs("POST")]
-        //public IHttpActionResult AddBlogPost(BlogPost newPost)
-        //public IHttpActionResult AddBlogPost(string title, string content, string [] tagsToPost, string [] categories )
         public IHttpActionResult AddBlogPost(AddPostViewModel newPost)
         {
            var blogPost = manager.ConvertPostModel(newPost);

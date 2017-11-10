@@ -23,25 +23,28 @@
         <div class="panel panel-default" hidden>
         </div>
         @foreach (var post in Model)
+        {
+            if (post.Status.StatusId == 1)
             {
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.UserName</h3>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.UserName</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h2>@post.Title</h2>
+                        @if (@post.Content.Length < 140)
+                        {
+                            <p>@post.Content</p>
+                        }
+                        else
+                        {
+                            <p>@post.Content.Substring(0, 140)</p>
+                            <p hidden>@post.Content.Substring(140) </p>
+                        }
+                        <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <h2>@post.Title</h2>
-                    @if (@post.Content.Length < 140)
-                {
-                        <p>@post.Content</p>
-                    }
-                    else
-                    {
-                        <p>@post.Content.Substring(0, 140)</p>
-                        <p hidden>@post.Content.Substring(140) </p>
-                    }                   
-                    <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
-                </div>
-            </div>
+            }
         }
     </div>
 </div>
