@@ -106,12 +106,6 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Users");
         }
 
-        public ActionResult UserProfile()
-        {
-
-            return View();
-        }
-
         [Authorize(Roles = "admin")]
         public ActionResult Pages()
         {

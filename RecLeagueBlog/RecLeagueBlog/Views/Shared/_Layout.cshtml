@@ -21,8 +21,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Blog", "Blog", "Home")</li>
                     <li>@Html.ActionLink("Login", "Login", "Auth")</li>
                 </ul>
@@ -32,8 +30,7 @@
     <div class="container body-content">
         <div class="jumbotron">
             <h1>Rec League Sports</h1>
-            <p class="lead">Rec League Sports is your go-to blog for all things rec.</p>
-            <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+            <p class="lead">Your go-to blog for all things rec.</p>
         </div>
         @RenderBody()
         <hr />
