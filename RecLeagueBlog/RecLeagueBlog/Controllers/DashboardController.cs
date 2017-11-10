@@ -30,7 +30,6 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
-
         public ActionResult Categories()
         {
 
@@ -104,7 +103,7 @@ namespace RecLeagueBlog.Controllers
             manager.DeleteUser(user.Id);
             return RedirectToAction("Users");
         }
-
+ 
         public ActionResult Pages()
         {
             var model = manager.GetAllStaticPages();
@@ -188,7 +187,7 @@ namespace RecLeagueBlog.Controllers
                 TempData["PasswordReset"] = "Password has been successfully reset";
                 return View("UserProfile");
             }
-            return View("UserProfile");
+            return View("ResetPassword");
         }
 
         public ActionResult UpdatePassword()

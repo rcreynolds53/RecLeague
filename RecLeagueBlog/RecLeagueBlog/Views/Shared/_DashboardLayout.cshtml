@@ -34,10 +34,6 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li>
-                            <a href="@Url.Action("UserProfile", "Dashboard")"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li class="divider"></li>
 						<li>
 							<a href="@Url.Action("UpdatePassword", "Dashboard")"><i class="fa fa-lock fa-fw"></i>Update Password</a>
 						</li>
@@ -54,6 +50,25 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
+
+                        @*<li>
+                            <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-rebel fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Posts", "Dashboard")"><i class="fa fa-edit fa-fw"></i> Posts</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Pages", "Dashboard")"><i class="fa fa-file-code-o fa-fw"></i> Pages</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Categories", "Dashboard")"><i class="fa fa-filter fa-fw"></i> Categories</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Tags", "Dashboard")"><i class="fa fa-tags fa-fw"></i> Tags</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Users", "Dashboard")"><i class="fa fa-users fa-fw"></i> Users</a>
+                        </li>*@
                         @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                         {
                             <li>
@@ -74,9 +89,12 @@
                             <li>
                                 <a href="@Url.Action("Users", "Dashboard")"><i class="fa fa-users fa-fw"></i> Users</a>
                             </li>
-                        }
-                        else
-                        {
+							<li>
+								<a href="@Url.Action("ResetPassword", "Dashboard")"><i class="fa fa-users fa-fw"></i> Reset Password</a>
+							</li>
+						}
+						else
+						{
                             <li>
                                 <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-rebel fa-fw"></i> Dashboard</a>
                             </li>
