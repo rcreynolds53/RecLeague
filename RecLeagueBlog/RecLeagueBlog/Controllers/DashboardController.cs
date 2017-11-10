@@ -199,7 +199,7 @@ namespace RecLeagueBlog.Controllers
                 TempData["PasswordReset"] = "Password has been successfully reset";
                 return View("UserProfile");
             }
-            return View("UserProfile");
+            return View("ResetPassword");
         }
 
         public ActionResult UpdatePassword()
