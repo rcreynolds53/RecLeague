@@ -12,6 +12,16 @@ namespace RecLeagueBlog.Data.EFRepositories
     {
         RecBlogDBContext context = new RecBlogDBContext();
 
+        public StaticPageViewModel ConvertPageToVm(StaticPage staticPage)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ConvertVmToPage(StaticPageViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateStaticPage(StaticPage newPage)
         {
             context.StaticPages.Add(newPage);

@@ -16,6 +16,7 @@ namespace RecLeagueBlog.Data.Interfaces
         void CreateStaticPage(StaticPage newPage);
         void EditStaticPage(StaticPage updatedPage);
         void DeleteStaticPage(int staticPageId);
-
+        StaticPageViewModel ConvertPageToVm(StaticPage staticPage);
+        void ConvertVmToPage(StaticPageViewModel viewModel);
     }
 }

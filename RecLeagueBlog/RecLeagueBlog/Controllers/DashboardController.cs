@@ -31,7 +31,6 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
-
         public ActionResult Categories()
         {
 
@@ -106,7 +105,6 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Users");
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult Pages()
         {
             var model = manager.GetAllStaticPages();
@@ -114,7 +112,6 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult AddPages()
         {
             var model = new StaticPageViewModel();
@@ -122,7 +119,6 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult AddPages(StaticPage staticPage)
         {
@@ -155,16 +151,16 @@ namespace RecLeagueBlog.Controllers
         [HttpGet]
         public ActionResult EditPages(int id)
         {
-            StaticPage model = manager.GetStaticPage(id);
-            //model.SetStatusItems(manager.GetAllStatuses());
+            var page = manager.GetStaticPage(id);
+            var model = manager.ConvertPageToVm(page);
+            model.SetStatusItems(manager.GetAllStatuses());
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult EditPages(StaticPage editPage)
+        public ActionResult EditPages(StaticPageViewModel editedPage)
         {
-            manager.EditStaticPage(editPage);
+            manager.ConvertVmToPage(editedPage);
             return RedirectToAction("Pages");
         }
 

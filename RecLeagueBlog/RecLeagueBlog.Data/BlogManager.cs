@@ -169,6 +169,16 @@ namespace RecLeagueBlog.Data
             return _staticPageRepository.GetAllStatuses();
         }
 
+        public StaticPageViewModel ConvertPageToVm(StaticPage staticPage)
+        {
+            return _staticPageRepository.ConvertPageToVm(staticPage);
+        }
+
+        public void ConvertVmToPage(StaticPageViewModel viewModel)
+        {
+            _staticPageRepository.ConvertVmToPage(viewModel);
+        }
+
         // ***** User Methods ********
 
         public List<AppUser> GetAllUsers()
