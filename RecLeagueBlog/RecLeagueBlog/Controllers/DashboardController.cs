@@ -20,7 +20,6 @@ namespace RecLeagueBlog.Controllers
         [Authorize(Roles = "manager")]
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to Rec League Sports.";
 
             return View();
         }
@@ -104,12 +103,6 @@ namespace RecLeagueBlog.Controllers
         {
             manager.DeleteUser(user.Id);
             return RedirectToAction("Users");
-        }
-
-        public ActionResult UserProfile()
-        {
-
-            return View();
         }
 
         public ActionResult Pages()
