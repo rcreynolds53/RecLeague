@@ -20,7 +20,6 @@ namespace RecLeagueBlog.Controllers
         [Authorize(Roles = "manager")]
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to Rec League Sports.";
 
             return View();
         }
@@ -30,7 +29,6 @@ namespace RecLeagueBlog.Controllers
         {
             return View();
         }
-
 
         public ActionResult Categories()
         {
@@ -105,8 +103,7 @@ namespace RecLeagueBlog.Controllers
             manager.DeleteUser(user.Id);
             return RedirectToAction("Users");
         }
-
-        [Authorize(Roles = "admin")]
+ 
         public ActionResult Pages()
         {
             var model = manager.GetAllStaticPages();
@@ -114,7 +111,6 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult AddPages()
         {
             var model = new StaticPageViewModel();
@@ -122,7 +118,6 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult AddPages(StaticPage staticPage)
         {
@@ -160,7 +155,6 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditPages(StaticPage editPage)
         {
