@@ -117,6 +117,7 @@ namespace RecLeagueBlog.Controllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Pages()
         {
             var model = manager.GetAllStaticPages();
@@ -124,6 +125,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult AddPages()
         {
             var model = new StaticPage();
@@ -131,6 +133,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult AddPages(StaticPage staticPage)
         {
@@ -168,6 +171,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditPages(StaticPage editPage)
         {

@@ -311,6 +311,7 @@
     <Content Include="Views\Dashboard\AddPages.cshtml" />
     <Content Include="Views\Dashboard\EditPages.cshtml" />
     <Content Include="Views\Dashboard\DeletePages.cshtml" />
+    <Content Include="Views\Dashboard\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
