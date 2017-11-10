@@ -1,55 +1,53 @@
 ﻿@model IEnumerable<RecLeagueBlog.Models.StaticPage>
 @{
-    ViewBag.Title = "Pages";
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+	ViewBag.Title = "Pages";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Pages</h1>
-            <hr>
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <form class="navbar-form navbar-left" onsubmit="return false;">
-                        <div class="form-group">
-                            <a href="@Url.Action("AddPages", "Dashboard")" class="btn btn-primary navbar-btn">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                Create Page
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </nav>
-        </div>
-    </div>
+
+<div class="row">
+	<div class="col-md-12">
+		<h1>Pages</h1>
+		<hr>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<form class="navbar-form navbar-left" onsubmit="return false;">
+					<div class="form-group">
+						<a href="@Url.Action("AddPages", "Dashboard")" class="btn btn-primary navbar-btn">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							Create Page
+						</a>
+					</div>
+				</form>
+			</div>
+		</nav>
+	</div>
 </div>
 <hr>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th width="70%">Title</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var page in Model)
-                    {
-                        <tr>
-                            <td>@page.Title</td>
-                            <td>
-                                @Html.ActionLink("Edit", "EditPages", "Dashboard", new { id = page.StaticPageId }, null) | 
-                                @Html.ActionLink("Delete", "DeletePages", "Dashboard", new { id = page.StaticPageId }, null)
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th width="70%">Title</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var page in Model)
+				{
+					<tr>
+						<td>@page.Title</td>
+						<td>
+							@Html.ActionLink("Edit", "EditPages", "Dashboard", new { id = page.StaticPageId }, null) |
+							@Html.ActionLink("Delete", "DeletePages", "Dashboard", new { id = page.StaticPageId }, null)
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>
 
 

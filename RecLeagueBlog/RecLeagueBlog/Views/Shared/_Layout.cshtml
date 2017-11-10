@@ -26,17 +26,6 @@
                     <li>@Html.ActionLink("Blog", "Blog", "Home")</li>
                     <li>@Html.ActionLink("Login", "Login", "Auth")</li>
                 </ul>
-				<ul class="dropdown-menu dropdown-user">
-					<li>
-						@foreach (var page in Model)
-						{
-							if (page.Status.StatusId == 1)
-							{
-								<a href="@Url.Action("", "")"><i class="fa fa-user fa-fw"></i> User Profile</a>
-							}
-						}
-					</li>
-				</ul>
             </div>
         </div>
     </div>

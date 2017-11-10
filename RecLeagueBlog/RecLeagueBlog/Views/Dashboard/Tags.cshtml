@@ -1,111 +1,80 @@
 ﻿
 @{
-    ViewBag.Title = "Tags";
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+	ViewBag.Title = "Tags";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<div class="container">
-    <div class=" row">
-        <h1>Tags</h1>
-        <hr />
-        <div class="col-xs-2">
-            <div class="form-group">
-                <button class="btn btn-default btn-lg" type="button" id="createTagBtn">Create Tag</button>
-            </div>
-        </div>
-        <div class="col-sm-offset-1 col-xs-1">
-            <div class="form-group">
-                <button class="btn btn-default btn-lg" type="button" id="search-button">Search</button>
-            </div>
-        </div>
-        <div class="dropdown col-xs-3">
-            <div class="col-xs-3">
-                <button class="btn btn-primary dropdown-toggle btn-lg" type="button" data-toggle="dropdown">
-                    Category Search
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#">Action</a>
-                    </li>
-                    <li>
-                        <a href="#">Chick Flick</a>
-                    </li>
-                    <li>
-                        <a href="#">Comedy</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-xs-5">
-            <div class="form-group">
-                <input type="text" class="input-lg form-control" id="search-by-term" placeholder="Search Term">
-            </div>
-        </div>
-    </div>
+<div class=" row">
+	<h1>Tags</h1>
+	<hr />
+	<div class="col-md-2">
+		<div class="form-group">
+			<button class="btn btn-default btn-lg" type="button" id="createTagBtn">Create Tag</button>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="form-group">
+			<input type="text" class="input-lg form-control" id="search-by-term" placeholder="Search Term">
+		</div>
+	</div>
 </div>
 <hr>
-<div class="container">
-    <ul class="list-group" id="errorMessages"></ul>
-    <div id="tagTableDiv" class="col-xs-12">
-        <table id="postsTable" class="table table-striped table-bordered">
-            <tr>
-                <th width="50%">Tag</th>
-                <th width="50%"></th>
-            </tr>
-            <tbody id="contentRows"></tbody>
-        </table>
-    </div>
+<ul class="list-group" id="errorMessages"></ul>
+<div id="tagTableDiv" class="col-md-12">
+	<table id="postsTable" class="table table-striped table-bordered">
+		<tr>
+			<th width="50%">Tag</th>
+			<th width="50%"></th>
+		</tr>
+		<tbody id="contentRows"></tbody>
+	</table>
 </div>
-<div class="container" id="addTagDiv" style="display: none">
-    <div class="col-xs-9">
-        <h2 class="newPost">Create Tag</h2>
-        <form class="form-horizontal" role="form" id="addTagForm">
-            <div class="form-group">
-                <label for="addTag" class="col-xs-12 control-label">Tag:</label>
-                <div class="col-xs-12">
-                    <input type="text" class="form-control" id="addTag" placeholder="Tag" required>
-                </div>
-            </div>
-            <div class="col-md-offset-4 col-md-2">
-                <input type="hidden" id="add-movie-id">
-                <button id="addTagCancelBtn" class="btn btn-danger" onclick="hideAddTag()">
-                    Cancel
-                </button>
-            </div>
-            <div class="col-md-2">
-                <button type="button" id="addTagBtn" class="btn btn-primary">
-                    Save Tag
-                </button>
-            </div>
-        </form>
-    </div>
+<div class="col-md-9" id="addTagDiv" style="display: none">
+	<h2 class="newPost">Create Tag</h2>
+	<form class="form-horizontal" role="form" id="addTagForm">
+		<div class="form-group">
+			<div class="col-md-6">
+				<input type="text" class="form-control" id="addTag" placeholder="Tag" required>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<input type="hidden" id="add-movie-id">
+			<button id="addTagCancelBtn" class="btn btn-danger" onclick="hideAddTag()">
+				Cancel
+			</button>
+		</div>
+		<div class="col-md-1">
+			<button type="button" id="addTagBtn" class="btn btn-primary">
+				Save
+			</button>
+		</div>
+	</form>
 </div>
-<div class="container" id="editTagDiv" style="display: none">
-    <h2>Edit Tag</h2>
-    <form class="form-horizontal" role="form" id="editTagForm">
-        <input type="hidden" id="tagId" />
-        <div class="form-group">
-            <label for="editTag" class="col-md-2 control-label">Tag:</label>
-            <div class="col-md-8">
-                <input type="text" class="form-control" id="editTag" placeholder="Tag">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-2">
-                <input type="hidden" id="edit-movie-id">
-                <button type="button" id="editTagCancelBtn" class="btn btn-danger" onclick="hideEditPostForm()">
-                    Cancel Edit
-                </button>
-            </div>
-            <div class="col-md-2">
-                <button type="button" id="editTagBtn" class="btn btn-primary">
-                    Update Tag
-                </button>
-            </div>
-        </div>
-    </form>
+<div class="col-md-9" id="editTagDiv" style="display: none">
+	<h2>Edit Tag</h2>
+	<form class="form-horizontal" role="form" id="editTagForm">
+		<input type="hidden" id="tagId" />
+		<div class="form-group">
+			<div class="col-md-6">
+				<input type="text" class="form-control" id="editTag" placeholder="Tag">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-2">
+				<input type="hidden" id="edit-movie-id">
+				<button type="button" id="editTagCancelBtn" class="btn btn-danger" onclick="hideEditPostForm()">
+					Cancel
+				</button>
+			</div>
+			<div class="col-md-1">
+				<button type="button" id="editTagBtn" class="btn btn-primary">
+					Save
+				</button>
+			</div>
+		</div>
+	</form>
 </div>
+
 @section scripts {
-    <script src="~/Scripts/home.js"></script>
-    }
+	<script src="~/Scripts/home.js"></script>
+}
