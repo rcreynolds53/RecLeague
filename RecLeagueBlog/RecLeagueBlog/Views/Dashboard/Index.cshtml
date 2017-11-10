@@ -1,9 +1,13 @@
-﻿
+﻿@model RecLeagueBlog.Models.Identity.AppUser
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-
+@section userPage {
+<li>
+    <a href="@Url.Action("UserProfile", "Dashboard", new {id = Model.Id}, null)"><i class="fa fa-user fa-fw"></i> User Profile</a>
+</li>
+}
 <div class="row">
     <div class="col-lg-12">
         <h1>@ViewBag.Message</h1>

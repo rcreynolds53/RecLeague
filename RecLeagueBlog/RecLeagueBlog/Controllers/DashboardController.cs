@@ -20,7 +20,6 @@ namespace RecLeagueBlog.Controllers
         [Authorize(Roles = "manager")]
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to Rec League Sports.";
 
             return View();
         }
@@ -189,7 +188,7 @@ namespace RecLeagueBlog.Controllers
                 TempData["PasswordReset"] = "Password has been successfully reset";
                 return View("UserProfile");
             }
-            return View("UserProfile");
+            return View("ResetPassword");
         }
 
         public ActionResult UpdatePassword()
