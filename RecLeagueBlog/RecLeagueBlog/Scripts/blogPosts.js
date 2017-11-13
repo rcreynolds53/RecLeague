@@ -2,7 +2,7 @@ $(document).ready(function () {
     loadPosts();
     $('#createPostBtn').on('click', function () {
         $('#addPostDiv').toggle('slow');
-        $('#postTableDiv').hide();
+        $('#postTableDiv').toggle();
         $('editPostDiv').hide();
     });
     var status = $('#statusId').val();
@@ -62,8 +62,12 @@ $(document).ready(function () {
     });
 });
 function hideAddPostForm() {
+    $('#addPostTitle').empty();
+    $('#addPostContent').empty();
+    $('#tags').importTags('');
+    $('#categories').importTags('');
     $('#postTableDiv').show();
-    $('#addMovieFormDiv').hide();
+    $('#addPostDiv').hide();
 }
 function loadPosts() {
     clearMoviesTable();

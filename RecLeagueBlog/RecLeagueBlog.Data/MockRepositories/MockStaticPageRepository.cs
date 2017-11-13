@@ -83,6 +83,11 @@ namespace RecLeagueBlog.Data.MockRepositories
             return _pages.Where(p => p.Status.StatusId == 1).ToList();
         }
 
+        public List<StaticPage> GetAllPublishStaticPages()
+        {
+            return _pages.Where(p => p.Status.StatusId == 1).ToList();
+        }
+
         public IEnumerable<Status> GetAllStatuses()
         {
             return _statuses;

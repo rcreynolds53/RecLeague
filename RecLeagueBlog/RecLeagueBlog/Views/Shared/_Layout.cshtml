@@ -1,6 +1,4 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -26,17 +24,9 @@
                     <li>@Html.ActionLink("Blog", "Blog", "Home")</li>
                     <li>@Html.ActionLink("Login", "Login", "Auth")</li>
                 </ul>
-				<ul class="dropdown-menu dropdown-user">
-					<li>
-						@foreach (var page in Model)
-						{
-							if (page.Status.StatusId == 1)
-							{
-								<a href="@Url.Action("", "")"><i class="fa fa-user fa-fw"></i> User Profile</a>
-							}
-						}
-					</li>
-				</ul>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" id="staticPageDropdown" value ="Static Pages"></ul>
             </div>
         </div>
     </div>
@@ -50,7 +40,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/staticPage.js")
     @RenderSection("scripts", required: false)
-    
+
 </body>
 </html>

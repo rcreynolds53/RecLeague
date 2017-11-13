@@ -207,5 +207,10 @@ namespace RecLeagueBlog.Data
         }
 
 
+        public List<StaticPage> GetAllPublishStaticPages()
+        {
+            return _staticPageRepository.GetAllPublishStaticPages();
+        }
+
     }
 }

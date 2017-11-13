@@ -50,6 +50,11 @@ namespace RecLeagueBlog.Data.EFRepositories
             return pages;
         }
 
+        public List<StaticPage> GetAllPublishStaticPages()
+        {
+            return context.StaticPages.Where(p => p.Status.StatusId == 1).ToList();
+        }
+
         public IEnumerable<Status> GetAllStatuses()
         {
             var statuses = (from s in context.Statuses
