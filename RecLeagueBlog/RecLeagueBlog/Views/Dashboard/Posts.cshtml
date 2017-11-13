@@ -2,7 +2,6 @@
     ViewBag.Title = "Posts";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-<<<<<<< HEAD
     <div class=" row">
         <h1>Blog Posts</h1>
         <hr />
@@ -119,133 +118,7 @@
         </div>
         <div class="form-group">
             <label for="editStatusId" class="col-xs-12">Post Status</label>
-            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
-=======
-
-        <div class="row">
-            <div class=" col-md-12">
-                <h1>Blog Posts</h1>
-                <hr />
-                <div class="col-xs-2">
-                    <div class="form-group">
-                        <button class="btn btn-default btn-lg" type="button" id="createPostBtn">Create Post</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="text" class="input-lg form-control" id="searchTerm" placeholder="Search Term">
-                </div>
-            </div>
-            <div class="col-md-offset-1 col-md-1">
-                <div class="form-group">
-                    <button class="btn btn-default btn-lg" type="button" id="searchBtn">Search</button>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <ul class="list-group" id="errorMessages"></ul>
-            <div id="postTableDiv" class="col-md-12">
-                <table id="postsTable" class="table table-striped table-bordered">
-                    <tr>
-                        <th width="25%">Title</th>
-                        <th width="25%">Tags</th>
-                        <th width="25%">Categories</th>
-                        <th width="25%"></th>
-                    </tr>
-                    <tbody id="contentRows"></tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row" id="addPostDiv" style="display: none">
-            <div class="col-xs-9">
-                <h2 class="newPost">Create Post</h2>
-                <form class="form-horizontal" role="form" id="add-movie-form">
-                    <div class="form-group">
-                        <label for="addPost" class="col-md-12 newPost">Title:</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" id="addPostTitle" placeholder="Title" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-12 newPost">Content:</label>
-                        <div class="col-md-12">
-                            <textarea id="addPostContent" class="col-md-12 postContent"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-12 newPost">Tags</label>
-                        <div class="col-md-12">
-                            <input name="tags" class="form-control" id="tags">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-12 newPost">Categories</label>
-                        <div class="col-md-12">
-                            <input name="tags" class="form-control col-md-12" id="categories">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="statusId" class="col-md-12">Post Status</label>
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
-                        {
-                            <select id="statusId" class="form-control">
-                                <option>Published</option>
-                                <option>Pending</option>
-                                <option>Deleted</option>
-                            </select>
-                        }
-                        else
-                        {
-                            <select id="statusId" class="form-control">
-                                <option>Pending</option>
-                            </select>
-                        }
-                    </div>
-                    <div class="col-md-offset-4 col-md-2">
-                        <input type="hidden" id="add-movie-id">
-                        <button id="add-movie-cancel-button" class="btn btn-danger" onclick="hideAddPostForm()">
-                            Cancel
-                        </button>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" id="addPostBtn" class="btn btn-primary">
-                            Save Post
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="row" id="editPostDiv" style="display: none">
-            <h2>Edit Post</h2>
-            <form class="form-horizontal" role="form" id="edit-movie-form">
-                <input type="hidden" id="postId" />
-                <div class="form-group">
-                    <label for="editPostTitle" class="col-md-2 control-label">Title:</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" id="editPostTitle" placeholder="Title">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12 newPost">Content:</label>
-                    <div class="col-md-12">
-                        <textarea class="form-control postContent" id="editPostContent"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12 newPost">Tags</label>
-                    <input name="tags" class="form-control col-md-12" id="editTags" />
-                </div>
-                <div class="form-group">
-                    <label class="col-md-12 newPost">Categories</label>
-                    <input name="tags" class="form-control col-md-12" id="editCategories" />
-                </div>
-                <div class="form-group">
-                    <label for="editStatusId" class="col-md-12">Post Status</label>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
->>>>>>> 07c4b8b9b7a11e37bb457910179a5ea62a1ecf42
+            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))        
             {
                 <select id="editStatusId" class="form-control">
                     <option value="Published">Published</option>
@@ -274,11 +147,7 @@
                 </button>
             </div>
         </div>
-<<<<<<< HEAD
     </form>
-=======
-    </div>
->>>>>>> 07c4b8b9b7a11e37bb457910179a5ea62a1ecf42
 </div>
 
 @section scripts {
