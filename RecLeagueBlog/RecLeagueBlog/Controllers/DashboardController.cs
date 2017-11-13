@@ -65,7 +65,6 @@ namespace RecLeagueBlog.Controllers
             {
                 manager.ConvertVMtoUserForAdd(model);
                 return RedirectToAction("Users");
-                //throw new Exception("Error placeholder for now");
             }
             else
             {
