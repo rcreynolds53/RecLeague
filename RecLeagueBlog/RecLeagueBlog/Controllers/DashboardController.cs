@@ -65,7 +65,6 @@ namespace RecLeagueBlog.Controllers
             {
                 manager.ConvertVMtoUserForAdd(model);
                 return RedirectToAction("Users");
-                //throw new Exception("Error placeholder for now");
             }
             else
             {
@@ -103,7 +102,7 @@ namespace RecLeagueBlog.Controllers
             manager.DeleteUser(user.Id);
             return RedirectToAction("Users");
         }
- 
+
         public ActionResult Pages()
         {
             var model = manager.GetAllStaticPages();
@@ -150,15 +149,16 @@ namespace RecLeagueBlog.Controllers
         [HttpGet]
         public ActionResult EditPages(int id)
         {
-            StaticPage model = manager.GetStaticPage(id);
-            //model.SetStatusItems(manager.GetAllStatuses());
+            var page = manager.GetStaticPage(id);
+            var model = manager.ConvertPageToVm(page);
+            model.SetStatusItems(manager.GetAllStatuses());
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult EditPages(StaticPage editPage)
+        public ActionResult EditPages(StaticPageViewModel editedPage)
         {
-            manager.EditStaticPage(editPage);
+            manager.ConvertVmToPage(editedPage);
             return RedirectToAction("Pages");
         }
 

@@ -42,11 +42,30 @@ namespace RecLeagueBlog.Data.MockRepositories
                  { StaticPageId = 2, Title = "Curling Canceled", Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", Status = _statuses[0]},
 
                 new StaticPage
-                 { StaticPageId = 2, Title = "Pending Status Page", Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", Status = _statuses[1]},
+                 { StaticPageId = 3, Title = "Pending Status Page", Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", Status = _statuses[1]},
 
                 new StaticPage
-                 { StaticPageId = 2, Title = "Delete Status Page", Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", Status = _statuses[2]},
+                 { StaticPageId = 4, Title = "Delete Status Page", Content = "It is with sadness that we announce that the men's curling league has been canceled due to a lack of interest in the dying sport.", Status = _statuses[2]},
             };
+        }
+
+        public StaticPageViewModel ConvertPageToVm(StaticPage staticPage)
+        {
+            StaticPageViewModel viewModel = new StaticPageViewModel();
+            viewModel.StaticPage = staticPage;
+            return viewModel;
+        }
+
+        public void ConvertVmToPage(StaticPageViewModel viewModel)
+        {
+            StaticPage convertedPage = _pages.Single(p => p.StaticPageId == viewModel.StaticPage.StaticPageId);
+            convertedPage.Title = viewModel.StaticPage.Title;
+            convertedPage.Content = viewModel.StaticPage.Content;
+            convertedPage.StaticPageId = viewModel.StaticPage.StaticPageId;
+            convertedPage.Status = viewModel.StaticPage.Status;
+
+            _pages.RemoveAll(p => p.StaticPageId == convertedPage.StaticPageId);
+            _pages.Add(convertedPage);
         }
 
         public void CreateStaticPage(StaticPage newPage)

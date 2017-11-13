@@ -13,8 +13,9 @@ namespace RecLeagueBlog.Controllers
 {
     public class AuthController : Controller
     {
-        // GET: Auth
+
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult Login(string returnUrl)
         {
             LoginModel model = new LoginModel
