@@ -1,6 +1,6 @@
 $(document).ready(function () {
     loadPosts();
-})
+});
 
 $('#createPostBtn').on('click', function () {
     $('#addPostDiv').toggle('slow');
@@ -31,7 +31,7 @@ $('#editStatusId').change(function () {
         // }
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:60542/post',
+            url: '/post',
             data: JSON.stringify({
                 title: $('#addPostTitle').val(),
                 content: test,
@@ -79,7 +79,7 @@ function loadPosts() {
     $('#editPostDiv').hide();
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:60542/posts',
+        url: '/posts',
         success: function (blogPostArray) {
             $.each(blogPostArray, function (index, post) {
                 var title = post.title;
@@ -133,7 +133,7 @@ $('#editPostBtn').click(function (event) {
     var postId = $('#postId').val();
     $.ajax({
         type: 'PUT',
-        url: 'http://localhost:60542/post/' + postId,
+        url: '/post/' + postId,
         data: JSON.stringify({
             blogPostId: parseInt(postId),
             title: $('#editPostTitle').val(),
@@ -173,7 +173,7 @@ $('#editPostBtn').click(function (event) {
 
 //        $.ajax({
 //            type: "DELETE",
-//            url: 'http://localhost:60542/post/' + postId,
+//            url: ' + postId,
 //            success: function () {
 //                loadPosts();
 //            },
