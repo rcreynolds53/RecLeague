@@ -61,7 +61,7 @@ function loadCategories() {
         success: function (categoriesArray) {
             $.each(categoriesArray, function (index, category) {
                 var categoryName = category.categoryName;
-                var categoryId = category.categoryName;
+                var categoryId = category.categoryId;
 
                 var row = '<tr>';
                 row += '<td>' + categoryName + '</td>';

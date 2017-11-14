@@ -74,9 +74,9 @@ namespace RecLeagueBlog.Data
         {
             _categoryRepo.CreateCategory(newCategory);
         }
-        public void UpdateCategory(Tag updatedCategory)
+        public void UpdateCategory(Category updatedCategory)
         {
-            _tagRepo.UpdateTag(updatedCategory);
+            _categoryRepo.UpdateCategory(updatedCategory);
         }
 
         // POSTS BLL
