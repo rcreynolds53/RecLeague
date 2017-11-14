@@ -38,7 +38,7 @@
                         }
                         else
                         {
-                            <p>@post.Content.Substring(0, 140)</p>
+                            <p>@Html.Raw(post.Content.Substring(0, 140))</p>
                             <p hidden>@post.Content.Substring(140) </p>
                         }
                         <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>

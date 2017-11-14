@@ -112,7 +112,7 @@ namespace RecLeagueBlog.Data.EFRepositories
                 if (!tags.Any(tag => tag.TagName == t))
                 {
                     Tag tagToAdd = new Tag();
-                    tagToAdd.TagId = tags.Max(tag => tag.TagId) + 1;
+                    //tagToAdd.TagId = tags.Max(tag => tag.TagId) + 1;
                     tagToAdd.TagName = t;
                     tags.Add(tagToAdd);
                 }
@@ -123,14 +123,14 @@ namespace RecLeagueBlog.Data.EFRepositories
                 if (!categories.Any(cat => cat.CategoryName == c))
                 {
                     Category catToAdd = new Category();
-                    catToAdd.CategoryId = categories.Max(cat => cat.CategoryId) + 1;
+                    //catToAdd.CategoryId = categories.Max(cat => cat.CategoryId) + 1;
                     catToAdd.CategoryName = c;
                     categories.Add(catToAdd);
                 }
             }
 
             BlogPost convertedPost = new BlogPost();
-            convertedPost.BlogPostId = context.BlogPosts.Max(p => p.BlogPostId) + 1;
+            //convertedPost.BlogPostId = context.BlogPosts.Max(p => p.BlogPostId) + 1;
             var newTags = new List<Tag>();
             foreach (var t in postModel.TagsToPost)
             {
