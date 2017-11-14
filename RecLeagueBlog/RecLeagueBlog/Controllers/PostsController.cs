@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Results;
+using Microsoft.AspNet.Identity;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -34,7 +35,8 @@ namespace RecLeagueBlog.Controllers
         [AcceptVerbs("POST")]
         public IHttpActionResult AddBlogPost(AddPostViewModel newPost)
         {
-           var blogPost = manager.ConvertPostModel(newPost);
+            newPost.UserName = User.Identity.GetUserName();          
+            var blogPost = manager.ConvertPostModel(newPost);
             manager.CreateBlogPost(blogPost);
             return Created($"post/{blogPost.BlogPostId}", blogPost);
         }

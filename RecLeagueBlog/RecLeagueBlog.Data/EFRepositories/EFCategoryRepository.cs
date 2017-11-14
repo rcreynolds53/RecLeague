@@ -29,19 +29,12 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public List<Category> GetAllCategories()
         {
-            var categories = (from c in context.Categories
-                              select c).ToList();
-
-            return categories;
+            return context.Categories.ToList();
         }
 
         public Category GetCategory(int categoryId)
         {
-            var category = (from c in context.Categories
-                            where c.CategoryId == categoryId
-                            select c).FirstOrDefault();
-
-            return category;
+            return context.Categories.FirstOrDefault(c => c.CategoryId == categoryId);
         }
 
         public void UpdateCategory(Category updatedCategory)
