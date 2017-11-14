@@ -34,7 +34,7 @@
                         <h2>@post.Title</h2>
                         @if (@post.Content.Length < 140)
                         {
-                            <p>@post.Content</p>
+                            <p>@Html.Raw(post.Content)</p>
                         }
                         else
                         {
