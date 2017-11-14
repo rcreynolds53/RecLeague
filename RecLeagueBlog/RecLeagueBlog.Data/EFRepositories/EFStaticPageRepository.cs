@@ -16,23 +16,38 @@ namespace RecLeagueBlog.Data.EFRepositories
         {
             StaticPageViewModel viewModel = new StaticPageViewModel();
             viewModel.StaticPage = staticPage;
+            viewModel.StaticPage.Status = context.Statuses.FirstOrDefault(s => s.StatusId == staticPage.Status.StatusId);
             return viewModel;
         }
 
         public void ConvertVmToPage(StaticPageViewModel viewModel)
         {
-            StaticPage convertedPage = context.StaticPages.Single(p => p.StaticPageId == viewModel.StaticPage.StaticPageId);
-            convertedPage.Title = viewModel.StaticPage.Title;
-            convertedPage.Content = viewModel.StaticPage.Content;
-            convertedPage.StaticPageId = viewModel.StaticPage.StaticPageId;
-            convertedPage.Status = viewModel.StaticPage.Status;
+            StaticPage convertedPage = new StaticPage();
 
-            context.Entry(convertedPage).State = System.Data.Entity.EntityState.Modified;
-            context.SaveChanges();
+            if (viewModel.StaticPage.StaticPageId == 0)
+            {
+               
+                convertedPage.Title = viewModel.StaticPage.Title;
+                convertedPage.Content = viewModel.StaticPage.Content;
+                //context.Statuses.Attach(viewModel.StaticPage.Status);
+                convertedPage.Status = context.Statuses.First(s => s.StatusId == viewModel.StaticPage.Status.StatusId);
+                context.StaticPages.Add(convertedPage);
+                context.SaveChanges();
+            }
+            else
+            {
+                convertedPage.Title = viewModel.StaticPage.Title;
+                convertedPage.Content = viewModel.StaticPage.Content;
+                convertedPage.Status = context.Statuses.First(s => s.StatusId == viewModel.StaticPage.Status.StatusId);
+                convertedPage.StaticPageId = viewModel.StaticPage.StaticPageId;
+                context.Entry(convertedPage).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
         public void CreateStaticPage(StaticPage newPage)
         {
+            
             context.StaticPages.Add(newPage);
             context.SaveChanges();
         }

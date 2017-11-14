@@ -141,11 +141,11 @@ namespace RecLeagueBlog.Data
 
         public void CreateStaticPage (StaticPage newPage)
         {
-            if (_staticPageRepository.GetAllPages().Any())
-            {
-                newPage.StaticPageId = _staticPageRepository.GetAllPages().Max(p => p.StaticPageId) + 1;
-            }
-            newPage.StaticPageId = 1;
+            //if (_staticPageRepository.GetAllPages().Any())
+            //{
+            //    newPage.StaticPageId = _staticPageRepository.GetAllPages().Max(p => p.StaticPageId) + 1;
+            //}
+            //newPage.StaticPageId = 1;
             _staticPageRepository.CreateStaticPage(newPage);
         }
 

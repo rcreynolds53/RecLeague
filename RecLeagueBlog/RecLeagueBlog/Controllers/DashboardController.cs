@@ -118,7 +118,7 @@ namespace RecLeagueBlog.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddPages(StaticPage staticPage)
+        public ActionResult AddPages(StaticPageViewModel viewModel)
         {
             if(!ModelState.IsValid)
             {
@@ -126,8 +126,7 @@ namespace RecLeagueBlog.Controllers
             }
             else
             {
-                var model = new StaticPage();
-                manager.CreateStaticPage(staticPage);
+                manager.ConvertVmToPage(viewModel);
                 return RedirectToAction("Pages");
             }
         }
