@@ -19,6 +19,11 @@
 						</a>
 					</div>
 				</form>
+                <form class="navbar-form navbar-right" onsubmit="return false;">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search Term" id="searchTerm">
+                    </div>
+                </form>
 			</div>
 		</nav>
 	</div>
@@ -40,8 +45,8 @@
 					<tr>
 						<td>@page.Title</td>
 						<td>
-							@Html.ActionLink("Edit", "EditPages", "Dashboard", new { id = page.StaticPageId }, null) |
-							@Html.ActionLink("Delete", "DeletePages", "Dashboard", new { id = page.StaticPageId }, null)
+							@Html.ActionLink("Edit", "EditPages", "Dashboard", new { id = page.StaticPageId }, null)
+							@*@Html.ActionLink("Delete", "DeletePages", "Dashboard", new { id = page.StaticPageId }, null)*@
 						</td>
 					</tr>
 				}
@@ -51,3 +56,20 @@
 </div>
 
 
+@section scripts {
+    <script>
+        $("#searchTerm").keyup(function () {
+            var value = this.value.toLowerCase().trim();
+
+            $("table tr").each(function (index) {
+                if (!index) return;
+                $(this).find("td").each(function () {
+                    var id = $(this).text().toLowerCase().trim();
+                    var not_found = (id.indexOf(value) == -1);
+                    $(this).closest('tr').toggle(!not_found);
+                    return not_found;
+                });
+            });
+        });
+    </script>
+}

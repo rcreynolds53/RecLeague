@@ -132,19 +132,19 @@ namespace RecLeagueBlog.Controllers
             }
         }
 
-        public ActionResult DeletePages(int id)
-        {
-            var page = manager.GetStaticPage(id);
-            return View(page);
-        }
+        //public ActionResult DeletePages(int id)
+        //{
+        //    var page = manager.GetStaticPage(id);
+        //    return View(page);
+        //}
 
-        [HttpPost]
-        public ActionResult DeletePages(StaticPage staticPage)
+        //[HttpPost]
+        //public ActionResult DeletePages(StaticPage staticPage)
 
-        {
-            manager.DeleteStaticPage(staticPage.StaticPageId);
-            return RedirectToAction("Pages");
-        }
+        //{
+        //    manager.DeleteStaticPage(staticPage.StaticPageId);
+        //    return RedirectToAction("Pages");
+        //}
 
         [HttpGet]
         public ActionResult EditPages(int id)

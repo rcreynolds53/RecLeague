@@ -449,7 +449,6 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Dashboard\AddPages.cshtml" />
     <Content Include="Views\Dashboard\EditPages.cshtml" />
-    <Content Include="Views\Dashboard\DeletePages.cshtml" />
     <Content Include="Views\Dashboard\ResetPassword.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_full_compressed.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />

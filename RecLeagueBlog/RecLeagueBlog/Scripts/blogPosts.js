@@ -102,7 +102,8 @@ function loadPosts() {
                 });
                 row += '</ul></td>';
                 if (AppGlobal.user.role) {
-                    row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit |</a><a onclick ="deletePost(' + blogPostId + ')"> Delete</a></td>';
+                    row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit</a></td>';
+                    // this was after the Edit link above. <a onclick="deletePost(' + blogPostId + ')"> Delete</a>
                 }
                 else if (post.status.statusName == "Pending" && post.userName == AppGlobal.user.name) {
 
@@ -165,26 +166,26 @@ $('#editPostBtn').click(function (event) {
         }
     });
 });
-function deletePost(postId) {
+//function deletePost(postId) {
 
-    var deletePost = confirm("Are you sure you want to delete this DVD from the collection?");
-    if (deletePost) {
+//    var deletePost = confirm("Are you sure you want to delete this DVD from the collection?");
+//    if (deletePost) {
 
-        $.ajax({
-            type: "DELETE",
-            url: 'http://localhost:60542/post/' + postId,
-            success: function () {
-                loadPosts();
-            },
-            error: function (jpXHR, textStatus, errorThrown) {
-                $('#errorMessages')
-                    .append($('<li>')
-                        .attr({ class: 'list-group-item list-group-item-danger' })
-                        .text('Error calling webservice. Please try again later.'));
-            }
-        });
-    }
-}
+//        $.ajax({
+//            type: "DELETE",
+//            url: 'http://localhost:60542/post/' + postId,
+//            success: function () {
+//                loadPosts();
+//            },
+//            error: function (jpXHR, textStatus, errorThrown) {
+//                $('#errorMessages')
+//                    .append($('<li>')
+//                        .attr({ class: 'list-group-item list-group-item-danger' })
+//                        .text('Error calling webservice. Please try again later.'));
+//            }
+//        });
+//    }
+//}
 
 function clearMoviesTable() {
     $('#contentRows').empty();
