@@ -149,6 +149,10 @@
     <Compile Include="Migrations\201711092011077_postAndPagesModelChanges.Designer.cs">
       <DependentUpon>201711092011077_postAndPagesModelChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711142106170_TestingEntity.cs" />
+    <Compile Include="Migrations\201711142106170_TestingEntity.Designer.cs">
+      <DependentUpon>201711142106170_TestingEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockRepositories\MockCategoryRepository.cs" />
     <Compile Include="MockRepositories\MockPostRepository.cs" />
@@ -195,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711092011077_postAndPagesModelChanges.resx">
       <DependentUpon>201711092011077_postAndPagesModelChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711142106170_TestingEntity.resx">
+      <DependentUpon>201711142106170_TestingEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
