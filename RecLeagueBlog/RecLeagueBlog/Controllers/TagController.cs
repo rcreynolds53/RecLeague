@@ -37,5 +37,20 @@ namespace RecLeagueBlog.Controllers
         {
             manager.DeleteTag(id);
         }
+
+        [Route("tag/{id}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetTag(int id)
+        {
+            return Ok(manager.GetTag(id));
+        }
+
+        [Route("tag/{id}")]
+        [AcceptVerbs("PUT")]
+        public void EditTag(Tag updatedTag)
+        {
+            manager.UpdateTag(updatedTag);
+
+        }
     }
 }

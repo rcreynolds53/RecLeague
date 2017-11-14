@@ -1,26 +1,29 @@
 $(document).ready(function () {
     loadPosts();
-    $('#createPostBtn').on('click', function () {
-        $('#addPostDiv').toggle('slow');
-        $('#postTableDiv').toggle();
-        $('editPostDiv').hide();
-    });
-    var status = $('#statusId').val();
+})
 
-    $('#statusId').change(function () {
-        status = $(this).val();
-        alert(status);
-    });
+$('#createPostBtn').on('click', function () {
+    $('#addPostDiv').toggle('slow');
+    $('#postTableDiv').hide();
+    $('editPostDiv').hide();
+});
+var status = $('#statusId').val();
 
-    var editStatus = $('#editStatusId').val();
+$('#statusId').change(function () {
+    status = $(this).val();
+    alert(status);
+});
 
-        $('#editStatusId').change(function () {
-            editStatus = $(this).val();
-            alert(editStatus);
-        }),
+var editStatus = $('#editStatusId').val();
+
+$('#editStatusId').change(function () {
+    editStatus = $(this).val();
+    alert(editStatus);
+}),
 
     $('#addPostBtn').click(function (event) {
-        tinyMCE.triggerSave();
+    tinyMCE.triggerSave();
+    var test = $('#addPostContent').val();
         // var haveValidationErrors = checkAndDisplayValidationErrors($('#addMovieFormDiv').find('input'));
 
         // if (haveValidationErrors) {
@@ -31,8 +34,8 @@ $(document).ready(function () {
             url: 'http://localhost:60542/post',
             data: JSON.stringify({
                 title: $('#addPostTitle').val(),
-                content: $('#addPostContent').val(),
-                statusName: status,               
+                content: test,
+                statusName: status,
                 tagsToPost: postTags(),
                 categories: postCategories()
 
@@ -60,7 +63,6 @@ $(document).ready(function () {
             }
         });
     });
-});
 function hideAddPostForm() {
     $('#addPostTitle').empty();
     $('#addPostContent').empty();
@@ -108,9 +110,9 @@ function loadPosts() {
                 }
                 else {
                     row += '<td>Can\'t edit post</td>';
-                }   
+                }
                 row += '</tr>';
-                
+
                 contentRows.append(row);
             });
         },
@@ -135,7 +137,7 @@ $('#editPostBtn').click(function (event) {
             blogPostId: parseInt(postId),
             title: $('#editPostTitle').val(),
             content: $('#editPostContent').val(),
-            statusName: editStatus,   
+            statusName: editStatus,
             tagsToPost: editTags(),
             categories: editCategories()
 
@@ -189,6 +191,7 @@ function clearMoviesTable() {
 }
 function showEditPost(postId) {
     $('#errorMessages').empty();
+    $('#addPostDiv').hide();
     $('#postTableDiv').hide();
     $('#editPostDiv').show();
     $('#postId').val(postId);
@@ -207,14 +210,14 @@ function showEditPost(postId) {
                 });
             $('#editTags').importTags(tagNames);
             //$('#editTags').append(String(tagNames)),
-                $('#editTags').tagsInput(),
+            $('#editTags').tagsInput(),
                 $.each(blogPost.categories, function (index, catagory) {
                     catagoryNames += String(catagory.categoryName) + ",";
                 });
-                $('#editCategories').importTags(catagoryNames);
+            $('#editCategories').importTags(catagoryNames);
 
-                $('#editCategories').tagsInput();
-                $('#editstatusId').val(blogPost.status.statusName);
+            $('#editCategories').tagsInput();
+            $('#editstatusId').val(blogPost.status.statusName);
 
 
 

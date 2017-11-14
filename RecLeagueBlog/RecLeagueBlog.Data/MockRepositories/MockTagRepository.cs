@@ -81,7 +81,7 @@ namespace RecLeagueBlog.Data.Repositories
 
                 if(tag != null)
                 {
-                    p.Tags.Remove(updatedTag);
+                    p.Tags.Remove(tag);
                     p.Tags.Add(updatedTag);
                 }
             }

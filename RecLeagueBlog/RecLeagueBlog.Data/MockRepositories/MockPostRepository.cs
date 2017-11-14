@@ -165,6 +165,7 @@ namespace RecLeagueBlog.Data.Repositories
                 var catToAdd = categories.SingleOrDefault(cat => cat.CategoryName == c);
                 newCategories.Add(catToAdd);
             }
+            convertedPost.Content = postModel.Content;
             convertedPost.Categories = newCategories;
             convertedPost.Title = postModel.Title;
             convertedPost.DateCreated = DateTime.Now;

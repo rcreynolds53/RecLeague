@@ -147,7 +147,7 @@ function showEditTag(tagId) {
 
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:60542/tag/' + postId,
+        url: 'http://localhost:60542/tag/' + tagId,
         success: function (tag, status) {
             $('#editTag').val(tag.tagName);
 
