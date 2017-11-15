@@ -165,7 +165,7 @@ $('#editPostBtn').click(function (event) {
 });
 function deletePost(postId) {
 
-    var deletePost = confirm("Are you sure you want to delete this DVD from the collection?");
+    var deletePost = confirm("Are you sure you want to delete this post?");
     if (deletePost) {
 
         $.ajax({
