@@ -153,6 +153,18 @@
     <Compile Include="Migrations\201711142106170_TestingEntity.Designer.cs">
       <DependentUpon>201711142106170_TestingEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711152117328_RedoDatabase.cs" />
+    <Compile Include="Migrations\201711152117328_RedoDatabase.Designer.cs">
+      <DependentUpon>201711152117328_RedoDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711152127022_UserPasswordCheck.cs" />
+    <Compile Include="Migrations\201711152127022_UserPasswordCheck.Designer.cs">
+      <DependentUpon>201711152127022_UserPasswordCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711152136151_StupidUsers.cs" />
+    <Compile Include="Migrations\201711152136151_StupidUsers.Designer.cs">
+      <DependentUpon>201711152136151_StupidUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockRepositories\MockCategoryRepository.cs" />
     <Compile Include="MockRepositories\MockPostRepository.cs" />
@@ -202,6 +214,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711142106170_TestingEntity.resx">
       <DependentUpon>201711142106170_TestingEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711152117328_RedoDatabase.resx">
+      <DependentUpon>201711152117328_RedoDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711152127022_UserPasswordCheck.resx">
+      <DependentUpon>201711152127022_UserPasswordCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711152136151_StupidUsers.resx">
+      <DependentUpon>201711152136151_StupidUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

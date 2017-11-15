@@ -73,7 +73,7 @@ namespace RecLeagueBlog.Data.MockRepositories
             _users.Add(user);
 
         }
-        public void ConvertVMtoUserForEdit(UserRoleViewModel viewModel)
+        public void ConvertVMtoUserForEditAsync(UserRoleViewModel viewModel)
         {
             var user = viewModel.AppUser;
             _users.RemoveAll(u => u.Id == viewModel.AppUser.Id);

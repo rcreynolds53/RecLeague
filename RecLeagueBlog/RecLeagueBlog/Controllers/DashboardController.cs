@@ -18,14 +18,12 @@ namespace RecLeagueBlog.Controllers
     {
         BlogManager manager = BlogManagerFactory.Create();
 
-        [Authorize(Roles = "manager")]
         public ActionResult Index()
         {
 
             return View();
         }
 
-        [Authorize(Roles = "manager")]
         public ActionResult Posts()
         {
             return View();
@@ -92,9 +90,8 @@ namespace RecLeagueBlog.Controllers
 
             var user = userMgr.FindByName(model.AppUser.UserName);
             var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
-
             userMgr.AddToRole(user.Id, role.Name);
-
+            context.SaveChanges();
             return RedirectToAction("Users");
 
         }
@@ -104,7 +101,6 @@ namespace RecLeagueBlog.Controllers
         {
             var user = manager.GetUser(id);
             var model = manager.ConvertUserToVM(user);
-            model.SetRoleItems(manager.GetAllRoles());
             return View(model);
         }
 

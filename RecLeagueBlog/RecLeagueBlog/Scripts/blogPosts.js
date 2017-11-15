@@ -105,7 +105,7 @@ function loadPosts() {
                     row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit</a></td>';
                     // this was after the Edit link above. <a onclick="deletePost(' + blogPostId + ')"> Delete</a>
                 }
-                else if (post.status.statusName == "Pending" && post.userName == AppGlobal.user.name) {
+                else if (post.status.statusName == "Pending" && post.appUser.userName == AppGlobal.user.name) {
 
                     row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit</a></td>';
                 }
@@ -241,7 +241,7 @@ function showEditPost(postId) {
             $('#editCategories').importTags(catagoryNames);
 
             $('#editCategories').tagsInput();
-            $('#editstatusId').val(blogPost.status.statusName);
+            $('#editStatusId').val(blogPost.status.statusName);
 
 
 
