@@ -38,6 +38,20 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public void UpdateBlogPost(BlogPost updatedPost)
         {
+            context.BlogPosts.Attach(updatedPost);
+
+            foreach( var tag in updatedPost.Tags )
+            {
+                context.Tags.Attach(tag);
+            }
+
+            foreach (var category in updatedPost.Categories)
+            {
+                context.Categories.Attach(category);
+            }
+
+            context.BlogPosts.Attach(updatedPost);
+
             context.Entry(updatedPost).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
         }
@@ -54,43 +68,61 @@ namespace RecLeagueBlog.Data.EFRepositories
             var categories = context.Categories.ToList();
             foreach (var t in postModel.TagsToPost)
             {
-                if (!tags.Any(tag => tag.TagName == t))
+                if (!context.Tags.Any(tag => tag.TagName == t))
                 {
                     Tag tagToAdd = new Tag();
                     tagToAdd.TagName = t;
-                    tags.Add(tagToAdd);
+                    context.Tags.Add(tagToAdd);
                 }
             }
+            context.SaveChanges();
 
             foreach (var c in postModel.Categories)
             {
-                if (!categories.Any(cat => cat.CategoryName == c))
+                if (!context.Categories.Any(cat => cat.CategoryName == c))
                 {
                     Category catToAdd = new Category();
                     catToAdd.CategoryName = c;
-                    categories.Add(catToAdd);
+                    context.Categories.Add(catToAdd);
                 }
             }
+
+            context.SaveChanges();
 
             BlogPost convertedPost = context.BlogPosts.Single(p => p.BlogPostId == postModel.BlogPostId);
             List<Tag> newTags = new List<Tag>();
             foreach (var t in postModel.TagsToPost)
             {
 
-                var tagToAdd = tags.SingleOrDefault(tag => tag.TagName == t);
+                var tagToAdd = context.Tags.SingleOrDefault(tag => tag.TagName == t);
                 newTags.Add(tagToAdd);
 
 
             }
+
+            convertedPost.Tags.Clear();
+
+            context.SaveChanges();
+
             convertedPost.Tags = newTags;
+
+
+            context.SaveChanges();
+
             List<Category> newCategories = new List<Category>();
 
             foreach (var c in postModel.Categories)
             {
-                var catToAdd = categories.Single(cat => cat.CategoryName == c);
+                var catToAdd = context.Categories.Single(cat => cat.CategoryName == c);
                 newCategories.Add(catToAdd);
             }
+
+            convertedPost.Categories.Clear();
+            context.SaveChanges();
             convertedPost.Categories = newCategories;
+
+            context.SaveChanges();
+
             convertedPost.Title = postModel.Title;
             convertedPost.Content = postModel.Content;
             convertedPost.Status = context.Statuses.First(s => s.StatusName == postModel.StatusName);

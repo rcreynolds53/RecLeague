@@ -27,6 +27,6 @@ namespace RecLeagueBlog.Data
             base.OnModelCreating(modelBuilder);
         }
 
-        public System.Data.Entity.DbSet<RecLeagueBlog.Models.Identity.AppRole> IdentityRoles { get; set; }
+        public DbSet<AppRole> IdentityRoles { get; set; }
     }
 }
