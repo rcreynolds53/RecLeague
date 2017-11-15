@@ -28,19 +28,12 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public List<BlogPost> GetAllPosts()
         {
-            var posts = (from p in context.BlogPosts
-                         select p).ToList();
-
-            return posts;
+            return context.BlogPosts.ToList();
         }
 
         public BlogPost GetPostById(int postId)
         {
-            var post = (from p in context.BlogPosts
-                        where p.BlogPostId == postId
-                        select p).FirstOrDefault();
-
-            return post;
+            return context.BlogPosts.FirstOrDefault(p => p.BlogPostId == postId);
         }
 
         public void UpdateBlogPost(BlogPost updatedPost)
@@ -51,25 +44,115 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public List<BlogPost> GetThreeRecent()
         {
-            var posts = (from p in context.BlogPosts
-                         orderby p.DateCreated descending
-                         select p).Take(3).ToList();
-            return posts;
+            return context.BlogPosts.OrderByDescending(p=>p.DateCreated).Take(3).ToList();
+
         }
 
         public BlogPost UpdatePostModel(AddPostViewModel postModel)
         {
-            throw new NotImplementedException();
+            var tags = context.Tags.ToList();
+            var categories = context.Categories.ToList();
+            foreach (var t in postModel.TagsToPost)
+            {
+                if (!tags.Any(tag => tag.TagName == t))
+                {
+                    Tag tagToAdd = new Tag();
+                    tagToAdd.TagName = t;
+                    tags.Add(tagToAdd);
+                }
+            }
+
+            foreach (var c in postModel.Categories)
+            {
+                if (!categories.Any(cat => cat.CategoryName == c))
+                {
+                    Category catToAdd = new Category();
+                    catToAdd.CategoryName = c;
+                    categories.Add(catToAdd);
+                }
+            }
+
+            BlogPost convertedPost = context.BlogPosts.Single(p => p.BlogPostId == postModel.BlogPostId);
+            List<Tag> newTags = new List<Tag>();
+            foreach (var t in postModel.TagsToPost)
+            {
+
+                var tagToAdd = tags.SingleOrDefault(tag => tag.TagName == t);
+                newTags.Add(tagToAdd);
+
+
+            }
+            convertedPost.Tags = newTags;
+            List<Category> newCategories = new List<Category>();
+
+            foreach (var c in postModel.Categories)
+            {
+                var catToAdd = categories.Single(cat => cat.CategoryName == c);
+                newCategories.Add(catToAdd);
+            }
+            convertedPost.Categories = newCategories;
+            convertedPost.Title = postModel.Title;
+            convertedPost.Content = postModel.Content;
+            convertedPost.Status = context.Statuses.First(s => s.StatusName == postModel.StatusName);
+
+            return convertedPost;
         }
 
-        BlogPost IBlogPostRepository.ConvertPostModel(AddPostViewModel postModel)
+        public BlogPost ConvertPostModel(AddPostViewModel postModel)
         {
-            throw new NotImplementedException();
+            var tags = context.Tags.ToList();
+            var categories = context.Categories.ToList();
+
+            foreach (var t in postModel.TagsToPost)
+            {
+                if (!tags.Any(tag => tag.TagName == t))
+                {
+                    Tag tagToAdd = new Tag();
+                    tagToAdd.TagName = t;
+                    tags.Add(tagToAdd);
+                }
+            }
+
+            foreach (var c in postModel.Categories)
+            {
+                if (!categories.Any(cat => cat.CategoryName == c))
+                {
+                    Category catToAdd = new Category();
+                    catToAdd.CategoryName = c;
+                    categories.Add(catToAdd);
+                }
+            }
+
+            BlogPost convertedPost = new BlogPost();
+            var newTags = new List<Tag>();
+            foreach (var t in postModel.TagsToPost)
+            {
+
+                var tagToAdd = tags.Single(tag => tag.TagName == t);
+                newTags.Add(tagToAdd);
+
+
+            }
+            convertedPost.Tags = newTags;
+            List<Category> newCategories = new List<Category>();
+
+            foreach (var c in postModel.Categories)
+            {
+                var catToAdd = categories.Single(cat => cat.CategoryName == c);
+                newCategories.Add(catToAdd);
+            }
+            convertedPost.Content = postModel.Content;
+            convertedPost.Categories = newCategories;
+            convertedPost.Title = postModel.Title;
+            convertedPost.DateCreated = DateTime.Now;
+            convertedPost.AppUser = context.Users.Single(u => u.UserName == postModel.UserName);
+            convertedPost.Status = context.Statuses.Single(s => s.StatusName == postModel.StatusName);
+            return convertedPost;
         }
 
         public List<BlogPost> GetAllPublishedPosts()
         {
-            throw new NotImplementedException();
+            return context.BlogPosts.Where(p => p.Status.StatusName.ToUpper() == "PUBLISHED").ToList();
         }
     }
 }

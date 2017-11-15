@@ -13,6 +13,7 @@ namespace RecLeagueBlog.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public string StatusName { get; set; }
+        public string UserName { get; set; }
 
         public string [] TagsToPost { get; set; }
         public string [] Categories { get; set; }

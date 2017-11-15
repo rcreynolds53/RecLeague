@@ -74,9 +74,9 @@ namespace RecLeagueBlog.Data
         {
             _categoryRepo.CreateCategory(newCategory);
         }
-        public void UpdateCategory(Tag updatedCategory)
+        public void UpdateCategory(Category updatedCategory)
         {
-            _tagRepo.UpdateTag(updatedCategory);
+            _categoryRepo.UpdateCategory(updatedCategory);
         }
 
         // POSTS BLL
@@ -141,11 +141,11 @@ namespace RecLeagueBlog.Data
 
         public void CreateStaticPage (StaticPage newPage)
         {
-            if (_staticPageRepository.GetAllPages().Any())
-            {
-                newPage.StaticPageId = _staticPageRepository.GetAllPages().Max(p => p.StaticPageId) + 1;
-            }
-            newPage.StaticPageId = 1;
+            //if (_staticPageRepository.GetAllPages().Any())
+            //{
+            //    newPage.StaticPageId = _staticPageRepository.GetAllPages().Max(p => p.StaticPageId) + 1;
+            //}
+            //newPage.StaticPageId = 1;
             _staticPageRepository.CreateStaticPage(newPage);
         }
 

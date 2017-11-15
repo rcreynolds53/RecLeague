@@ -28,19 +28,12 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public List<Tag> GetAllTags()
         {
-            var tags = (from t in context.Tags
-                        select t).ToList();
-
-            return tags;
+            return context.Tags.ToList();
         }
 
         public Tag GetTag(int tagId)
         {
-            var tag = (from t in context.Tags
-                       where t.TagId == tagId
-                       select t).FirstOrDefault();
-
-            return tag;
+            return context.Tags.FirstOrDefault(t => t.TagId == tagId);
         }
 
         public void UpdateTag(Tag updatedTag)

@@ -29,11 +29,12 @@ namespace RecLeagueBlog.Controllers
             var model = manager.GetPost(id);
             return View(model);
         }
+
         [Route("/StaticPage/{id}")]
         public ActionResult StaticPage(int id)
         {
            var page = manager.GetStaticPage(id);
-            return Content(page.Content);
+            return View(page);
         }
     }
 }

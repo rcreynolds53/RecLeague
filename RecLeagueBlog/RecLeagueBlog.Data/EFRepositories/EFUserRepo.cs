@@ -69,10 +69,7 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public IEnumerable<IdentityRole> GetAllRoles()
         {
-            var roles = (from r in context.Roles
-                         select r).ToList();
-
-            return roles;
+            return context.Roles.ToList();
         }
         public UserRoleViewModel ConvertUserToVM(AppUser user)
         {

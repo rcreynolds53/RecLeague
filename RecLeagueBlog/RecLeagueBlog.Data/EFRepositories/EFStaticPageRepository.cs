@@ -14,25 +14,47 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public StaticPageViewModel ConvertPageToVm(StaticPage staticPage)
         {
-            throw new NotImplementedException();
+            StaticPageViewModel viewModel = new StaticPageViewModel();
+            viewModel.StaticPage = staticPage;
+            viewModel.StaticPage.Status = context.Statuses.FirstOrDefault(s => s.StatusId == staticPage.Status.StatusId);
+            return viewModel;
         }
 
         public void ConvertVmToPage(StaticPageViewModel viewModel)
         {
-            throw new NotImplementedException();
+            StaticPage convertedPage = new StaticPage();
+
+            if (viewModel.StaticPage.StaticPageId == 0)
+            {
+               
+                convertedPage.Title = viewModel.StaticPage.Title;
+                convertedPage.Content = viewModel.StaticPage.Content;
+                //context.Statuses.Attach(viewModel.StaticPage.Status);
+                convertedPage.Status = context.Statuses.First(s => s.StatusId == viewModel.StaticPage.Status.StatusId);
+                context.StaticPages.Add(convertedPage);
+                context.SaveChanges();
+            }
+            else
+            {
+                convertedPage.Title = viewModel.StaticPage.Title;
+                convertedPage.Content = viewModel.StaticPage.Content;
+                convertedPage.Status = context.Statuses.First(s => s.StatusId == viewModel.StaticPage.Status.StatusId);
+                convertedPage.StaticPageId = viewModel.StaticPage.StaticPageId;
+                context.Entry(convertedPage).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
         public void CreateStaticPage(StaticPage newPage)
         {
+            
             context.StaticPages.Add(newPage);
             context.SaveChanges();
         }
 
         public void DeleteStaticPage(int staticPageId)
         {
-            var post = (from p in context.StaticPages
-                        where p.StaticPageId == staticPageId
-                        select p).FirstOrDefault();
+            var post = context.StaticPages.FirstOrDefault(s => s.StaticPageId == staticPageId);
             context.StaticPages.Remove(post);
             context.SaveChanges();
         }
@@ -45,19 +67,12 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public List<StaticPage> GetAllPages()
         {
-            var pages = (from p in context.StaticPages
-                         select p).ToList();
-
-            return pages;
+            return context.StaticPages.ToList();
         }
 
         public List<StaticPage> GetAllPublishedPages()
         {
-            var pages = (from p in context.StaticPages
-                        where p.Status.StatusId == 1
-                        select p).ToList();
-
-            return pages;
+            return context.StaticPages.Where(s => s.Status.StatusId == 1).ToList();
         }
 
         public List<StaticPage> GetAllPublishStaticPages()
@@ -67,19 +82,12 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public IEnumerable<Status> GetAllStatuses()
         {
-            var statuses = (from s in context.Statuses
-                         select s).ToList();
-
-            return statuses;
+            return context.Statuses.ToList();
         }
 
         public StaticPage GetPageByID(int staticPageId)
         {
-            var page = (from p in context.StaticPages
-                        where p.StaticPageId == staticPageId
-                        select p).FirstOrDefault();
-
-            return page;
+            return context.StaticPages.FirstOrDefault(s => s.StaticPageId == staticPageId);
         }
     }
 }

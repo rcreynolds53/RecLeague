@@ -1,26 +1,29 @@
 $(document).ready(function () {
     loadPosts();
-    $('#createPostBtn').on('click', function () {
-        $('#addPostDiv').toggle('slow');
-        $('#postTableDiv').toggle();
-        $('editPostDiv').hide();
-    });
-    var status = $('#statusId').val();
+});
 
-    $('#statusId').change(function () {
-        status = $(this).val();
-        alert(status);
-    });
+$('#createPostBtn').on('click', function () {
+    $('#addPostDiv').toggle('slow');
+    $('#postTableDiv').hide();
+    $('editPostDiv').hide();
+});
+var status = $('#statusId').val();
 
-    var editStatus = $('#editStatusId').val();
+$('#statusId').change(function () {
+    status = $(this).val();
+    alert(status);
+});
 
-        $('#editStatusId').change(function () {
-            editStatus = $(this).val();
-            alert(editStatus);
-        }),
+var editStatus = $('#editStatusId').val();
+
+$('#editStatusId').change(function () {
+    editStatus = $(this).val();
+    alert(editStatus);
+}),
 
     $('#addPostBtn').click(function (event) {
-        tinyMCE.triggerSave();
+    tinyMCE.triggerSave();
+    var test = $('#addPostContent').val();
         // var haveValidationErrors = checkAndDisplayValidationErrors($('#addMovieFormDiv').find('input'));
 
         // if (haveValidationErrors) {
@@ -28,11 +31,11 @@ $(document).ready(function () {
         // }
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:60542/post',
+            url: '/post',
             data: JSON.stringify({
                 title: $('#addPostTitle').val(),
-                content: $('#addPostContent').val(),
-                statusName: status,               
+                content: test,
+                statusName: status,
                 tagsToPost: postTags(),
                 categories: postCategories()
 
@@ -60,7 +63,6 @@ $(document).ready(function () {
             }
         });
     });
-});
 function hideAddPostForm() {
     $('#addPostTitle').empty();
     $('#addPostContent').empty();
@@ -77,7 +79,7 @@ function loadPosts() {
     $('#editPostDiv').hide();
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:60542/posts',
+        url: '/posts',
         success: function (blogPostArray) {
             $.each(blogPostArray, function (index, post) {
                 var title = post.title;
@@ -100,7 +102,8 @@ function loadPosts() {
                 });
                 row += '</ul></td>';
                 if (AppGlobal.user.role) {
-                    row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit |</a><a onclick ="deletePost(' + blogPostId + ')"> Delete</a></td>';
+                    row += '<td><a onclick ="showEditPost(' + blogPostId + ')">Edit</a></td>';
+                    // this was after the Edit link above. <a onclick="deletePost(' + blogPostId + ')"> Delete</a>
                 }
                 else if (post.status.statusName == "Pending" && post.userName == AppGlobal.user.name) {
 
@@ -108,9 +111,9 @@ function loadPosts() {
                 }
                 else {
                     row += '<td>Can\'t edit post</td>';
-                }   
+                }
                 row += '</tr>';
-                
+
                 contentRows.append(row);
             });
         },
@@ -130,12 +133,12 @@ $('#editPostBtn').click(function (event) {
     var postId = $('#postId').val();
     $.ajax({
         type: 'PUT',
-        url: 'http://localhost:60542/post/' + postId,
+        url: '/post/' + postId,
         data: JSON.stringify({
             blogPostId: parseInt(postId),
             title: $('#editPostTitle').val(),
             content: $('#editPostContent').val(),
-            statusName: editStatus,   
+            statusName: editStatus,
             tagsToPost: editTags(),
             categories: editCategories()
 
@@ -163,6 +166,7 @@ $('#editPostBtn').click(function (event) {
         }
     });
 });
+<<<<<<< HEAD
 function deletePost(postId) {
 
     var deletePost = confirm("Are you sure you want to delete this post?");
@@ -183,12 +187,35 @@ function deletePost(postId) {
         });
     }
 }
+=======
+//function deletePost(postId) {
+
+//    var deletePost = confirm("Are you sure you want to delete this DVD from the collection?");
+//    if (deletePost) {
+
+//        $.ajax({
+//            type: "DELETE",
+//            url: ' + postId,
+//            success: function () {
+//                loadPosts();
+//            },
+//            error: function (jpXHR, textStatus, errorThrown) {
+//                $('#errorMessages')
+//                    .append($('<li>')
+//                        .attr({ class: 'list-group-item list-group-item-danger' })
+//                        .text('Error calling webservice. Please try again later.'));
+//            }
+//        });
+//    }
+//}
+>>>>>>> 72a2c04d78ac4dfca823309d230f3fde51ecebec
 
 function clearMoviesTable() {
     $('#contentRows').empty();
 }
 function showEditPost(postId) {
     $('#errorMessages').empty();
+    $('#addPostDiv').hide();
     $('#postTableDiv').hide();
     $('#editPostDiv').show();
     $('#postId').val(postId);
@@ -207,14 +234,14 @@ function showEditPost(postId) {
                 });
             $('#editTags').importTags(tagNames);
             //$('#editTags').append(String(tagNames)),
-                $('#editTags').tagsInput(),
+            $('#editTags').tagsInput(),
                 $.each(blogPost.categories, function (index, catagory) {
                     catagoryNames += String(catagory.categoryName) + ",";
                 });
-                $('#editCategories').importTags(catagoryNames);
+            $('#editCategories').importTags(catagoryNames);
 
-                $('#editCategories').tagsInput();
-                $('#editstatusId').val(blogPost.status.statusName);
+            $('#editCategories').tagsInput();
+            $('#editstatusId').val(blogPost.status.statusName);
 
 
 

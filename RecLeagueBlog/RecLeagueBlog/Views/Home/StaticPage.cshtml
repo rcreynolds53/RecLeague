@@ -1,0 +1,20 @@
+﻿@model RecLeagueBlog.Models.StaticPage
+@{
+    ViewBag.Title = "StaticPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>@Model.Title</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <p class="lead">@Html.Raw(Model.Content)</p>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>

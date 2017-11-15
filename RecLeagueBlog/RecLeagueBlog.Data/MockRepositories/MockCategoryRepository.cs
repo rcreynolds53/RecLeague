@@ -75,7 +75,7 @@ namespace RecLeagueBlog.Data.Repositories
                 var category = p.Categories.SingleOrDefault(c => c.CategoryId == updatedCategory.CategoryId);
                 if (category != null)
                 {
-                    p.Categories.Remove(updatedCategory);
+                    p.Categories.Remove(category);
                     p.Categories.Add(updatedCategory);
                 }
             }                       

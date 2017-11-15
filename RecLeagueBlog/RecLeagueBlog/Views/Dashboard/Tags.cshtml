@@ -14,7 +14,7 @@
 	</div>
 	<div class="col-md-3">
 		<div class="form-group">
-			<input type="text" class="input-lg form-control" id="search-by-term" placeholder="Search Term">
+			<input type="text" class="input-lg form-control" id="searchTerm" placeholder="Search Term">
 		</div>
 	</div>
 </div>
@@ -62,7 +62,7 @@
 		<div class="form-group">
 			<div class="col-md-2">
 				<input type="hidden" id="edit-movie-id">
-				<button type="button" id="editTagCancelBtn" class="btn btn-danger" onclick="hideEditPostForm()">
+				<button type="button" id="editTagCancelBtn" class="btn btn-danger" onclick="hideAddTag()">
 					Cancel
 				</button>
 			</div>
@@ -76,5 +76,5 @@
 </div>
 
 @section scripts {
-	<script src="~/Scripts/home.js"></script>
+	<script src="~/Scripts/tagScript.js"></script>
 }

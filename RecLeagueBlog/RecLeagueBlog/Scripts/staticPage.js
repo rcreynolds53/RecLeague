@@ -11,8 +11,8 @@ function loadPages() {
             $.each(staticPageList, function (index, page) {
                 var title = page.title;
                 var pageId = page.staticPageId;
-
-                var li = '<li><a href = "Home/StaticPage/' + pageId + '">' + title + '</a></li>';
+                var li = '<li><a href = "http://localhost:60542/Home/StaticPage/' + pageId + '">' + title + '</a></li>';
+                //var li = '<li><a href = "Home/StaticPage/' + pageId + '">' + title + '</a></li>';
                 pageListItem.append(li);
 
             });

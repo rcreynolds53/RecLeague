@@ -61,7 +61,7 @@ function loadCategories() {
         success: function (categoriesArray) {
             $.each(categoriesArray, function (index, category) {
                 var categoryName = category.categoryName;
-                var categoryId = category.categoryName;
+                var categoryId = category.categoryId;
 
                 var row = '<tr>';
                 row += '<td>' + categoryName + '</td>';
@@ -193,3 +193,17 @@ function checkAndDisplayValidationErrors(input) {
         return false;
     }
 }
+
+$("#searchTerm").keyup(function () {
+    var value = this.value.toLowerCase().trim();
+
+    $("table tr").each(function (index) {
+        if (!index) return;
+        $(this).find("td").each(function () {
+            var id = $(this).text().toLowerCase().trim();
+            var not_found = id.indexOf(value) === -1;
+            $(this).closest('tr').toggle(!not_found);
+            return not_found;
+        });
+    });
+});
