@@ -166,7 +166,7 @@ $('#editPostBtn').click(function (event) {
         }
     });
 });
-<<<<<<< HEAD
+
 function deletePost(postId) {
 
     var deletePost = confirm("Are you sure you want to delete this post?");
@@ -187,7 +187,7 @@ function deletePost(postId) {
         });
     }
 }
-=======
+
 //function deletePost(postId) {
 
 //    var deletePost = confirm("Are you sure you want to delete this DVD from the collection?");
@@ -208,7 +208,7 @@ function deletePost(postId) {
 //        });
 //    }
 //}
->>>>>>> 72a2c04d78ac4dfca823309d230f3fde51ecebec
+
 
 function clearMoviesTable() {
     $('#contentRows').empty();
