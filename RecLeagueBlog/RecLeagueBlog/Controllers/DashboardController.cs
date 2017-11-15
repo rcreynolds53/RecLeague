@@ -184,7 +184,7 @@ namespace RecLeagueBlog.Controllers
                 await store.UpdateAsync(identityUser);
 
                 TempData["PasswordReset"] = "Password has been successfully reset";
-                return View("UserProfile");
+                return View("ResetPassword");
             }
             return View("ResetPassword");
         }
