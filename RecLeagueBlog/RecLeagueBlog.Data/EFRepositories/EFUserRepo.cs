@@ -73,14 +73,24 @@ namespace RecLeagueBlog.Data.EFRepositories
         }
         public UserRoleViewModel ConvertUserToVM(AppUser user)
         {
-            throw new NotImplementedException();
+            var userVM = new UserRoleViewModel();
+            userVM.AppUser = user;
+            userVM.SetRoleItems(context.Roles);
+            return userVM;
         }
 
         public void ConvertVMtoUserForAdd(UserRoleViewModel viewModel)
         {
-            var user = viewModel.AppUser;
-            context.Users.Add(user);
-            context.SaveChanges();
+            throw new NotImplementedException();
+            //var store = new UserStore<AppUser>(context);           
+            //var manager = new UserManager<AppUser>(store);
+            //var user = viewModel.AppUser;
+            //var role = context.Roles.SingleOrDefault(r => r.Id == viewModel.Role.Id);
+
+            //manager.Create(user, viewModel.NewPassword);
+            //context.SaveChanges();
+            //manager.AddToRole(;
+            //context.SaveChanges();
         }
 
         public void ConvertVMtoUserForEdit(UserRoleViewModel viewModel)

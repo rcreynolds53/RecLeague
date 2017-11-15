@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using System.Linq;
 
 namespace RecLeagueBlog.Controllers
 {
@@ -61,15 +62,40 @@ namespace RecLeagueBlog.Controllers
         [HttpPost]
         public ActionResult AddUser(UserRoleViewModel model)
         {
-            if (ModelState.IsValid)
+            model.AppUser.UserName = model.AppUser.Email;
+            var context = new RecBlogDBContext();
+            var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
+            var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            if (!roleMgr.RoleExists("admin"))
             {
-                manager.ConvertVMtoUserForAdd(model);
-                return RedirectToAction("Users");
+                roleMgr.Create(new IdentityRole() { Name = "admin" });
             }
-            else
+
+            if (!roleMgr.RoleExists("manager"))
             {
-                return View(model);
+                roleMgr.Create(new IdentityRole() { Name = "manager" });
             }
+
+            if (userMgr.FindByName(model.AppUser.UserName) == null)
+            {
+                var newuser = new AppUser()
+                {
+                    FirstName = model.AppUser.FirstName,
+                    LastName = model.AppUser.LastName,
+                    UserName = model.AppUser.UserName,
+                    Email = model.AppUser.Email
+
+                };
+                userMgr.Create(newuser, model.NewPassword);
+            }
+
+            var user = userMgr.FindByName(model.AppUser.UserName);
+            var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
+
+            userMgr.AddToRole(user.Id, role.Name);
+
+            return RedirectToAction("Users");
 
         }
 
