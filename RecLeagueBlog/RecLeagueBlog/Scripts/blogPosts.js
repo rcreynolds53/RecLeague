@@ -166,6 +166,28 @@ $('#editPostBtn').click(function (event) {
         }
     });
 });
+
+function deletePost(postId) {
+
+    var deletePost = confirm("Are you sure you want to delete this post?");
+    if (deletePost) {
+
+        $.ajax({
+            type: "DELETE",
+            url: 'http://localhost:60542/post/' + postId,
+            success: function () {
+                loadPosts();
+            },
+            error: function (jpXHR, textStatus, errorThrown) {
+                $('#errorMessages')
+                    .append($('<li>')
+                        .attr({ class: 'list-group-item list-group-item-danger' })
+                        .text('Error calling webservice. Please try again later.'));
+            }
+        });
+    }
+}
+
 //function deletePost(postId) {
 
 //    var deletePost = confirm("Are you sure you want to delete this DVD from the collection?");
@@ -186,6 +208,7 @@ $('#editPostBtn').click(function (event) {
 //        });
 //    }
 //}
+
 
 function clearMoviesTable() {
     $('#contentRows').empty();
