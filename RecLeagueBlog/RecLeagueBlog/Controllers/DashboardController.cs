@@ -18,14 +18,12 @@ namespace RecLeagueBlog.Controllers
     {
         BlogManager manager = BlogManagerFactory.Create();
 
-        [Authorize(Roles = "manager")]
         public ActionResult Index()
         {
 
             return View();
         }
 
-        [Authorize(Roles = "manager")]
         public ActionResult Posts()
         {
             return View();
