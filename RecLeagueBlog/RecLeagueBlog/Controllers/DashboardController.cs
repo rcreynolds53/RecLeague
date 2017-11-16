@@ -18,29 +18,34 @@ namespace RecLeagueBlog.Controllers
     {
         BlogManager manager = BlogManagerFactory.Create();
 
+        [Authorize(Roles = "admin, manager")]
         public ActionResult Index()
         {
 
             return View();
         }
 
+        [Authorize(Roles = "admin, manager")]
         public ActionResult Posts()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Categories()
         {
 
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Tags()
         {
 
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult Users()
         {
@@ -49,6 +54,7 @@ namespace RecLeagueBlog.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult AddUser()
         {
@@ -57,6 +63,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult AddUser(UserRoleViewModel model)
         {
@@ -96,6 +103,7 @@ namespace RecLeagueBlog.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditUser(string id)
         {
@@ -104,6 +112,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditUser(UserRoleViewModel viewModel)
         {
@@ -111,6 +120,7 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Users");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult DeleteUser(string id)
         {
@@ -118,6 +128,7 @@ namespace RecLeagueBlog.Controllers
             return View(user);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult DeleteUser(AppUser user)
         {
@@ -125,6 +136,7 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Users");
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Pages()
         {
             var model = manager.GetAllStaticPages();
@@ -132,6 +144,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult AddPages()
         {
             var model = new StaticPageViewModel();
@@ -139,6 +152,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult AddPages(StaticPageViewModel viewModel)
         {
@@ -167,6 +181,7 @@ namespace RecLeagueBlog.Controllers
         //    return RedirectToAction("Pages");
         //}
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditPages(int id)
         {
@@ -176,6 +191,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditPages(StaticPageViewModel editedPage)
         {
@@ -183,11 +199,13 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Pages");
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult ResetPassword()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> ResetPassword(string userId, string newPassword, ResetPasswordModel model)
         {
@@ -211,11 +229,13 @@ namespace RecLeagueBlog.Controllers
             return View("ResetPassword");
         }
 
+        [Authorize(Roles = "admin, manager")]
         public ActionResult UpdatePassword()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin, manager")]
         [HttpPost]
         public async Task<ActionResult> UpdatePassword(UpdatePasswordModel model, string userId, string newPassword)
         {
