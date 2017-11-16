@@ -57,8 +57,14 @@ namespace RecLeagueBlog.Data.EFRepositories
         }
 
         public List<BlogPost> GetThreeRecent()
-        {
-            return context.BlogPosts.OrderByDescending(p=>p.DateCreated).Take(3).ToList();
+        {            
+            var publishedPosts = context.BlogPosts.Where(p => p.Status.StatusId == 1);
+            var getThese = publishedPosts.OrderByDescending(p => p.DateCreated).Take(3).ToList();
+            return getThese;
+            //return (from p in context.BlogPosts
+                    //where p.Status.StatusName.ToUpper() == "PUBLISHED"
+                    //orderby p.DateCreated descending
+                    //select p).Take(3).ToList();
 
         }
 

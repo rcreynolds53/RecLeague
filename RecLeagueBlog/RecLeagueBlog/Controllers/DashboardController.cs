@@ -195,18 +195,19 @@ namespace RecLeagueBlog.Controllers
             RecBlogDBContext context = new RecBlogDBContext();
             UserStore<AppUser> store = new UserStore<AppUser>(context);
             UserManager<AppUser> userManager = new UserManager<AppUser>(store);
-            userId = User.Identity.GetUserId();
+            
+            //userId = User.Identity.GetUserName();
             //if (model.NewPassword != null && model.Email != null)
             if (ModelState.IsValid)
             {
                 newPassword = model.NewPassword;
                 string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
-                AppUser identityUser = await store.FindByIdAsync(userId);
+                AppUser identityUser = await store.FindByEmailAsync(model.Email);
                 await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
                 await store.UpdateAsync(identityUser);
 
                 TempData["PasswordReset"] = "Password has been successfully reset";
-                return View("UserProfile");
+                return View("ResetPassword");
             }
             return View("ResetPassword");
         }
