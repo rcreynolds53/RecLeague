@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RecLeagueBlog.Models.BlogPost>
+﻿@model List<RecLeagueBlog.Models.BlogPost>
 @{
     ViewBag.Title = "Blog";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,8 +24,8 @@
         </div>
         @foreach (var post in Model)
         {
-            if (post.Status.StatusId == 1)
-            {
+            //if (post.Status.StatusId == 1)
+            //{
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.AppUser.UserName</h3>
@@ -44,7 +44,7 @@
                         <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
                     </div>
                 </div>
-            }
+            @*}*@
         }
     </div>
 </div>

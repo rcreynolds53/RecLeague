@@ -48,7 +48,9 @@ $('#editStatusId').change(function () {
             success: function (data, status) {
                 $('#errorMessages').empty();
                 $('#addPostTitle').val('');
-                $('#addPostContent').val('');
+                tinymce.get('addPostContent').setContent('');      
+                $('#tags').importTags('');
+                $('#categories').importTags('');
                 $('#editPostDiv').hide('');
                 loadPosts();
 

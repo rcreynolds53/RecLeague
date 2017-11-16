@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RecLeagueBlog.Models.BlogPost>
+﻿@model List<RecLeagueBlog.Models.BlogPost>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -18,8 +18,8 @@
                     Posted on @post.DateCreated.ToString("MM/dd/yyyy") by @post.AppUser.UserName
                 </div>
                 <div class="panel-body">
+                    <h2>@post.Title</h2>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <h2>@post.Title</h2>
                         @if (@post.Content.Length < 140)
                         {
                             <p>@Html.Raw(post.Content)</p>
@@ -28,7 +28,7 @@
                         {
                             <p>@Html.Raw(post.Content.Substring(0, 140))</p>
                         }
-                        <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More &rarr;</a>
+                        <a class="btn btn-default" href="@Url.Action("Post", "Home", new { id = post.BlogPostId }, null)">Read More</a>
                     </div>
                 </div>
             </div>
