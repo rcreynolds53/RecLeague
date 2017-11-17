@@ -133,25 +133,21 @@
     <Compile Include="Interfaces\IStaticPageRepository.cs" />
     <Compile Include="Interfaces\ITagRepository.cs" />
     <Compile Include="Interfaces\IUserRepo.cs" />
-    <Compile Include="Migrations\201711031613370_Init.cs" />
-    <Compile Include="Migrations\201711031613370_Init.Designer.cs">
-      <DependentUpon>201711031613370_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201711152112238_init.cs" />
+    <Compile Include="Migrations\201711152112238_init.Designer.cs">
+      <DependentUpon>201711152112238_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711031558321_testingmigration.cs" />
-    <Compile Include="Migrations\201711031558321_testingmigration.Designer.cs">
-      <DependentUpon>201711031558321_testingmigration.cs</DependentUpon>
+    <Compile Include="Migrations\201711152117328_RedoDatabase.cs" />
+    <Compile Include="Migrations\201711152117328_RedoDatabase.Designer.cs">
+      <DependentUpon>201711152117328_RedoDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711091552536_RemoveStatusIdFromPostModel.cs" />
-    <Compile Include="Migrations\201711091552536_RemoveStatusIdFromPostModel.Designer.cs">
-      <DependentUpon>201711091552536_RemoveStatusIdFromPostModel.cs</DependentUpon>
+    <Compile Include="Migrations\201711152127022_UserPasswordCheck.cs" />
+    <Compile Include="Migrations\201711152127022_UserPasswordCheck.Designer.cs">
+      <DependentUpon>201711152127022_UserPasswordCheck.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711092011077_postAndPagesModelChanges.cs" />
-    <Compile Include="Migrations\201711092011077_postAndPagesModelChanges.Designer.cs">
-      <DependentUpon>201711092011077_postAndPagesModelChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711142106170_TestingEntity.cs" />
-    <Compile Include="Migrations\201711142106170_TestingEntity.Designer.cs">
-      <DependentUpon>201711142106170_TestingEntity.cs</DependentUpon>
+    <Compile Include="Migrations\201711152136151_StupidUsers.cs" />
+    <Compile Include="Migrations\201711152136151_StupidUsers.Designer.cs">
+      <DependentUpon>201711152136151_StupidUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockRepositories\MockCategoryRepository.cs" />
@@ -188,20 +184,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711031613370_Init.resx">
-      <DependentUpon>201711031613370_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711152117328_RedoDatabase.resx">
+      <DependentUpon>201711152117328_RedoDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711031558321_testingmigration.resx">
-      <DependentUpon>201711031558321_testingmigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711152127022_UserPasswordCheck.resx">
+      <DependentUpon>201711152127022_UserPasswordCheck.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711091552536_RemoveStatusIdFromPostModel.resx">
-      <DependentUpon>201711091552536_RemoveStatusIdFromPostModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711092011077_postAndPagesModelChanges.resx">
-      <DependentUpon>201711092011077_postAndPagesModelChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711142106170_TestingEntity.resx">
-      <DependentUpon>201711142106170_TestingEntity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711152136151_StupidUsers.resx">
+      <DependentUpon>201711152136151_StupidUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -353,7 +343,12 @@
     <Content Include="scripts\tinymce\tinymce.min.js" />
   </ItemGroup>
   <ItemGroup>
+
     <WCFMetadata Include="Connected Services\" />
+
+    <EmbeddedResource Include="Migrations\201711152112238_init.resx">
+      <DependentUpon>201711152112238_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -18,31 +18,34 @@ namespace RecLeagueBlog.Controllers
     {
         BlogManager manager = BlogManagerFactory.Create();
 
-        [Authorize(Roles = "manager")]
+        [Authorize(Roles = "admin, manager")]
         public ActionResult Index()
         {
 
             return View();
         }
 
-        [Authorize(Roles = "manager")]
+        [Authorize(Roles = "admin, manager")]
         public ActionResult Posts()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Categories()
         {
 
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Tags()
         {
 
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult Users()
         {
@@ -51,6 +54,7 @@ namespace RecLeagueBlog.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult AddUser()
         {
@@ -59,6 +63,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult AddUser(UserRoleViewModel model)
         {
@@ -92,22 +97,22 @@ namespace RecLeagueBlog.Controllers
 
             var user = userMgr.FindByName(model.AppUser.UserName);
             var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
-
             userMgr.AddToRole(user.Id, role.Name);
-
+            context.SaveChanges();
             return RedirectToAction("Users");
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditUser(string id)
         {
             var user = manager.GetUser(id);
             var model = manager.ConvertUserToVM(user);
-            model.SetRoleItems(manager.GetAllRoles());
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditUser(UserRoleViewModel viewModel)
         {
@@ -115,6 +120,7 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Users");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult DeleteUser(string id)
         {
@@ -122,6 +128,7 @@ namespace RecLeagueBlog.Controllers
             return View(user);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult DeleteUser(AppUser user)
         {
@@ -129,6 +136,7 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Users");
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult Pages()
         {
             var model = manager.GetAllStaticPages();
@@ -136,6 +144,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult AddPages()
         {
             var model = new StaticPageViewModel();
@@ -143,6 +152,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult AddPages(StaticPageViewModel viewModel)
         {
@@ -171,6 +181,7 @@ namespace RecLeagueBlog.Controllers
         //    return RedirectToAction("Pages");
         //}
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditPages(int id)
         {
@@ -180,6 +191,7 @@ namespace RecLeagueBlog.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditPages(StaticPageViewModel editedPage)
         {
@@ -187,11 +199,13 @@ namespace RecLeagueBlog.Controllers
             return RedirectToAction("Pages");
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult ResetPassword()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> ResetPassword(string userId, string newPassword, ResetPasswordModel model)
         {
@@ -199,13 +213,14 @@ namespace RecLeagueBlog.Controllers
             RecBlogDBContext context = new RecBlogDBContext();
             UserStore<AppUser> store = new UserStore<AppUser>(context);
             UserManager<AppUser> userManager = new UserManager<AppUser>(store);
-            userId = User.Identity.GetUserId();
+            
+            //userId = User.Identity.GetUserName();
             //if (model.NewPassword != null && model.Email != null)
             if (ModelState.IsValid)
             {
                 newPassword = model.NewPassword;
                 string hashedNewPassword = userManager.PasswordHasher.HashPassword(newPassword);
-                AppUser identityUser = await store.FindByIdAsync(userId);
+                AppUser identityUser = await store.FindByEmailAsync(model.Email);
                 await store.SetPasswordHashAsync(identityUser, hashedNewPassword);
                 await store.UpdateAsync(identityUser);
 
@@ -215,11 +230,13 @@ namespace RecLeagueBlog.Controllers
             return View("ResetPassword");
         }
 
+        [Authorize(Roles = "admin, manager")]
         public ActionResult UpdatePassword()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin, manager")]
         [HttpPost]
         public async Task<ActionResult> UpdatePassword(UpdatePasswordModel model, string userId, string newPassword)
         {

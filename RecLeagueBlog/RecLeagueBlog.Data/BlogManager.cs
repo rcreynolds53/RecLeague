@@ -98,12 +98,7 @@ namespace RecLeagueBlog.Data
 
         public void CreateBlogPost(BlogPost newPost)
         {
-            if(_blogPostRepo.GetAllPosts().Any())
-            {
-                newPost.BlogPostId = _blogPostRepo.GetAllPosts().Max(p => p.BlogPostId) + 1;
-            }
 
-            newPost.BlogPostId = 1;
             _blogPostRepo.CreateBlogPost(newPost);
         }
 
@@ -203,7 +198,7 @@ namespace RecLeagueBlog.Data
 
         public void ConvertVMtoUserForEdit(UserRoleViewModel model)
         {
-            _userRepo.ConvertVMtoUserForEdit(model);
+            _userRepo.ConvertVMtoUserForEditAsync(model);
         }
 
         public UserRoleViewModel ConvertUserToVM(AppUser user)

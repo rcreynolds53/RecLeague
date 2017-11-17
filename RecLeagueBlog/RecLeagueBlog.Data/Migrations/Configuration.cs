@@ -62,9 +62,9 @@ namespace RecLeagueBlog.Data.Migrations
                 userMgr.Create(newuser, "Testing456");
             }
             var userMan = userMgr.FindByName("manager@recleague.com");
-            if (!userMgr.IsInRole(user.Id, "manager"))
+            if (!userMgr.IsInRole(userMan.Id, "manager"))
             {
-                userMgr.AddToRole(user.Id, "manager");
+                userMgr.AddToRole(userMan.Id, "manager");
             }
         }
     }

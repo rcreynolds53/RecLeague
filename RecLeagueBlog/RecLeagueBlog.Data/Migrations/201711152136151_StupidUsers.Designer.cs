@@ -7,13 +7,13 @@ namespace RecLeagueBlog.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AppUserMigration : IMigrationMetadata
+    public sealed partial class StupidUsers : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AppUserMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(StupidUsers));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711031426113_AppUser"; }
+            get { return "201711152136151_StupidUsers"; }
         }
         
         string IMigrationMetadata.Source

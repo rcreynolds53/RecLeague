@@ -7,13 +7,13 @@ namespace RecLeagueBlog.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class UserPasswordCheck : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UserPasswordCheck));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711031613370_Init"; }
+            get { return "201711152127022_UserPasswordCheck"; }
         }
         
         string IMigrationMetadata.Source

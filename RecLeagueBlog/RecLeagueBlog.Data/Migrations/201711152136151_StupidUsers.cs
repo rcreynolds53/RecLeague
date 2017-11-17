@@ -3,7 +3,7 @@ namespace RecLeagueBlog.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class RemoveStatusIdFromPostModel : DbMigration
+    public partial class StupidUsers : DbMigration
     {
         public override void Up()
         {

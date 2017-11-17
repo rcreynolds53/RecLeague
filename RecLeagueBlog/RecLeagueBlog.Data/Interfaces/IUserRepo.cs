@@ -17,6 +17,6 @@ namespace RecLeagueBlog.Data.Interfaces
         IEnumerable<IdentityRole> GetAllRoles();
         UserRoleViewModel ConvertUserToVM(AppUser user);
         void ConvertVMtoUserForAdd(UserRoleViewModel viewModel);
-        void ConvertVMtoUserForEdit(UserRoleViewModel viewModel);
+        void ConvertVMtoUserForEditAsync(UserRoleViewModel viewModel);
     }
 }

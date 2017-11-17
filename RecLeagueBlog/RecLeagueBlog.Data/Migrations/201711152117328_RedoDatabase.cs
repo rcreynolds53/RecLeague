@@ -3,7 +3,7 @@ namespace RecLeagueBlog.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class RedoDatabase : DbMigration
     {
         public override void Up()
         {

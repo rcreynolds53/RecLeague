@@ -7,18 +7,18 @@ namespace RecLeagueBlog.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class RemoveStatusIdFromPostModel : IMigrationMetadata
+    public sealed partial class RedoDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveStatusIdFromPostModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RedoDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711091552536_RemoveStatusIdFromPostModel"; }
+            get { return "201711152117328_RedoDatabase"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

@@ -81,22 +81,27 @@ namespace RecLeagueBlog.Data.EFRepositories
 
         public void ConvertVMtoUserForAdd(UserRoleViewModel viewModel)
         {
-            throw new NotImplementedException();
-            //var store = new UserStore<AppUser>(context);           
-            //var manager = new UserManager<AppUser>(store);
-            //var user = viewModel.AppUser;
-            //var role = context.Roles.SingleOrDefault(r => r.Id == viewModel.Role.Id);
-
-            //manager.Create(user, viewModel.NewPassword);
-            //context.SaveChanges();
-            //manager.AddToRole(;
-            //context.SaveChanges();
-        }
-
-        public void ConvertVMtoUserForEdit(UserRoleViewModel viewModel)
-        {
             var user = viewModel.AppUser;
-            context.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            context.Users.Add(user);
+            context.SaveChanges();
         }
+
+        public void ConvertVMtoUserForEditAsync(UserRoleViewModel model)
+        {
+            //var user = viewModel.AppUser;
+            model.AppUser.UserName = model.AppUser.Email;
+            var context = new RecBlogDBContext();
+            var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
+            var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var user = userMgr.FindByName(model.AppUser.UserName);            
+            var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
+            string[] allUserRoles = userMgr.GetRoles(user.Id).ToArray();
+            userMgr.RemoveFromRoles(user.Id, allUserRoles);
+            //userMgr.AddPassword(user.Id, model.ConfirmPassword);
+            userMgr.AddToRole(user.Id, role.Name);
+            context.SaveChanges();
+
+        }
+
     }
 }
