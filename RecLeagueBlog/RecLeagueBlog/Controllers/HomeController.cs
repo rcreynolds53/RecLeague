@@ -20,7 +20,7 @@ namespace RecLeagueBlog.Controllers
 
         public ActionResult Blog()
         {
-            var model = manager.GetAllPosts();
+            var model = manager.GetAllPublishedPosts();
             return View(model);
         }
 
