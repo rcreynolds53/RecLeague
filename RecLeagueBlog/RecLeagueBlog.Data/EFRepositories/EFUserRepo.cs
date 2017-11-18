@@ -71,6 +71,7 @@ namespace RecLeagueBlog.Data.EFRepositories
         {
             return context.Roles.ToList();
         }
+
         public UserRoleViewModel ConvertUserToVM(AppUser user)
         {
             var userVM = new UserRoleViewModel();
